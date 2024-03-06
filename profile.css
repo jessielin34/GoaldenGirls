@@ -1,0 +1,58 @@
+body {
+    /* background-color:  !important; */
+    padding: 2%;
+    height: 100%;
+}
+.content{
+    background-color: palevioletred;
+    border-style: solid;
+    height: 100vh;
+    width: 100%;
+    padding: 2%;
+    overflow-y: auto; /* make div scrollable*/
+}
+
+.profile-bg{
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+}
+
+
+.img {
+  background-image:url(images/yellow-bg.png);
+  background-size:contain;
+  width: 100%;
+  height: 250px;
+  border-style: solid;
+
+}
+
+.pro-img {
+    display: flex;
+    justify-content: left;
+
+}
+
+#profile-img {
+    width: 230px;
+    margin-top: -150px;
+    margin-left: 25px;
+}
+
+ #edit{
+    display: none;
+}
+
+.new-goal {
+    display: flex;
+    justify-content: end;
+    font-size: xx-large !important;
+    margin-top: -50px;
+    
+}
+button {
+    border: solid !important;
+    font-size: 20px !important;
+    font-family: "Press Start 2P", system-ui !important;
+}
