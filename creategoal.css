@@ -75,6 +75,25 @@ button {
     border: solid;
 }
 
+.create-goal{
+    margin: auto;
+    width: 900px;
+    height: 500px;
+    margin-right: 100px; 
+    padding: 15px;
+    background-color: #dff7d5;
+    border: 5px solid black;
+    box-shadow: 5px 5px #000fff, 10px 10px white;
+}
+
+.new-goal-tab {
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    border-bottom: 5px solid black; 
+    text-align: center;
+    text-size-adjust: 15px;
+    margin: -15px -15px 0px -15px;
+}
 
 /* Customize Scrollbar */
 ::-webkit-scrollbar {
