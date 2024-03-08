@@ -9,10 +9,10 @@ body {
     /* display: flex; */
     background-color: #ff69b4;
     border-style: solid;
-    height: 100vh;
+    /* height:; */
     width: 100%;
     padding: 2%;
-    overflow-y: auto; /* make div scrollable*/
+    /* overflow-y: auto; make div scrollable */
 }
 
 
