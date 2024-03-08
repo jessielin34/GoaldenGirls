@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Goal</title>
+    <link rel="stylesheet" href="creategoal.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">     
+</head>
+
+<body>
+    <div class="content"> 
+
+        <div class="profile-bg">
+            <div class="img-bg"></div>
+        </div>
+        <div class="pro-img">
+            <div class="username">
+                <img src="images/pro-img.png" id="profile-img">
+            </div>
+            <div class="username" id="user">
+                <p>@cherry</p>
+            </div>
+        </div>
+        <!--
+        <div class="create-goal">
+            <p class="new-goal-tab">NEW GOAL</p>
+            <div> 
+                <form>
+                    <input class="name-textbox" type="text" id="name" name="name" placeholder="name">     
+                    <p class="cp-text">checkpoints</p>                
+                    <br>
+                    <input class="des-textbox" type="text" id="description" name="description" placeholder="description">
+                </form>
+            </div>
+        </div>
+        -->
+        <form name="goal-form" id="goal-form">
+            <div class="goal-form">
+              <h3 class="new-goal-tab">NEW GOAL</h3>
+              <div class="input-group">
+                <label for="goal-name">name</label>
+                <input type="text" id="goal-name" placeholder="name">
+              </div>
+              <div class="checkpoints">
+                <div class="checkpoint"> 
+                  <label for="checkpoint1">checkpoints</label><br />
+                  <textarea id="checkpoint1" placeholder="description"></textarea>
+                  <input type="button" id="addCP" value="+" />
+                  <br/>
+                </div>
+              </div>
+              <button class="cancel">Cancel</button>
+              <button class="done">DONE.</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="./creategoal.js"></script>
+</body>
+</html>

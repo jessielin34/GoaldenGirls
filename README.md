@@ -1,2 +1,2 @@
 # GoaldenGirls
-# Gabrie5a Branch
+See the deployed site at: https://jessielin34.github.io/GoaldenGirls/
