@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">     
 </head>
 
-<body class="page-border">
+<body>
     <div class="content"> 
 
         <div class="profile-bg">
@@ -25,19 +25,40 @@
                 <p>@cherry</p>
             </div>
         </div>
+        <!--
         <div class="create-goal">
             <p class="new-goal-tab">NEW GOAL</p>
             <div> 
                 <form>
-
-                    
+                    <input class="name-textbox" type="text" id="name" name="name" placeholder="name">     
+                    <p class="cp-text">checkpoints</p>                
+                    <br>
+                    <input class="des-textbox" type="text" id="description" name="description" placeholder="description">
                 </form>
             </div>
         </div>
+        -->
+        <form name="goal-form" id="goal-form">
+            <div class="goal-form">
+              <h3 class="new-goal-tab">NEW GOAL</h3>
+              <div class="input-group">
+                <label for="goal-name">name</label>
+                <input type="text" id="goal-name" placeholder="name">
+              </div>
+              <div class="checkpoints">
+                <div class="checkpoint"> 
+                  <label for="checkpoint1">checkpoints</label><br />
+                  <textarea id="checkpoint1" placeholder="description"></textarea>
+                  <input type="button" id="addCP" value="+" />
+                  <br/>
+                </div>
+              </div>
+              <button class="cancel">Cancel</button>
+              <button class="done">DONE.</button>
+            </div>
+        </form>
     </div>
-    
 
-
-    <script src="profile.js"></script>
+    <script src="./creategoal.js"></script>
 </body>
 </html>
