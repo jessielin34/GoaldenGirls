@@ -5,7 +5,7 @@ var check = function () {
         document.getElementById('message').innerHTML = 'Passwords are matching.';
     } else {
         document.getElementById('message').style.color = 'red';
-        document.getElementById('message').innerHTML = 'Passwords are not matching!.';
+        document.getElementById('message').innerHTML = 'Passwords are not matching!';
     }
 }
 

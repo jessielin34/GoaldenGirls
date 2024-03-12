@@ -22,7 +22,7 @@ body {
 
 .img-bg {
     display: flex;
-    background-image: url(images/yellow-bg.png);
+    background-image: url(../images/yellow-bg.png);
     background-size: contain;
     width: 100%;
     height: 250px;
