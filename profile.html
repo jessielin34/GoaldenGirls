@@ -16,11 +16,11 @@
         <div class="profile-bg">
             <div class="img-bg">
                 <div id="edit">
-                    <input id="editimg" title=" " type="file" onchange="loadImageFile(this)" />
-                    <button type="button" class="btn btn-light">Edit</button>
+                    <button type="button" class="btn btn-light" onclick="document.getElementById('getFile').click()">Edit</button>
+                    <input id="getFile" style="display:none" type="file" />
                     <!--<label for="files" class="btn btn-light">Edit</label>
-                        <input id="files" title=" " style="visibility:hidden;" type="file" onchange="loadImageFile(this)">-->
-                    </div>
+        <input id="files" title=" " style="visibility:hidden;" type="file" onchange="loadImageFile(this)">-->
+                </div>
                 </div>
             </div>
             <div class="pro-img">
