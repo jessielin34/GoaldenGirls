@@ -114,12 +114,12 @@ button {
    
   /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #F5D909;
+    background: #FBEE8F;
     border-radius: 10px;
     border: solid;
 }
   
   /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-        background: #F5C30A;
+        background: #F5D909;
     }
