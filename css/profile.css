@@ -9,8 +9,8 @@ body::before {
     z-index: -100; /* place behind elements on page */
     width: 98%;
     height: 100%;
-    background-color: #FF6BAD;
-    background-image: linear-gradient(to right, #FF9CC8 0%, #FF6BAD 49%, #FF53A0 100%);
+    background-color: #FF9CC8;
+    background-image: linear-gradient(to right, #FF6BAD 0%, #FF9CC8 49%, #FF6BAD 100%);
     animation: bg-change 5s infinite;
 }
 
