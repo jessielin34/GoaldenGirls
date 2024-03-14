@@ -94,16 +94,21 @@ button {
     
 }
 
-.container{
+.container {
     padding: 2%;
-    font-size: x-large;
-    background-color: pink;
-    border: solid;
+    font-size: xx-large;
+
+ }
+
+.card-style {
+    display: inline-block;
+    border: 5px solid blue;
+    box-shadow: 10px 10px black;
 }
 
 
 /* Customize Scrollbar */
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 20px;
   }
   
