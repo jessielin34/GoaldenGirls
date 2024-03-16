@@ -12,6 +12,7 @@ body::before {
     background-color: #FF9CC8;
     background-image: linear-gradient(to right, #FF6BAD 0%, #FF9CC8 49%, #FF6BAD 100%);
     animation: bg-change 5s infinite;
+    
 }
 
 @keyframes bg-change {
@@ -31,12 +32,13 @@ body {
     padding-left: 1%;
     height: 100%;
     font-family: "Press Start 2P", system-ui !important;
+    
 }
 .content {
     /* display: flex; 
     background-color: #ff69b4;*/
     border-style: solid;
-    height: 100vh;
+    height: auto;
     width: 100%;
     padding: 2%;
     overflow-y: auto;
