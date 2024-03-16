@@ -3,16 +3,16 @@
     padding: 0;
 }
 
-body::before {
-    content: ""; /* required for ::before */
-    position: absolute; /* don't scroll with page */
-    z-index: -100; /* place behind elements on page */
+/* body::before {
+    content: ""; required for ::before 
+    position: absolute; don't scroll with page 
+    z-index: -100;  place behind elements on page 
     width: 98%;
     height: 106.5%;
     background-color: #FFFFFF;
     background-image: linear-gradient(to right, #F5D909 0%, #FFFFFF 49%, #FF53A0 100%);
     animation: bg-change 5s infinite;
-}
+} */
 
 @keyframes bg-change {
     0%, 100% {
@@ -41,6 +41,9 @@ body {
     width: 100%;
     padding: 2%;
     overflow-y: auto;
+    background-color: #FFFFFF;
+    background-image: linear-gradient(to right, #F5D909 0%, #FFFFFF 49%, #FF53A0 100%);
+    animation: bg-change 5s infinite;
 }
 
 
