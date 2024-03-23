@@ -1,22 +1,24 @@
+// import { _supabase } from "./client";
 const supabaseKey = 
 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1waGViaXJ6eWRlb2dreWprdGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA2MDY2OTksImV4cCI6MjAyNjE4MjY5OX0.qDac2fiFpZVq-TOfqIDfj9osvHOWpCBb6VIVgypSiMM';
 
 const supabaseUrl = 'https://mphebirzydeogkyjktjr.supabase.co';
 
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-console.log(supabase);
+console.log(_supabase);
 
 let doneButton = document.querySelector("#done");
-doneButton.addEventListener("click", async(e)=>{
+doneButton.addEventListener("click", async(e)=> {
     e.preventDefault();
-    let name = document.querySelector("#goal-title").value;
+    let goal = document.querySelector("#goal-title").value;
     let description = document.querySelector("#goal-description").value;
     let checkpoint1 = document.querySelector("#checkpoint1").value;
     let checkpoint2 = document.querySelector("#checkpoint2").value;
     let checkpoint3 = document.querySelector("#checkpoint3").value;
-    if(name != "" && description != "" && checkpoint1 != ""){
+    console.log("why");
+    if(goal != "" && description != "" && checkpoint1 != ""){
         const {data, error} = await _supabase.from("Goals").insert({
-            goal: name,
+            goal: goal,
             user_id: auth.uid(),
             description: description,
         });
@@ -29,7 +31,6 @@ doneButton.addEventListener("click", async(e)=>{
         });
         console.log(res);
         alert("Your goal has been added!");
-        alert("Your goal has been added!");
 
     }
     else{
@@ -41,5 +42,4 @@ doneButton.addEventListener("click", async(e)=>{
 
 
 function addGoal (goalText){
-
 }

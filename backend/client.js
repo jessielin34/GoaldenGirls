@@ -4,4 +4,6 @@ const supabaseKey =
 const supabaseUrl = 'https://mphebirzydeogkyjktjr.supabase.co';
 
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-console.log(supabase);
+console.log(_supabase);
+
+// export {_supabase};
