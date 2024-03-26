@@ -72,38 +72,51 @@
 
             </form>
     -->
-                          <form name="goal-form" id="goal-form">
-                              <div class="form-group">
-                                  <label for="goal-title">Title:</label>
-                                  <input class="form-control" id="goal-title" style="border:solid;" placeholder="Learn French, Practice Figma, etc.">
-                              </div>
-                              <div class="form-group">
-                                  <label for="goal-description">Description:</label>
-                                  <textarea class="form-control" id="goal-description" style="border:solid;" rows="3"></textarea>
-                              </div>
+        <form name="goal-form" id="goal-form">
+            <div class="form-group">
+                <label for="goal-title">Title:</label>
+                <input class="form-control" id="goal-title" style="border:solid;" placeholder="Learn French, Practice Figma, etc.">
+            </div>
+            <div class="form-group">
+                <label for="goal-description">Description:</label>
+                <textarea class="form-control" id="goal-description" style="border:solid;" rows="3"></textarea>
+            </div>
+            
+            <label for="checkpoints">Checkpoints:</label><br>
 
-                              <label for="checkpoints">Checkpoints:</label><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">1.</span>
+                </div>
+                <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">2.</span>
+                </div>
+                <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">3.</span>
+                </div>
+                <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">4.</span>
+                </div>
+                <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>  
+             <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">5.</span>
+                </div>
+                <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
 
-                              <div class="input-group mb-3">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text" id="inputGroup-sizing-default">1.</span>
-                                  </div>
-                                  <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                              </div>
-                              <div class="input-group mb-3">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text" id="inputGroup-sizing-default">2.</span>
-                                  </div>
-                                  <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                              </div>
-                              <div class="input-group mb-3">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text" id="inputGroup-sizing-default">3.</span>
-                                  </div>
-                                  <input type="text" class="form-control" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                              </div>
-                              <!-- dont need this for MVP <input class="btn" type="button" id="addCP" value="+ Add another checkpoint" />-->
-                          </form>
+    <!-- dont need this for MVP <input class="btn" type="button" id="addCP" value="+ Add another checkpoint" />-->
+        </form>
     </div>
 
     <script src="js/creategoal.js"></script>
