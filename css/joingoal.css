@@ -3,16 +3,18 @@
     padding: 0;
 }
 
-/* body::before {
-    content: ""; required for ::before 
-    position: absolute; don't scroll with page 
-    z-index: -100;  place behind elements on page 
-    width: 98%;
-    height: 106.5%;
+.content::before {
+    content: "";
+    position: absolute; /* Position relative to the .content class */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Place behind the content */
     background-color: #FFFFFF;
     background-image: linear-gradient(to right, #F5D909 0%, #FFFFFF 49%, #FF53A0 100%);
     animation: bg-change 5s infinite;
-} */
+} 
 
 @keyframes bg-change {
     0%, 100% {
@@ -37,13 +39,13 @@ body {
     /* display: flex; 
     background-color: #ff69b4;*/
     border-style: solid;
-    height: 100%;
+    height: auto;
     width: 100%;
     padding: 2%;
     overflow-y: auto;
-    background-color: #FFFFFF;
-    background-image: linear-gradient(to right, #F5D909 0%, #FFFFFF 49%, #FF53A0 100%);
-    animation: bg-change 5s infinite;
+    position: relative; /* Needed for absolute positioning of pseudo-elements */
+    min-height: 100vh;
+    overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
 }
 
 
