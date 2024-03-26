@@ -3,37 +3,38 @@
     padding: 0;
 }
 
-/* body::before {
-    content: ""; required for ::before 
-    position: absolute; don't scroll with page 
-    z-index: -100; place behind elements on page 
-    width: 98%;
-    height: 100%;
+.content::before {
+    content: "";
+    position: absolute; /* Position relative to the .content class */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Place behind the content */
     background-color: #FF9CC8;
     background-image: linear-gradient(to right, #FF6BAD 0%, #FF9CC8 49%, #FF6BAD 100%);
     animation: bg-change 5s infinite;
-    
-} */
+} 
 
-@keyframes bg-change {
-    0%, 100% {
-        filter: hue-rotate(0deg);
+    @keyframes bg-change {
+        0%, 100% {
+            filter: hue-rotate(0deg);
+        }
+
+        50% {
+            filter: hue-rotate(-45deg);
+        }
     }
 
-    50% {
-        filter: hue-rotate(-45deg);
-    }
-}
-
-body {
+    body {
     /**/
     padding-top: 1%;
     padding-right: 1%;
     padding-left: 1%;
     height: 100%;
     font-family: "Press Start 2P", system-ui !important;
-    
 }
+
 .content {
     /* display: flex; 
     background-color: #ff69b4;*/
@@ -42,9 +43,9 @@ body {
     width: 100%;
     padding: 2%;
     overflow-y: auto;
-    background-color: #FF9CC8;
-    background-image: linear-gradient(to right, #FF6BAD 0%, #FF9CC8 49%, #FF6BAD 100%);
-    animation: bg-change 5s infinite;
+    position: relative; /* Needed for absolute positioning of pseudo-elements */
+    min-height: 100vh;
+    overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
 }
 
 
