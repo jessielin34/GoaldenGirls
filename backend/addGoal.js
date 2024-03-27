@@ -15,23 +15,30 @@ doneButton.addEventListener("click", async(e)=> {
     let checkpoint1 = document.querySelector("#checkpoint1").value;
     let checkpoint2 = document.querySelector("#checkpoint2").value;
     let checkpoint3 = document.querySelector("#checkpoint3").value;
-    console.log("why");
-    if(goal != "" && description != "" && checkpoint1 != ""){
-        const {data, error} = await _supabase.from("Goals").insert({
-            goal: goal,
-            user_id: auth.uid(),
+    let goal_id = 0;
+    console.log("woking..");
+    if(goal != "" && description != "" && checkpoint1 != "" && checkpoint2 != ""){
+        const {data, error} = await _supabase
+        .from("Goals")
+        .insert({
+            goal_name: goal,
             description: description,
-        });
-        console.log(data);
+        }).select();
+        goal_id = data[0].id;
+        console.log(goal_id);
+        const {data2, error2} = await _supabase
+        .from("Checkpoint")
+        .insert([
+            {name: checkpoint1, goal_id: goal_id},
+            {name: checkpoint2, goal_id: goal_id},
+            {name: checkpoint3, goal_id: goal_id},
+        ]);
         // get id of goal by checking auth.uid() && 
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
-        const res = await _supabase.from("Checkpoint").insert({
-            goal_id: goalID
-        });
-        console.log(res);
+        console.log(data2);
         alert("Your goal has been added!");
-
+        window.location.replace("http://127.0.0.1:3000/profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");
@@ -39,7 +46,3 @@ doneButton.addEventListener("click", async(e)=> {
     }
     
 });
-
-
-function addGoal (goalText){
-}
