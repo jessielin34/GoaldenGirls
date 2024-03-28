@@ -104,30 +104,29 @@ div.one {
     animation: spinRight 800ms linear infinite; 
 }
 
-div.one:before, 
-div.one:after {
-    content: '';
-    width: 6vmax; 
-    height: 6vmax; 
-    display: block;
-    position: absolute; 
-    top: calc(50% - 3vmax);
-    left: calc(50% - 3vmax);
-    border-left: 3px solid white; 
-    border-radius: 100%;
-    animation: spinLeft 800ms linear infinite; 
+    div.one:before,
+    div.one:after {
+        content: '';
+        width: 6vmax;
+        height: 6vmax;
+        display: block;
+        position: absolute;
+        top: calc(50% - 3vmax);
+        left: calc(50% - 3vmax);
+        border-left: 3px solid #F5D909;
+        border-radius: 100%;
+        animation: spinLeft 800ms linear infinite;
+    }
 
-}
-
-div.one:after {
-    width: 4vmax; 
-    height: 4vmax; 
-    top: calc(50% - 2vmax);
-    left: calc(50% - 2vmax);
-    border: 0; 
-    border-right: 2px solid white; 
-    animation: none; 
-}
+    div.one:after {
+        width: 4vmax;
+        height: 4vmax;
+        top: calc(50% - 2vmax);
+        left: calc(50% - 2vmax);
+        border: 0;
+        border-right: 2px solid #FF6BAD;
+        animation: none;
+    }
 
 @keyframes spinRight{
     from{
