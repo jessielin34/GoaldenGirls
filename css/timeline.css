@@ -1,57 +1,14 @@
-/*
 
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-.content::before {
-    content: "";
-    position: absolute; 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1; 
-    background-color: #FFFFFF;
-    background-image: linear-gradient(to right, #F5D909 0%, #FFFFFF 49%, #FF53A0 100%);
-    animation: bg-change 5s infinite;
-}
-
-
-
-
-@keyframes bg-change {
-    0%, 100% {
-        filter: hue-rotate(0deg);
-    }
-
-    50% {
-        filter: hue-rotate(-45deg);
-    }
-}
 
 body {
-    
-    padding-top: 1%;
-    padding-right: 1%;
-    padding-left: 1%;
-    height: 100%;
     font-family: "Press Start 2P", system-ui !important;
 }
 
 .content {
-    
     border-style: solid;
     height: auto;
-    width: 100%;
-    padding: 2%;
-    overflow-y: auto;
-    position: relative; 
-    min-height: 100vh;
-    overflow: hidden; 
 }
+
 
 .btn {
     font-family: 'Press Start 2P', system-ui;
@@ -59,15 +16,16 @@ body {
     color: black;
     padding: 15px 15px;
     text-align: center;
-    font-size: 16px;
+    font-size: 10px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px;
-    transition: background-color 0.3s ease;
     border: solid !important;
+    top: 30px;
+    position: relative;
 }
 
-*/
+
 
 * { 
     margin: 0px; 
@@ -172,7 +130,7 @@ div.one {
 .start ul li h4 {
     color: white; 
     text-transform: uppercase;
-    font-size: 30px; 
+    font-size: 25px; 
 }
 
 .start ul li .media-body {
@@ -203,35 +161,28 @@ div.one {
 }
 
 img {
-    width: 190px; 
-    height: 190px; 
-    margin-left: -30px; 
-    margin-top: -20px; 
-    border: white; 
+    width: 170px;
+    height: 170px;
+    margin-left: -30px;
+    margin-top: -20px;
+    border: black 3px;
+    border-radius:50%;
 }
 
-.two img {
-    width: 180px; 
-    height: 180px; 
+.two img { 
     margin-left: -50px; 
     margin-top: -20px; 
 }
 
-.three img {
-    width: 150px;
-    height: 150px; 
+.three img { 
     margin-left: -50px; 
 }
 
-.four img {
-    width: 165px; 
-    height: 165px; 
+.four img { 
     margin-left: -50px; 
 }
 
-.five img {
-    width: 175px; 
-    height: 175px; 
+.five img { 
     margin-left: -20px; 
     margin-top: -20px; 
 }
