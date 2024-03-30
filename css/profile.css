@@ -84,14 +84,14 @@
 } 
 
 #profile-img {
-    width: 230px;
+    width: 200px;
     margin-top: -150px;
 }
 
 .new-goal {
     display: flex;
     justify-content: end;
-    margin-top: -120px;
+    margin-top: -100px;
     
 }
 button {
@@ -110,6 +110,20 @@ button {
     display: inline-block;
     border: 5px solid blue;
     box-shadow: 10px 10px black;
+}
+
+.btn {
+    font-family: 'Press Start 2P', system-ui;
+    background-color: #FFFFFF;
+    color: black;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    border: solid !important;
 }
 
 
