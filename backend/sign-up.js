@@ -10,8 +10,14 @@ signup.addEventListener("click", async(e)=>{
         email: email,
         password: password,
     });
-    if (data)console.log(data);
-    else console.log(error);
-    window.location.replace("http://127.0.0.1:3000/profile.html"); //hard-coded
+    if (error) {
+        console.log(error);
+        alert("Unable to register!");
+    }
+    else {
+        console.log(data);
+        alert("Verify your email!");
+        window.location.replace("http://127.0.0.1:3000/index.html");
+    }
 });
 

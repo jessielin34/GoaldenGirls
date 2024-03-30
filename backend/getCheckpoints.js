@@ -1,21 +1,18 @@
-import { _supabase } from './client.js';
-let goal_id = 0;
-
-function getGoalID(val) {
-    let goal_id = parseInt(val);
-    console.log(goal_id);
-};
+// import { _supabase } from './client.js';
+// let goal_id = 0;
 
 
-// let buttons = document.getElementsByClassName('btn');
-// for (let i=0 ; i < buttons.length ; i++){
-//     (function(index){
-//         buttons[index].onclick = function(){
-//             goal_id = parseInt(buttons[index].value);
-//             console.log(goal_id);
-//             alert("I am button " + buttons[index].value);
-//         };
-//     })(i)
-// }
+// console.log(goals);
 
-export {goal_id};
+
+// $("button").onclick(function() {
+    
+// });
+// export {goal_id};
+
+function setGoalId(val){
+    localStorage.setItem('goal_id', val);
+    console.log(localStorage.getItem('goal_id'));
+    console.log(val);
+    window.location.replace("http://127.0.0.1:3000/timeline.html");
+}
