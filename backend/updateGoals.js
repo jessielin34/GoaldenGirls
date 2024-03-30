@@ -17,8 +17,13 @@ const checkDB = async()=> {
         for (let i in data){
             goal += 
             `<a href="timeline.html" style="color: black !important; ">
-                <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block; ">
+                <div class="card card-style" style="width: 20rem; height: 15rem; display: inline-block; ">
                     <div class="card-body">
+                        <a href="" id="deletegoal">
+                            <button class="btn btn-danger" style="align-items: center">
+                                x
+                            </button>
+                        </a>
                         <h5 class="card-title">${data[i].goal_name}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Starts Soon!</h6>
                         <div class="progress">

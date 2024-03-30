@@ -11,6 +11,6 @@ login.addEventListener("click", async(e)=>{
       })
     console.log(data);
     window.location.replace("http://127.0.0.1:3000/profile.html"); //hard-coded
-    // localStorage.setItem('token', data.);
-    // const token = localStorage.getItem('token');
+    localStorage.setItem('token', data[0].access_token);
+    const token = localStorage.getItem('token');
 });
