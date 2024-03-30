@@ -1,23 +1,29 @@
-// import { _supabase } from "./client";
-const supabaseKey = 
-'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1waGViaXJ6eWRlb2dreWprdGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA2MDY2OTksImV4cCI6MjAyNjE4MjY5OX0.qDac2fiFpZVq-TOfqIDfj9osvHOWpCBb6VIVgypSiMM';
+import { _supabase } from "./client";
+// const supabaseKey = 
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1waGViaXJ6eWRlb2dreWprdGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA2MDY2OTksImV4cCI6MjAyNjE4MjY5OX0.qDac2fiFpZVq-TOfqIDfj9osvHOWpCBb6VIVgypSiMM';
 
-const supabaseUrl = 'https://mphebirzydeogkyjktjr.supabase.co';
+// const supabaseUrl = 'https://mphebirzydeogkyjktjr.supabase.co';
 
-const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-console.log(_supabase);
+// const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// console.log(_supabase);
 
 let doneButton = document.querySelector("#done");
 doneButton.addEventListener("click", async(e)=> {
     e.preventDefault();
     let goal = document.querySelector("#goal-title").value;
+    let checkpoints = [];
     let description = document.querySelector("#goal-description").value;
     let checkpoint1 = document.querySelector("#checkpoint1").value;
+    if (checkpoint != ""){
+    }
     let checkpoint2 = document.querySelector("#checkpoint2").value;
     let checkpoint3 = document.querySelector("#checkpoint3").value;
+    let checkpoint4 = document.querySelector("#checkpoint4").value;
+    let checkpoint5 = document.querySelector("#checkpoint5").value;
+    console.log(checkpoints);
     let goal_id = 0;
     console.log("woking..");
-    if(goal != "" && description != "" && checkpoint1 != "" && checkpoint2 != ""){
+    if(goal != "" && description != "" && checkpoint1 != ""){
         const {data, error} = await _supabase
         .from("Goals")
         .insert({
@@ -26,6 +32,7 @@ doneButton.addEventListener("click", async(e)=> {
         }).select();
         goal_id = data[0].id;
         console.log(goal_id);
+
         const {data2, error2} = await _supabase
         .from("Checkpoint")
         .insert([
