@@ -12,7 +12,7 @@ signup.addEventListener("click", async(e)=>{
     });
     if (error) {
         console.log(error);
-        alert("Unable to register!");
+        alert("Unable to register! Make sure password is at least 6 characters.");
     }
     else {
         console.log(data);
