@@ -8,42 +8,39 @@
 
 import {_supabase} from './client.js';
 
+// const { data: { user }, error } = await _supabase.auth.getUser();
+// if (error){
+//     window.location.replace("http://127.0.0.1:3000/index.html");
+// }
+
 const getCheckPoints = async()=> {
-    let goal_id = 0;
+    let goal_id = parseInt(localStorage.getItem("goal_id"));
+    console.log(goal_id);
     let goal_name = "";
-    const res = await _supabase
-    .from('Goals')
-    .select('*')
-    .eq('goal_name', 'Learn Guitar');
-    if (res){
-        goal_id = res.goal_id;
-        console.log(goal_id);
+    const { data: goal, error_}  = await _supabase.from("Goals").select("*").eq("id", goal_id);
+    if (!error_){
+        let title = document.getElementById("cp_title");
+        goal_name = goal[0].goal_name;
+        title.innerText = "Goal: " + goal_name;
     }
     else {
-        console.log("what");
+        console.log(error_);
     }
     let checkpoints = ``;
     const {data, error} = await _supabase
     .from("Checkpoint")
     .select("*")
-    .eq("goal_id", 11);
+    .eq("goal_id", goal_id);
     if (data){
         for (let i in data){
             checkpoints += `<li>
-            <div class="left two">
+            <div class="left">
                 <div class="icon animate fadeInLeft" data-wow-delay="1.2s">
-                    <img src="images/pro-img2.png" alt="" />
+                    <img src="images/first.png" alt="" />
                 </div>
             </div>
             <div class="media-body">
                 <h4>${data[i].name}</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
             </div>
         </li>`
         }

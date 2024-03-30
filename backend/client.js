@@ -7,4 +7,8 @@ const supabaseUrl = 'https://mphebirzydeogkyjktjr.supabase.co';
 const _supabase = createClient(supabaseUrl, supabaseKey);
 console.log(_supabase);
 
+
+// const { error } = await _supabase.auth.signOut();
+// const { data: { user } } = await _supabase.auth.getUser();
+// console.log(user);
 export {_supabase};
