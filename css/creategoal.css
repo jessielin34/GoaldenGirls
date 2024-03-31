@@ -3,13 +3,14 @@
     padding: 0;
 }
 
-body::before {
-    content: ""; /* required for ::before */
-    position: absolute; /* don't scroll with page */
-    z-index: -100; /* place behind elements on page */
-    width: 98%;
-    height: 100%;
-    background-color: #dff7d5;
+.content::before {
+    content: "";
+    position: absolute; /* Position relative to the .content class */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Place behind the content */
     background-image: linear-gradient(to right, #FF9CC8 0%, #dff7d5 49%, #FF9CC8 100%);
     animation: bg-change 5s infinite;
 }
@@ -37,10 +38,13 @@ body {
     /* display: flex; 
     background-color: #ff69b4;*/
     border-style: solid;
-    height: 100vh;
+    height: auto;
     width: 100%;
     padding: 2%;
     overflow-y: auto;
+    position: relative; /* Needed for absolute positioning of pseudo-elements */
+    min-height: 100vh;
+    overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
 }
 
 .img-bg {
@@ -71,6 +75,7 @@ body {
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
     text-shadow: 1px 2px 2px rgb(0,0,0);
+    font-size: large; 
 }
 
 #profile-img {
@@ -81,7 +86,7 @@ body {
 .new-goal {
     display: flex;
     justify-content: end;
-    margin-top: -65px;
+    margin-top: -75px;
     
 }
 
