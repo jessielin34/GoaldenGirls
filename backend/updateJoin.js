@@ -11,10 +11,6 @@ const updateUser = async()=>{
 }; updateUser();
 console.log(user);
 
-//check join table
-async function noJoin(){
-    
-};
 
 const checkDB = async()=> {
     let goal_ids = [];
@@ -38,7 +34,6 @@ const checkDB = async()=> {
             let repeat = false;
             for (let j in goal_ids){
                 if (data[i].id == goal_ids[j]){
-                    console.log(goal_ids[j]);
                     repeat = true;
                 }    
             }
@@ -54,61 +49,39 @@ const checkDB = async()=> {
                 </div>
                 </a>`
             }
-            // console.log(data[i]);
             
-        };
-        const template = document.createElement("a");
-        template.innerHTML = goal.trim();
-        let sibling = document.getElementById("goal1");
-        let parent = sibling.parentNode;
-        parent.insertBefore(template, sibling.nextSibling);   
-    }
+            };
+            const template = document.createElement("a");
+            template.innerHTML = goal.trim();
+            let sibling = document.getElementById("goal1");
+            let parent = sibling.parentNode;
+            parent.insertBefore(template, sibling.nextSibling); 
+        
+            //add join Event Listener
+            const joined = document.querySelectorAll(".join");
+            for (let i =0; i<joined.length; i++){
+                let join_goal = parseInt(joined[i].value);
+                joined[i].addEventListener('click', async()=>{
+                    let {data, error} = await _supabase
+                    .from("Join")
+                    .insert({
+                        user_id: user_id,
+                        goal_id: join_goal,
+                    });
+                    if (error){
+                        console.log(error);
+                        alert("Unable to join goal :(")
+                    }
+                    else{
+                        alert("Successfully joined!");
+                        window.location.replace("../profile.html");
+                    } 
+                });
+            }
+        }
     else{
         console.log(error);
     };
 
 };
 checkDB();
-
-//update Join table
-
-document.querySelectorAll(".join").every(addEventListener('click', async(val)=>{
-    let goal_id = val.target.value;
-    const {data, error} = await _supabase
-    .from("Join")
-    .insert({
-        user_id: user.id,
-        goal_id: goal_id,
-    });
-    if (error){
-        console.log(error);
-        alert("Unable to join goal :(")
-    }
-    else{
-        alert("Successfully joined!");
-        window.location.replace("http://127.0.0.1:3000/profile.html");
-    }  
-}));
-// console.log(joins);
-// async function updateJoin(val){
-//     const {data, error} = await _supabase
-//     .from("Join")
-//     .insert({
-//         user_id: user.id,
-//         goal_id: val,
-//     });
-//     if (error){
-//         console.log(error);
-//     }
-//     alert("Goal has been joined!");
-// };
-
-// // for (let goal = 0; goal < join.length; goal++){
-//     // console.log(join[goal]);
-//     // join[goal].addEventListener('click', async(e)=>{
-//     //     e.preventDefault();
-//     
-// }
-
-
-
