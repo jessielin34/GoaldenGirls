@@ -15,7 +15,6 @@ const checkJoin = async()=>{
     for (let i =0; i <goals.length; i++){
         goal_ids.push(goals[i].goal_id);
     }
-    console.log(goals[0]);
 
     //add all joined goals
     for (let i in goal_ids){
@@ -23,14 +22,13 @@ const checkJoin = async()=>{
         .from("Goals")
         .select("*")
         .eq('id', goal_ids[i]);
-        console.log(data);
         if (!error){
             goal += 
             `<a href="timeline.html" style="color: black !important; ">
                 <div class="card card-style" style="width: 20rem; height: 15rem; display: inline-block; ">
                     <div class="card-body">
-                        <a href="" id="deletegoal">
-                            <button class="btn btn-danger" style="align-items: center">
+                        <a id="deletegoal">
+                            <button class="btn btn-danger join" value="${data[0].id}" style="align-items: center">
                                 x
                             </button>
                         </a>
@@ -39,7 +37,7 @@ const checkJoin = async()=>{
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <button class="btn btn-light join" value="${data[0].id}" type="button" onclick="setGoalId(this.value)">
+                        <button class="btn btn-light" value="${data[0].id}" type="button" onclick="setGoalId(this.value)">
                             expand
                         </button>
                     </div>
@@ -56,7 +54,26 @@ const checkJoin = async()=>{
     let sibling = document.getElementById("joinGoal");
     let parent = sibling.parentNode;
     parent.insertBefore(template, sibling.nextSibling); 
-    console.log(goal); 
+    //add eventListener for delete joined goals
+    const joined = document.querySelectorAll(".join");
+    console.log(joined.legnth);
+    for (let i =0; i<joined.length; i++){
+        let joined_goal = parseInt(joined[i].value);
+        joined[i].addEventListener('click', async()=>{
+            let {data, error} = await _supabase
+            .from("Join")
+            .delete({user_id: user_id})
+            .eq('goal_id', joined_goal);
+            if (error){
+                console.log(error);
+                alert("Unable to remove goal :(")
+            }
+            else{
+                alert("Successfully unjoined goal!");
+                window.location.replace("../profile.html");
+            } 
+        })
+    }
 }; checkJoin();
 
 
