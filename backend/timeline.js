@@ -8,11 +8,6 @@
 
 import {_supabase} from './client.js';
 
-// const { data: { user }, error } = await _supabase.auth.getUser();
-// if (error){
-//     window.location.replace("http://127.0.0.1:3000/index.html");
-// }
-
 const getCheckPoints = async()=> {
     let goal_id = parseInt(localStorage.getItem("goal_id"));
     console.log(goal_id);
