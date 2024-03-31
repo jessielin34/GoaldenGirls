@@ -9,7 +9,7 @@
 import {_supabase} from './client.js';
 
 let user_id = "a";
-const { data: { user }, error } = await _supabase.auth.getUser();
+let { data: { user }, error } = await _supabase.auth.getUser();
 const updateUser = async()=>{
     document.getElementById("user").textContent= user.email;
     user_id = user.id;
@@ -23,10 +23,10 @@ const updateUser = async()=>{
 //     console.log(val);
 // };
 
+
 const checkDB = async()=> {
-    
-    let goal = "";
-    const {data, error} = await _supabase
+    let goals = "";
+    let {data, error} = await _supabase
     .from("Goals")
     .select("*")
     .eq('user_id', user_id);
@@ -34,7 +34,7 @@ const checkDB = async()=> {
         //https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
         //https://youtu.be/4bqKagS5X88?si=VcavSSC0LfeBryZ3
         for (let i in data){
-            goal += 
+            goals += 
             `<a href="timeline.html" style="color: black !important; ">
                 <div class="card card-style" style="width: 20rem; height: 15rem; display: inline-block; ">
                     <div class="card-body">
@@ -44,7 +44,7 @@ const checkDB = async()=> {
                             </button>
                         </a>
                         <h5 class="card-title">${data[i].goal_name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Starts Soon!</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">${data[i].description}</h6>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -67,8 +67,10 @@ const checkDB = async()=> {
         //     </div>
         // </a>`
         };
+        //add from Join
+        
         const template = document.createElement("a");
-        template.innerHTML = goal.trim();
+        template.innerHTML = goals.trim();
         let sibling = document.getElementById("goal1");
         let parent = sibling.parentNode;
         parent.insertBefore(template, sibling.nextSibling);   
