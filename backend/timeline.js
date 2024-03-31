@@ -31,7 +31,7 @@ const getCheckPoints = async()=> {
             checkpoints += `<li>
             <div class="left">
                 <div class="icon animate fadeInLeft" data-wow-delay="1.2s">
-                    <img src="images/first.png" alt="" />
+                    <img src="images/colorwheel-unscreen.gif" alt="" />
                 </div>
             </div>
             <div class="media-body">
