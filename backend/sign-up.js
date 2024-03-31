@@ -18,7 +18,7 @@ signup.addEventListener("click", async(e)=>{
         else {
             console.log(data);
             alert("Verify your email!");
-            window.location.replace("../index.html");
+            window.location.replace("https://jessielin34.github.io/GoaldenGirls/"); 
         }
     }
     else {

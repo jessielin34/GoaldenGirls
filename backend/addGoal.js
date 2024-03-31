@@ -62,7 +62,7 @@ doneButton.addEventListener("click", async(e)=> {
         // https://supabase.com/docs/guides/auth/managing-user-data
         // console.log(data2);
         alert("Your goal has been added!");
-        window.location.replace("../profile.html"); //hard-coded
+        window.location.replace("https://jessielin34.github.io/GoaldenGirls/profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");

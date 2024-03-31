@@ -74,7 +74,7 @@ const checkDB = async()=> {
                     }
                     else{
                         alert("Successfully joined!");
-                        window.location.replace("../profile.html");
+                        window.location.replace("https://jessielin34.github.io/GoaldenGirls/joingoal.html"); 
                     } 
                 });
             }

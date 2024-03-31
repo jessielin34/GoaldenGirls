@@ -70,7 +70,7 @@ const checkJoin = async()=>{
             }
             else{
                 alert("Successfully unjoined goal!");
-                window.location.replace("../profile.html");
+                window.location.replace("https://jessielin34.github.io/GoaldenGirls/profile.html"); 
             } 
         })
     }
