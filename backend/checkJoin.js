@@ -56,7 +56,7 @@ const checkJoin = async()=>{
     parent.insertBefore(template, sibling.nextSibling); 
     //add eventListener for delete joined goals
     const joined = document.querySelectorAll(".join");
-    console.log(joined.legnth);
+    // console.log(joined.legnth);
     for (let i =0; i<joined.length; i++){
         let joined_goal = parseInt(joined[i].value);
         joined[i].addEventListener('click', async()=>{

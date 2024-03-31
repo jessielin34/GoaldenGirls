@@ -45,7 +45,9 @@ doneButton.addEventListener("click", async(e)=> {
             goal_name: goal,
             description: description,
         }).select();
-        console.log(error);
+        if (error){
+            alert(error.message);
+        }
         goal_id = data[0].id;
         console.log(goal_id);
 
@@ -66,7 +68,7 @@ doneButton.addEventListener("click", async(e)=> {
     }
     else{
         console.log("Unable to add to database");
-        alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoint!");
+        alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoints!");
     }
     
 });

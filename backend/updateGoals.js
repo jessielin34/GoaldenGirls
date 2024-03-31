@@ -32,7 +32,7 @@ const checkDB = async()=> {
                 <div class="card card-style" style="width: 20rem; height: 15rem; display: inline-block; ">
                     <div class="card-body">
                         <a id="deletegoal">
-                            <button class="btn btn-danger delete_my" value="${data[0].id}" style="align-items: center">
+                            <button class="btn btn-danger delete_my" value="${data[i].id}" style="align-items: center">
                                 x
                             </button>
                         </a>
@@ -58,7 +58,6 @@ const checkDB = async()=> {
         //add eventListener for deleting own goals
         //add eventListener for delete
         const mine = document.querySelectorAll(".delete_my");
-        console.log(mine.legnth);
         for (let i =0; i<mine.length; i++){
             let my_goal = parseInt(mine[i].value);
             mine[i].addEventListener('click', async()=>{
