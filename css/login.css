@@ -60,7 +60,10 @@ body::before {
 .headline {
     font-family: 'Press Start 2P', system-ui;
     font-size: 25px;
-    color: black;
+    color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 1px 2px 2px rgb(0,0,0);
 }
 
 .txt {
