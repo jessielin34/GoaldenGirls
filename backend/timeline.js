@@ -16,7 +16,7 @@ const getCheckPoints = async()=> {
     if (!error_){
         let title = document.getElementById("cp_title");
         goal_name = goal[0].goal_name;
-        title.innerText = "Goal: " + goal_name;
+        title.innerText = "GOAL: " + goal_name;
     }
     else {
         console.log(error_);

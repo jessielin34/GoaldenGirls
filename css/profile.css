@@ -111,6 +111,7 @@ button {
     display: inline-block;
     border: 5px solid blue;
     box-shadow: 10px 10px black;
+    vertical-align: top;
 }
 
 .btn {
