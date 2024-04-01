@@ -141,24 +141,7 @@ div.one {
     color: white; 
 }
 
-.home .process:after {
-    background: url(../images/process-top.png) center top no-repeat; 
-    height: 100%;
-    position: absolute; 
-    top: 0px; 
-    content: "";
-    width: 100%; 
-    z-index: 1; 
-}
 
-.home .process:before {
-    position: absolute; 
-    top: 0px; 
-    content: "";
-    width: 100%;
-    left: 0px; 
-    background: white; 
-}
 
 img {
     width: 170px;
@@ -193,15 +176,6 @@ img {
     -webkit-text-stroke-color: black;
     text-shadow: 1px 2px 2px rgb(0,0,0);
 }
-
-
-
-
-
-
-
-
-
 
 
 
