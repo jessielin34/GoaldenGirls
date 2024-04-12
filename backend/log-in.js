@@ -15,7 +15,7 @@ login.addEventListener("click", async(e)=>{
             alert("Input valid credentials!");
         }
         else {
-            window.location.replace("https://jessielin34.github.io/GoaldenGirls/profile.html"); //hard-coded
+            window.location.replace("./../profile.html"); //hard-coded
             // window.history.replaceState({ additionalInformation: 'Updated the URL with JS' }, 'Profile', '../profile.html');
         }
     }

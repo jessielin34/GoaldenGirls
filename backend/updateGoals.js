@@ -85,7 +85,7 @@ const checkDB = async()=> {
                 }
                 else{
                     alert("Successfully deleted goal!");
-                    window.location.replace("https://jessielin34.github.io/GoaldenGirls/profile.html"); 
+                    window.location.replace("./../profile.html"); 
                 }
             })
         }
@@ -108,7 +108,7 @@ signout.addEventListener("click", async(e)=>{
     e.preventDefault();
     const { error } = await _supabase.auth.signOut();
     if (!error){
-        window.location.replace("https://jessielin34.github.io/GoaldenGirls/index.html"); 
+        window.location.replace("./../index.html"); 
     }
     else {
         alert("Unable to sign out\n", error);

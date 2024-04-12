@@ -2,6 +2,15 @@ import { _supabase } from "./client.js";
 import { addCheckpoint } from "./editGoalHelper.js";
 
 //1. select goal name and description
+let user_id = "";
+//check user is signed in
+
+const updateUser = async()=>{
+    const { data: { user }, error } = await _supabase.auth.getUser();
+    document.getElementById("user").textContent= user.email;
+    user_id = user.id;
+}; updateUser();
+
 let goal_id = parseInt(localStorage.getItem("goal_id"));
 
 const { data: goal, error_}  = await _supabase
@@ -24,7 +33,7 @@ if (data){
     let counter = 1;
     for (let i in data){
         if (counter > 5){
-            addCheckpoint();
+            addCheckpoint(counter);
         }
         console.log(data[i]);
         let cp = document.querySelector(`#checkpoint${counter}`)
@@ -38,7 +47,7 @@ if (data){
 
 //3. Read the new info + update in Supabase
 let doneButton = document.querySelector("#done");
-doneButton.addEventListener('click', async()=>{
+doneButton.addEventListener('click', async(e)=>{
     e.preventDefault();
     let checkList = [];
     let checkpoints = document.querySelectorAll("input");
@@ -53,13 +62,14 @@ doneButton.addEventListener('click', async()=>{
     console.log(checkList);
     let goal = document.querySelector("#goal-title").value;
     let description = document.querySelector("#goal-description").value;
+    console.log(goal, description);
 
-    let goal_id = 0;
     console.log("woking..");
     if(goal != "" && description != "" && checkpoints.length >= 2){
         const {data, error} = await _supabase
         .from("Goals")
         .update({
+            //user_id: user_id,
             goal_name: goal,
             description: description,
         })
@@ -68,9 +78,9 @@ doneButton.addEventListener('click', async()=>{
             alert(error.message);
         }
 
-        //if # of cp < current : delete or 
-        //# of cp > : add 
-        //or just delete them and add them again to database
+        // if # of cp < current : delete or 
+        // # of cp > : add 
+        // or just delete them and add them again to database
         for (let cp in cpIdList){
             const {data2, error2} = await _supabase
             .from("Checkpoint")
@@ -79,15 +89,18 @@ doneButton.addEventListener('click', async()=>{
             ])
             .eq('id', cpIdList[cp]);
         }
+        if (error){
+            alert("unable to modify checkpoints");
+        }
         
         // get id of goal by checking auth.uid() && 
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
-        alert("Your goal has been added!");
-        window.location.replace("https://jessielin34.github.io/GoaldenGirls/profile.html"); //hard-coded
+        alert("Your goal has been modified!");
+        window.location.replace("./../profile.html"); //hard-coded
     }
     else{
-        console.log("Unable to add to database");
+        console.log("Unable to add to edit");
         alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoints!");
     }
 })

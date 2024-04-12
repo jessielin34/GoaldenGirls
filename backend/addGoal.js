@@ -21,10 +21,13 @@ doneButton.addEventListener("click", async(e)=> {
             counter++;
         }
     }
-    console.log(checkList[cp]);
-    // let goal = document.querySelector("#goal-title").value;
     
-    // let description = document.querySelector("#goal-description").value;
+    // for (let cp of checkList){
+    //     console.log(cp);
+    // }
+    let goal = document.querySelector("#goal-title").value;
+    
+    let description = document.querySelector("#goal-description").value;
     // let checkpoint1 = document.querySelector("#checkpoint1").value;
     // if (checkpoint1 != ""){
     //     checkpoints.push(checkpoint1);
@@ -62,11 +65,11 @@ doneButton.addEventListener("click", async(e)=> {
         console.log(goal_id);
 
         let order_counter =1;
-        for (let cp of checkList){
+        for (let cp_name of checkList){
             const {data2, error2} = await _supabase
             .from("Checkpoint")
             .insert([
-            {name: cp, goal_id: goal_id, checkpoint_order: order_counter}
+            {name: cp_name, goal_id: goal_id, checkpoint_order: order_counter}
             ]);
             order_counter++;
         }
@@ -75,7 +78,7 @@ doneButton.addEventListener("click", async(e)=> {
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
         alert("Your goal has been added!");
-        window.location.replace("https://jessielin34.github.io/GoaldenGirls/profile.html"); //hard-coded
+        window.location.replace("./../profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");

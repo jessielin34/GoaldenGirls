@@ -12,8 +12,8 @@
 
 function setGoalId(val){
     localStorage.setItem('goal_id', val.value);
-    console.log(val.textContent);
+    console.log(val.value);
     console.log(localStorage.getItem('goal_id'));
-    if (val.textContent.includes('expand')) window.location.replace("https://jessielin34.github.io/GoaldenGirls/timeline.html"); 
-    else window.location.replace("http://127.0.0.1:3000/editgoal.html")
+    if (val.textContent.includes('expand')) window.location.replace("./../timeline.html"); 
+    else window.location.replace("./../editgoal.html")
 }
