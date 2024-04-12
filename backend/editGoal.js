@@ -1,16 +1,44 @@
 import { _supabase } from "./client.js";
+import { addCheckpoint } from "./editGoalHelper.js";
 
-let user_id = "";
-//check user is signed in
-const updateUser = async()=>{
-    const { data: { user }, error } = await _supabase.auth.getUser();
-    document.getElementById("user").textContent= user.email;
-    user_id = user.id;
-}; updateUser();
-console.log(user);
-//
+//1. select goal name and description
+let goal_id = parseInt(localStorage.getItem("goal_id"));
+
+const { data: goal, error_}  = await _supabase
+.from("Goals")
+.select("*")
+.eq("id", goal_id);
+if (!error_){
+    document.querySelector("#goal-title").value = goal[0].goal_name;
+    document.querySelector("#goal-description").value = goal[0].description;
+}
+else console.log(error_);
+
+//2. select all checkpoints and display
+const cpIdList = [];
+const {data, error} = await _supabase
+.from("Checkpoint")
+.select("*")
+.eq("goal_id", goal_id);
+if (data){
+    let counter = 1;
+    for (let i in data){
+        if (counter > 5){
+            addCheckpoint();
+        }
+        console.log(data[i]);
+        let cp = document.querySelector(`#checkpoint${counter}`)
+        cp.value = data[i].name;
+        cpIdList.push(data[i].id);
+        //add name to the textContent?
+
+        counter++;
+    }
+}
+
+//3. Read the new info + update in Supabase
 let doneButton = document.querySelector("#done");
-doneButton.addEventListener("click", async(e)=> {
+doneButton.addEventListener('click', async()=>{
     e.preventDefault();
     let checkList = [];
     let checkpoints = document.querySelectorAll("input");
@@ -21,52 +49,35 @@ doneButton.addEventListener("click", async(e)=> {
             counter++;
         }
     }
+    //check from original to updated --> if diff change push into a new list with the 
     console.log(checkList);
     let goal = document.querySelector("#goal-title").value;
-    
     let description = document.querySelector("#goal-description").value;
-    // let checkpoint1 = document.querySelector("#checkpoint1").value;
-    // if (checkpoint1 != ""){
-    //     checkpoints.push(checkpoint1);
-    // }
-    // let checkpoint2 = document.querySelector("#checkpoint2").value;
-    // if (checkpoint2 != ""){
-    //     checkpoints.push(checkpoint2);
-    // }
-    // let checkpoint3 = document.querySelector("#checkpoint3").value;
-    // if (checkpoint3 != ""){
-    //     checkpoints.push(checkpoint3);
-    // }
-    // let checkpoint4 = document.querySelector("#checkpoint4").value;
-    // if (checkpoint4 != ""){
-    //     checkpoints.push(checkpoint4);
-    // }
-    // let checkpoint5 = document.querySelector("#checkpoint5").value;
-    // if (checkpoint5 != ""){
-    //     checkpoints.push(checkpoint5);
-    // }
+
     let goal_id = 0;
     console.log("woking..");
     if(goal != "" && description != "" && checkpoints.length >= 2){
         const {data, error} = await _supabase
         .from("Goals")
-        .insert({
-            user_id: user_id,
+        .update({
             goal_name: goal,
             description: description,
-        }).select();
+        })
+        .eq('id', goal_id);
         if (error){
             alert(error.message);
         }
-        goal_id = data[0].id;
-        console.log(goal_id);
 
-        for (let cp in checkList){
+        //if # of cp < current : delete or 
+        //# of cp > : add 
+        //or just delete them and add them again to database
+        for (let cp in cpIdList){
             const {data2, error2} = await _supabase
             .from("Checkpoint")
-            .insert([
-            {name: cp, goal_id: goal_id}
-            ]);
+            .update([
+            {name: checkList[cp]}
+            ])
+            .eq('id', cpIdList[cp]);
         }
         
         // get id of goal by checking auth.uid() && 
@@ -79,5 +90,4 @@ doneButton.addEventListener("click", async(e)=> {
         console.log("Unable to add to database");
         alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoints!");
     }
-    //
-});
+})
