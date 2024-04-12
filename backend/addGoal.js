@@ -65,7 +65,7 @@ doneButton.addEventListener("click", async(e)=> {
             const {data2, error2} = await _supabase
             .from("Checkpoint")
             .insert([
-            {name: cp, goal_id: goal_id}
+            {name: checkList[cp], goal_id: goal_id}
             ]);
         }
         
