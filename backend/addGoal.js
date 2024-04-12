@@ -21,10 +21,10 @@ doneButton.addEventListener("click", async(e)=> {
             counter++;
         }
     }
-    console.log(checkList);
-    let goal = document.querySelector("#goal-title").value;
+    console.log(checkList[cp]);
+    // let goal = document.querySelector("#goal-title").value;
     
-    let description = document.querySelector("#goal-description").value;
+    // let description = document.querySelector("#goal-description").value;
     // let checkpoint1 = document.querySelector("#checkpoint1").value;
     // if (checkpoint1 != ""){
     //     checkpoints.push(checkpoint1);
@@ -61,12 +61,14 @@ doneButton.addEventListener("click", async(e)=> {
         goal_id = data[0].id;
         console.log(goal_id);
 
-        for (let cp in checkList){
+        let order_counter =1;
+        for (let cp of checkList){
             const {data2, error2} = await _supabase
             .from("Checkpoint")
             .insert([
-            {name: checkList[cp], goal_id: goal_id}
+            {name: cp, goal_id: goal_id, checkpoint_order: order_counter}
             ]);
+            order_counter++;
         }
         
         // get id of goal by checking auth.uid() && 
@@ -79,5 +81,5 @@ doneButton.addEventListener("click", async(e)=> {
         console.log("Unable to add to database");
         alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoints!");
     }
-    //
+    
 });
