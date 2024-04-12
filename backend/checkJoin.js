@@ -37,7 +37,7 @@ const checkJoin = async()=>{
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <button class="btn btn-light" value="${data[0].id}" type="button" onclick="setGoalId(this.value)">
+                        <button class="btn btn-light" value="${data[0].id}" type="button" onclick="setGoalId(this)">
                             expand
                         </button>
                     </div>
