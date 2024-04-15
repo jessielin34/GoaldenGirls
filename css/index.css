@@ -40,7 +40,7 @@ body {
 .b {
     position: absolute;
   left: 50%;
-  top: 50%;
+  top: 100%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
@@ -62,35 +62,65 @@ body {
 
 .headline {
     font-family: 'Press Start 2P', system-ui;
-    font-size: 60px;
+    font-size: 21px;
     color: white;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black; 
     text-shadow: 1px 2px 2px rgb(0,0,0);
+    text-align: center;
 }
 
+.browser-window {
+    width: 700px;
+    height: auto;
+    border: 3px solid #000;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 10px;
+  }
 
-.image {
-    -webkit-animation: spin 5s linear infinite;
-    -moz-animation: spin 5s linear infinite;
-    animation: spin 5s linear infinite;
-}
+  .window-header {
+    display: flex;
+    justify-content: start;
+    padding: 5px;
+  }
 
-@-moz-keyframes spin {
-    100% {
-        -moz-transform: rotate(360deg);
-    }
-}
+  .window-header .circle {
+    height: 12px;
+    width: 12px;
+    border-radius: 10%;
+    margin-right: 4px;
+  }
 
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
+  .red {
+    background-color: red;
+  }
 
-@keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
+  .yellow {
+    background-color: yellow;
+  }
+
+  .green {
+    background-color: rgb(29, 213, 99);
+  }
+
+  .address-bar {
+    background-color: #ddd;
+    border: none;
+    padding: 4px;
+    margin-top: 4px;
+  }
+
+  .content-area {
+    height: 400px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-family: 'Press Start 2P', system-ui;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
