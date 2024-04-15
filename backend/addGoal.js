@@ -22,32 +22,9 @@ doneButton.addEventListener("click", async(e)=> {
         }
     }
     
-    // for (let cp of checkList){
-    //     console.log(cp);
-    // }
     let goal = document.querySelector("#goal-title").value;
     
     let description = document.querySelector("#goal-description").value;
-    // let checkpoint1 = document.querySelector("#checkpoint1").value;
-    // if (checkpoint1 != ""){
-    //     checkpoints.push(checkpoint1);
-    // }
-    // let checkpoint2 = document.querySelector("#checkpoint2").value;
-    // if (checkpoint2 != ""){
-    //     checkpoints.push(checkpoint2);
-    // }
-    // let checkpoint3 = document.querySelector("#checkpoint3").value;
-    // if (checkpoint3 != ""){
-    //     checkpoints.push(checkpoint3);
-    // }
-    // let checkpoint4 = document.querySelector("#checkpoint4").value;
-    // if (checkpoint4 != ""){
-    //     checkpoints.push(checkpoint4);
-    // }
-    // let checkpoint5 = document.querySelector("#checkpoint5").value;
-    // if (checkpoint5 != ""){
-    //     checkpoints.push(checkpoint5);
-    // }
     let goal_id = 0;
     console.log("woking..");
     if(goal != "" && description != "" && checkpoints.length >= 2){
@@ -68,9 +45,11 @@ doneButton.addEventListener("click", async(e)=> {
         for (let cp_name of checkList){
             const {data2, error2} = await _supabase
             .from("Checkpoint")
-            .insert([
-            {name: cp_name, goal_id: goal_id, checkpoint_order: order_counter}
-            ]);
+            .insert([{
+                name: cp_name, 
+                goal_id: goal_id, 
+                checkpoint_order: order_counter
+            }]);
             order_counter++;
         }
         

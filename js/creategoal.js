@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     var addButton = document.getElementById('addCP'); // Get the button by its ID
-    var counter = 6; // Start counting from 6 because you already have 5 checkpoints
 
     addButton.onclick = function () {
+        let checkpoints = document.querySelectorAll("input");
+        var counter = checkpoints.length - 1;
         var newCheckpoint = document.createElement('div'); // Create a new div for input group
         newCheckpoint.classList.add('input-group', 'mb-3');
 
@@ -29,6 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var form = document.getElementById('goal-form');
         form.insertBefore(newCheckpoint, addButton); // Insert new input before the button
 
-        counter++; // Increment the counter
+        //counter++; // Increment the counter
     };
 });
