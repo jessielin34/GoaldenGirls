@@ -109,6 +109,19 @@ form {
     padding-right:20%;
 }
 
+.delete-checkpoint {
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 38px; /* Adjust the line-height to match your input's height */
+    display: none; /* Hide by default */
+    color: red; /* Example color */
+}
+
+/* Only display delete button on hover of the input group */
+.input-group.mb-3:hover .delete-checkpoint {
+    display: block;
+}
+
 /* Customize Scrollbar */
 ::-webkit-scrollbar {
     width: 20px;
