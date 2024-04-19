@@ -20,10 +20,26 @@ export function addCheckpoint (counter) {
     newInput.setAttribute('aria-describedby', 'inputGroup-sizing-default');
     newInput.style.border = 'solid';
 
+
     newPrepend.appendChild(newSpan);
     newCheckpoint.appendChild(newPrepend);
     newCheckpoint.appendChild(newInput);
+    addDeleteButtonToCheckpoint(newCheckpoint);
+
 
     var form = document.getElementById('goal-form');
     form.insertBefore(newCheckpoint, addButton); // Insert new input before the button
 };
+
+
+function addDeleteButtonToCheckpoint(checkpoint) {
+    var deleteBtn = document.createElement('span');
+    deleteBtn.classList.add('delete-checkpoint');
+    deleteBtn.innerHTML = '&times;'; // Using HTML entity for multiplication sign (×) as close button
+    checkpoint.appendChild(deleteBtn);
+
+    deleteBtn.addEventListener('click', function() {
+        checkpoint.remove(); // Removes the '.input-group.mb-3' div
+        updateCheckpointNumbers(); // Update the numbers after deleting
+    });
+}

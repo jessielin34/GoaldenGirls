@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newInput.type = 'text';
         newInput.classList.add('form-control');
         newInput.style.border = 'solid';
+        newInput.id = 'checkpoint' + counter;
 
         newPrepend.appendChild(newSpan);
         newCheckpoint.appendChild(newPrepend);

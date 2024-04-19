@@ -12,6 +12,7 @@ document.getElementById("user").textContent= user.email;
 //1. select goal name and description
 let orig_name = "";
 let orig_description = "";
+let orig_category = "";
 let goal_id = parseInt(localStorage.getItem("goal_id"));
 console.log(goal_id);
 const { data: goal, error_}  = await _supabase
@@ -23,6 +24,8 @@ if (!error_){
     document.querySelector("#goal-title").value = orig_name;
     orig_description = goal[0].description;
     document.querySelector("#goal-description").value = orig_description;
+    orig_category = goal[0].category;
+    document.querySelector("#category-select").value = orig_category;
 }
 else console.log(error_);
 
@@ -53,21 +56,22 @@ doneButton.addEventListener('click', async(e)=>{
     e.preventDefault();
     let checkList = []; // list of names of all updated checkpoints
     let checkpoints = document.querySelectorAll("input");
-    let counter = 1;
+    //let counter = 1;
     for (let check of checkpoints){
-        if (check.id == "checkpoint" + String(counter)){
+        if (check.id.includes("checkpoint")){
             if (check.value) checkList.push(check.value);
-            counter++;
+            //counter++;
         }
     }
+    console.log(checkList);
     //check if lists match
-    const updateCps = checkArrays(cpNameList, checkList);
-    console.log(updateCps);
+    //const updateCps = checkArrays(cpNameList, checkList);
+    //console.log(updateCps);
     //if (array)    
-    if (updateCps.length == 0) {
-        alert("No changes made!");
-        return;
-    }
+    // if (updateCps.length == 0) {
+    //     alert("No changes made!");
+    //     return;
+    // }
     //check from original to updated --> if diff change push into a new list with the 
     console.log(checkList);
     let goal = document.querySelector("#goal-title").value;
@@ -119,6 +123,7 @@ doneButton.addEventListener('click', async(e)=>{
         }
         if (checkList.length  < cpIdList.length){
             for (let i = checkList.length; i < cpIdList.length; i++){
+                console.log(i);
                 let {data_, error_} = await _supabase
                 .from("Checkpoint")
                 .delete({user_id: user_id})
@@ -135,7 +140,7 @@ doneButton.addEventListener('click', async(e)=>{
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
         alert("Your goal has been modified!");
-        window.location.replace("./../profile.html"); //hard-coded
+        //window.location.replace("./../profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to edit");
@@ -145,7 +150,7 @@ doneButton.addEventListener('click', async(e)=>{
 
 function checkArrays(list_a, list_b){
     let updateCps = [];
-    if (list_a === list_b) console.log("no changes");
+    if (list_a == list_b) console.log("no changes");
     else{
         for (let i = 0; i < list_a.length ; ++i){
             if (list_a[i] != list_b[i]){

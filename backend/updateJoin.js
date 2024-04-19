@@ -1,6 +1,10 @@
 import { _supabase } from "./client.js";
 //check user is signed in
 
+// var script = document.createElement('script');
+// script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
+// document.getElementsByTagName('head')[0].appendChild(script);
+
 let user_id = "a";
 const { data: { user },error } = await _supabase.auth.getUser();
 
@@ -10,6 +14,9 @@ const updateUser = async()=>{
 
 }; updateUser();
 console.log(user);
+
+//array with categories
+let categories = [];
 
 
 const checkDB = async()=> {
@@ -38,8 +45,29 @@ const checkDB = async()=> {
                 }    
             }
             if (!repeat){
-                goal += 
-                `<a style="color: black !important; ">
+                let category = data[i].category;
+                if (!categories.includes(category)){ //add category sections
+                    categories.push(category);
+                    $('.list-group').append(
+                        $('<li/>')
+                        .attr("id", category)
+                        .addClass("list-group-item d-flex justify-content-between align-items-start bg-transparent")
+                    );
+                    $('#'+category).append(
+                        $('<div/>')
+                        .addClass("ms-2 me-auto")
+                        .attr("id", category +"div")
+                    )
+                    $(`#${category}div`).append(
+                        $('<div/>')
+                        .addClass('container fw-bold')
+                        .text(category)
+                    )
+                }
+                //add goals
+                $(`#${category}div`).append(
+                    $('<a/>')
+                    .html(`<a style="color: black !important; ">
                 <div class="card card-style" style="width: 18rem; height: 12rem; display: inline-block; ">
                     <div class="card-body">
                         <h5 class="card-title">${data[i].goal_name}</h5>
@@ -47,15 +75,27 @@ const checkDB = async()=> {
                         <button type="button" class="btn btn-warning join" value="${data[i].id}">Join</button>
                     </div>
                 </div>
-                </a>`
+                </a>`)
+                )
             }
             
             };
-            const template = document.createElement("a");
-            template.innerHTML = goal.trim();
-            let sibling = document.getElementById("goal1");
-            let parent = sibling.parentNode;
-            parent.insertBefore(template, sibling.nextSibling); 
+            console.log(categories);
+            
+            //add categories
+            categories.sort();
+            for (let cat of categories){
+                
+                
+
+            }
+
+            // const template = document.createElement("a");
+            // //creat div with category name as textContent
+            // template.innerHTML = goal.trim();
+            // let sibling = document.getElementById("goal1");
+            // let parent = sibling.parentNode;
+            // parent.insertBefore(template, sibling.nextSibling); 
         
             //add join Event Listener
             const joined = document.querySelectorAll(".join");

@@ -23,8 +23,8 @@ doneButton.addEventListener("click", async(e)=> {
     }
     
     let goal = document.querySelector("#goal-title").value;
-    
     let description = document.querySelector("#goal-description").value;
+    let category = document.querySelector("#category-select").value;
     let goal_id = 0;
     console.log("woking..");
     if(goal != "" && description != "" && checkpoints.length >= 2){
@@ -34,6 +34,7 @@ doneButton.addEventListener("click", async(e)=> {
             user_id: user_id,
             goal_name: goal,
             description: description,
+            category: category,
         }).select();
         if (error){
             alert(error.message);
@@ -57,7 +58,7 @@ doneButton.addEventListener("click", async(e)=> {
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
         alert("Your goal has been added!");
-        window.location.replace("./../profile.html"); //hard-coded
+        //window.location.replace("./../profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");
