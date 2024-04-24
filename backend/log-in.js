@@ -28,12 +28,28 @@ login.addEventListener("click", async(e)=>{
 //session:
 // access_token: "eyJhbGciOiJIUzI1NiIsImtpZCI6IkgvWWZVQk45WkdGTnJlSVQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzExNzYzNzI0LCJpYXQiOjE3MTE3N…"
 
-// expires_at: 1711763724
 
-// expires_in: 3600
+//Forgot Password:
 
-// refresh_token: "NcPgGCBssg_mRBo8XzXC-g"
+let reset = document.querySelector("#reset");
+reset.addEventListener("click", async(e)=>{
+    e.preventDefault();
+    //console.log("working");
+    let email = document.querySelector("#inputemail").value;
+    const { data, error } = await _supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://jessielin34.github.io/GoaldenGirls/reset-password.html'});
+    if (error){
+        alert(error);
+    }
+})
 
-// token_type: "bearer"
 
-// user: {id: "043ec298-ae82-43ba-a
+async function resetPassword(){
+    let new_password = document.querySelector("#inputpassword").value;
+    const { data, error } = await _supabase.auth.updateUser({
+        password: new_password
+    })
+    if (error){
+        alert(error);
+    }
+}
