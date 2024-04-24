@@ -1,38 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Press Start 2P', system-ui;
-    color: white
-
+    background-color: #000;
+    color: white;
+    text-align: center;
+    margin: 0;
 }
 
 .container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 960px;
+    margin: auto;
+    padding-top: 20px;
 }
 
-.b {
-    position: absolute;
-  left: 50%;
-  top: 100%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.logo-img {
+    width: 100%;
+    max-width: 750px;
+}
+
+.icon-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* This ensures the icons do not wrap */
+}
+
+.icon-img {
+    width: 150px; /* width is already defined */
+    margin: 0 5px; /* Add a little space between icons */
+    flex: 0 0 auto; /* Don't grow, don't shrink, and don't base size on content */
 }
 
 .btn {
     font-family: 'Press Start 2P', system-ui;
-    background-color: #FFFFFF;
     color: black;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+    padding: 15px 25px;
     border-radius: 12px;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
     border: solid !important;
+    transition: background-color 0.3s ease;
 }
 
 
@@ -43,7 +55,6 @@ body {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black; 
     text-shadow: 1px 2px 2px rgb(0,0,0);
-    text-align: center;
 }
 
 .browser-window {
@@ -52,8 +63,8 @@ body {
     border: 3px solid #000;
     border-radius: 2px;
     padding: 5px;
-    margin: 10px;
-  }
+    margin: 10px auto;
+}
 
   .window-header {
     display: flex;
@@ -87,16 +98,62 @@ body {
     margin-top: 4px;
   }
 
-  .content-area {
-    height: 400px;
-  }
+.content-area {
+    padding: 20px;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-pink {
+    background-color: #fcd2d0;
+}
 
   .subtitle {
-    text-align: center;
     font-family: 'Press Start 2P', system-ui;
     padding: 15px 15px;
-    text-align: center;
     font-size: 16px;
     margin: 4px 2px;
   }
+
+.txt {
+    font-family: 'Press Start 2P', system-ui;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.custom-input {
+    border: solid black !important;
+    margin-bottom: 15px; /* Space between input fields */
+}
+
+.copyright-footer {
+    font-family: 'Press Start 2P', system-ui;
+    font-size: x-small;
+}
+
+/* Customize Scrollbar */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #FBEE8F;
+    border-radius: 10px;
+    border: solid;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #F5D909;
+    }
 
