@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Log in</title>
+    <title>Reset password</title>
     <link rel="stylesheet" href="css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,9 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-    
     <div class="container">
-        <h3 class="headline">LOG IN</h3>
+        <h3 class="headline">PASSWORD RESET</h3>
         <div class="browser-window my-4">
             <div class="window-header">
                 <div class="circle red"></div>
@@ -22,23 +21,15 @@
             <div class="content-area bg-color">
                 <form class="txt">
                     <div class="form-group">
-                        <input type="email" class="form-control custom-input" id="inputemail" placeholder="Enter email">
+                        <p class="card-text py-2">
+                            Enter your email address and we'll send you an email with instructions to reset your password.
+                        </p>
+                        <input type="email" class="form-control custom-input" id="inputemail" placeholder="Type an email address">
                     </div>
-                    <div class="form-group">
-
-                        <input type="password" class="form-control custom-input" id="inputpassword" placeholder="Enter password">
-                    </div>
-                    <div class="form-group form-check">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberme" checked />
-                            <label class="form-check-label" for="rememberme"> Remember me </label>
-                        </div>
-
-                        <a class="forgot-pass text-muted" href="resetpass.html" id="forgotpass">Forgot password?</a>
-                    </div>
-                    <a id="submit" class="btn">+ Go! +</a> <br />
-                    <div class="text-center">
-                        <p>Not a member? <a class="forgot-pass text-muted" href="#!">Register</a></p>
+                    <a href="#" class="btn">+ Reset password +</a> <!--probably will need an alert to go check email-->
+                    <div class="justify-content-between mt-4">
+                        <a class="forgot-pass text-muted" href="login.html"><u>Login</u></a>
+                        <a class="forgot-pass text-muted" href="signup.html"><u>Register</u></a>
                     </div>
                 </form>
             </div>
@@ -46,7 +37,7 @@
     </div>
 
 
-            <script src="backend/log-in.js" type="module"></script>
+            <script src="" type="module"></script>
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
