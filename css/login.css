@@ -143,9 +143,9 @@ body, html {
 }
 
 .bg-color {
-    background-color: #FF53A0;
-    background-image: linear-gradient(to right, #F5D909 0%, #FF6BAD 49%, #F5D909 100%);
-    animation: bg-change 5s infinite;
+    background-color: #FF6BAD;
+    background-image: radial-gradient(circle farthest-side at top right, transparent, #F5D909), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
+    animation: bg-change 10s infinite;
 }
 
 @keyframes bg-change {
