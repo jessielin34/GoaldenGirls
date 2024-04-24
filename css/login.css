@@ -1,14 +1,14 @@
-/*Background animation*/
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+/*Background animation
 body::before {
-    content: ""; /* required for ::before */
-    position: fixed; /* don't scroll with page */
-    z-index: -100; /* place behind elements on page */
+    content: ""; 
+    position: fixed; 
+    z-index: -100; 
     width: 100%;
     height: 100%;
     background-color: #FF53A0;
@@ -25,8 +25,9 @@ body::before {
         filter: hue-rotate(-45deg);
     }
 }
-
+*/
 body, html {
+    font-family: 'Press Start 2P', system-ui;
     height: 100%; /* Ensure the full height of the page is used */
     display: flex; /* Establish flex container */
     justify-content: center; /* Center horizontally */
@@ -82,6 +83,9 @@ body, html {
     width: 100%;
     max-width: 500px;
     text-align: center;
+    padding: 15px 15px;
+    font-size: 16px;
+    margin: 4px 2px;
 }
 
 
@@ -90,4 +94,66 @@ body, html {
     color: black;
     font-family: 'Press Start 2P', system-ui;
     padding: 0.375rem 0.75rem; 
+}
+
+
+.browser-window {
+    width: 500px;
+    height: auto;
+    border: 3px solid #000;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 10px auto;
+}
+
+.window-header {
+    display: flex;
+    justify-content: start;
+    padding: 5px;
+}
+
+    .window-header .circle {
+        height: 12px;
+        width: 12px;
+        border-radius: 10%;
+        margin-right: 4px;
+    }
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: rgb(29, 213, 99);
+}
+
+.address-bar {
+    background-color: #ddd;
+    border: none;
+    padding: 4px;
+    margin-top: 4px;
+}
+
+.content-area {
+    padding: 20px;
+}
+
+.bg-color {
+    background-color: #FF53A0;
+    background-image: linear-gradient(to right, #F5D909 0%, #FF6BAD 49%, #F5D909 100%);
+    animation: bg-change 5s infinite;
+}
+
+@keyframes bg-change {
+    0%, 100% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(-45deg);
+    }
 }
