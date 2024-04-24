@@ -83,3 +83,11 @@ body, html {
     max-width: 500px;
     text-align: center;
 }
+
+
+.input-group-text {
+    background-color: slategray;
+    color: black;
+    font-family: 'Press Start 2P', system-ui;
+    padding: 0.375rem 0.75rem; 
+}
