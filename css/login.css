@@ -1,7 +1,8 @@
 /*Background animation*/
-* { /* reset margins and paddings on all elements */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body::before {
@@ -13,7 +14,6 @@ body::before {
     background-color: #FF53A0;
     background-image: linear-gradient(to right, #F5D909 0%, #FF6BAD 49%, #F5D909 100%);
     animation: bg-change 5s infinite;
-    overflow: hidden;
 }
 
 @keyframes bg-change {
@@ -26,34 +26,36 @@ body::before {
     }
 }
 
-.container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+body, html {
+    height: 100%; /* Ensure the full height of the page is used */
+    display: flex; /* Establish flex container */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
-.b {
-    position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+
+.container {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
+
 
 .btn {
     font-family: 'Press Start 2P', system-ui;
-    background-color: #FFFFFF;
+    background-color: white;
     color: black;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+    padding: 15px 25px;
     border-radius: 12px;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
     border: solid !important;
+    transition: background-color 0.3s ease;
 }
 
 
@@ -66,7 +68,18 @@ body::before {
     text-shadow: 1px 2px 2px rgb(0,0,0);
 }
 
+.custom-input {
+    border: solid black !important;
+    margin-bottom: 15px; /* Space between input fields */
+}
+
+.forgot-pass {
+    color: black;
+}
+
 .txt {
     font-family: 'Press Start 2P', system-ui;
-    text-align: center; 
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
 }
