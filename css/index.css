@@ -117,6 +117,24 @@ body {
     margin: 4px 2px;
   }
 
+.txt {
+    font-family: 'Press Start 2P', system-ui;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.custom-input {
+    border: solid black !important;
+    margin-bottom: 15px; /* Space between input fields */
+}
+
+.copyright-footer {
+    font-family: 'Press Start 2P', system-ui;
+    font-size: x-small;
+}
+
 /* Customize Scrollbar */
 ::-webkit-scrollbar {
     width: 20px;

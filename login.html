@@ -22,12 +22,17 @@
                     <input type="password" class="form-control custom-input" id="inputpassword" placeholder="Enter password">
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="rememberme">
-                    <label class="form-check-label" for="remember-me">Remember me</label>
-                    <br />
-                    <a class="forgot-pass" href="resetpass.html" id="forgotpass">Forgot password?</a>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberme" checked />
+                        <label class="form-check-label" for="rememberme"> Remember me </label>
+                    </div>
+                   
+                    <a class="forgot-pass text-muted" href="resetpass.html" id="forgotpass">Forgot password?</a>
                 </div> 
-                <a id="submit" class="btn">Go!</a>
+                <a id="submit" class="btn">+ Go! +</a> <br />
+                <div class="text-center">
+                    <p>Not a member? <a class="forgot-pass text-muted" href="#!">Register</a></p>
+                </div>
             </form>
 
         </div>
