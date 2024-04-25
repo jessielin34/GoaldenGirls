@@ -142,6 +142,26 @@ body, html {
     padding: 20px;
 }
 
+.navbar-txt {
+    font-family: 'Press Start 2P', system-ui;
+    font-size: 21px;
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 1px 2px 2px rgb(0,0,0);
+}
+
+.navbar-position {
+    position: fixed; /* Fix the navbar's position relative to the viewport */
+    top: 0; /* Align the top edge of the navbar with the top edge of the viewport */
+    left: 0;
+    right: 0;
+    width: 100%; /* Make the navbar extend full width of the viewport */
+    padding: 10px 0; /* Add some padding for aesthetics */
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Optional: Adds shadow for better visibility over page content */
+}
+
 .bg-color {
     background-color: #FF6BAD;
     background-image: radial-gradient(circle farthest-side at top right, transparent, #F5D909), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
