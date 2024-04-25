@@ -110,6 +110,11 @@ body {
     background-color: #fcd2d0;
 }
 
+
+.bg-yellow {
+    background-color: #fef38b;
+}
+
   .subtitle {
     font-family: 'Press Start 2P', system-ui;
     padding: 15px 15px;
@@ -166,3 +171,20 @@ body {
     -webkit-text-stroke-color: black;
     text-shadow: 1px 2px 2px rgb(0,0,0);
 }
+
+.bg-color {
+    background-color: #FF6BAD;
+    background-image: radial-gradient(circle farthest-side at top right, transparent, #F5D909), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
+    animation: bg-change 10s infinite;
+}
+
+@keyframes bg-change {
+    0%, 100% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(-45deg);
+    }
+}
+

@@ -26,10 +26,10 @@
                     </svg>
                 </a>
                 <div class="dropdown-menu subtitle" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">About Us</a>
-                    <a class="dropdown-item" href="#">Contact</a>
+                    <a class="dropdown-item" href="#about-us">About Us</a>
+                    <a class="dropdown-item" href="#contact-us">Contact</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">SIGN UP</a>
+                    <a class="dropdown-item" href="signup.html">SIGN UP</a>
                 </div>
             </div>
             <a href="login.html" class="btn form-control mr-sm-2">LOG IN</a>
@@ -38,10 +38,7 @@
     </nav>
     <div class="container text-center">
         <img src="images/logo-border.gif" alt="logo" class="logo-img"><br><br>
-        <p class="headline">SOCIAL MEDIA FOR YOUR GOALS</p>
-        <a href="login.html" class="btn">LOG IN</a>
-        <a href="signup.html" class="btn">SIGN UP</a>
-        <br><br>
+        <p class="headline" id="about-us">ABOUT US</p>
         <div class="browser-window my-4">
             <div class="window-header">
                 <div class="circle red"></div>
@@ -80,30 +77,62 @@
                 </div>
             </div>
         </div> <br />
-        <h3 class="headline">CONTACT US</h3>
-        <div class="subtitle">Got any questions or suggestions? Fill out this form to reach out!</div>
-        <form class="txt" id="contact-form">
-            <div class="form-group">
-                <input type="text" class="form-control custom-input" id="inputname" placeholder="Name" name="name" required>
-
-                <input type="email" class="form-control custom-input" id="inputemail" placeholder="Email address" name="email" required>
-
-                <input type="text" class="form-control custom-input" id="inputsubject" placeholder="Subject" name="email-subject" required>
-                <textarea class="form-control custom-input" id="inputmessage" placeholder="Message" rows="4" name="message" required></textarea>
-                <a id="submit" class="btn">Submit.</a> <br />
+        <h3 class="headline" id="register">REGISTER</h3>
+        <div class="browser-window my-4">
+            <div class="window-header">
+                <div class="circle red"></div>
+                <div class="circle yellow"></div>
+                <div class="circle green"></div>
             </div>
-        </form>
+            <div class="content-area bg-color">
+                <div class="subtitle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-award" viewBox="0 0 16 16">
+                        <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702z" />
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z" />
+                    </svg>
+                    <br /><br />
+                    Share your goals, cheer others on, have a visualized timeline for each of your goals, build your network, customize your profile,
+                    and most importantly achieve your goals!
+                    <br><br>
+                    <a href="signup.html" class="btn btn-light">SIGN UP</a>
 
-        <footer>
-            <p class="copyright-footer">&copy; 2024 Goalden. All rights reserved.</p>
-        </footer>
+                </div>
+            </div>
+        </div> <br />
+        <h3 class="headline" id="contact-us">CONTACT US</h3>
+        <div class="browser-window my-4">
+            <div class="window-header">
+                <div class="circle red"></div>
+                <div class="circle yellow"></div>
+                <div class="circle green"></div>
+            </div>
+            <div class="content-area bg-yellow">
+                <div class="subtitle">
+                    <div class="subtitle">Got any questions or suggestions? Fill out this form to reach out!</div>
+                    <form class="txt" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control custom-input" id="inputname" placeholder="Name" name="name" required>
 
-    </div>
+                            <input type="email" class="form-control custom-input" id="inputemail" placeholder="Email address" name="email" required>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                            <input type="text" class="form-control custom-input" id="inputsubject" placeholder="Subject" name="email-subject" required>
+                            <textarea class="form-control custom-input" id="inputmessage" placeholder="Message" rows="4" name="message" required></textarea>
+                            <a id="submit" class="btn btn-light">Submit.</a> <br />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            <footer>
+                <p class="copyright-footer">&copy; 2024 Goalden. All rights reserved.</p>
+            </footer>
+
+       
+
+                <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
 </body>
