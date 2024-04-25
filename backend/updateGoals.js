@@ -13,6 +13,7 @@ let { data: { user }, error } = await _supabase.auth.getUser();
 const updateUser = async()=>{
     document.getElementById("user").textContent= user.email;
     user_id = user.id;
+    console.log(user);
 
 }; updateUser();
 

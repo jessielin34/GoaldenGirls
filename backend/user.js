@@ -1,11 +1,14 @@
 import { _supabase } from "./client.js";
-const user_data = "";
-const { data: { user }, error } = await _supabase.auth.getUser();
-if (!error){
-    user_data = user;
-}
-else{
-    user_data = error;
-}
 
-export { user_data };
+try {
+    var { data: { user }, error } = await _supabase.auth.getUser();
+    console.log(user);
+}
+catch(error){
+    console.log(error);
+}
+//console.log(user);
+
+export {user};
+
+//https://supabase.com/docs/reference/javascript/auth-onauthstatechange
