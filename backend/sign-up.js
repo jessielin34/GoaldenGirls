@@ -5,6 +5,17 @@ signup.addEventListener("click", signUp);
 async function signUp(e){
     e.preventDefault();
     let username = document.querySelector("#inputusername").value;
+    //check username is not taken
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq("username", username);
+        if (data.length != 0) throw("username already exists in database");
+    } catch (err){
+        alert("Username is taken!")
+        throw err;
+    }
     let email = document.querySelector("#inputemail").value;
     let password = document.querySelector("#inputpassword").value;
     let password2 = document.querySelector("#reenterpassword").value;
@@ -21,7 +32,7 @@ async function signUp(e){
             console.log(data.user);
             addUserTable({data, username});
             alert("Verify your email!");
-            //window.location.replace("./../index.html"); 
+            window.location.replace("./../index.html"); 
         }
         
     }
@@ -46,4 +57,3 @@ async function addUserTable(userData) {
     })
     if (error) alert(error);
 }
-

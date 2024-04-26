@@ -12,7 +12,7 @@ async function resetPassword(){
         if (error){
             alert(error);
         }
-        else alert("Password successfully updated!")
+        else alert("Password successfully updated!");
     }
-    else alert("Enter all fields!")
+    else alert("Enter all fields!");
 }
