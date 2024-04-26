@@ -152,6 +152,10 @@ form {
     border-left: none !important; /* remove the left border to merge with text input */
 }
 
+.input-group.over {
+    border: 2px dashed #000; /* Example style */
+}
+
 
 /* Customize Scrollbar */
 ::-webkit-scrollbar {
