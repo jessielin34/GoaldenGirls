@@ -34,44 +34,7 @@
 
         </div>
         <br /><br /><br /><br />
-        <!--
-        <div class="create-goal">
-            <p class="new-goal-tab">NEW GOAL</p>
-            <div>
-                <form>
-                    <input class="name-textbox" type="text" id="name" name="name" placeholder="name">
-                    <p class="cp-text">checkpoints</p>
-                    <br>
-                    <input class="des-textbox" type="text" id="description" name="description" placeholder="description">
-                </form>
-            </div>
-        </div>
-
-            <form name="goal-form" id="goal-form">
-                <div class="goal-form">
-                    <h3 class="new-goal-tab">NEW GOAL</h3>
-                    <div class="input-group">
-                        <label for="goal-name">name</label>
-                        <input type="text" id="goal-name" placeholder="name">
-                    </div>
-                    <div class="checkpoints">
-                        <div class="checkpoint">
-                            <label for="checkpoint1">checkpoints</label><br />
-                            <textarea id="checkpoint1" placeholder="description"></textarea>
-                            <input type="button" id="addCP" value="+" />
-                            <br />
-                        </div>
-                    </div>
-                    <a href="profile.html">
-                        <button type="button" class="cancel">Cancel</button>
-                    </a>
-                    <a href="profile.html">
-                        <button type="button" class="done">DONE.</button>
-                    </a>
-                </div>
-
-            </form>
-    -->
+        
         <form name="goal-form" id="goal-form">
             <div class="form-group">
                 <label for="goal-title">Title:</label>
@@ -84,6 +47,7 @@
             <div class="form-group">
                 <label for="goal-category">Category:</label>
                 <select class="form-control" name="categories" id="category-select" style="border:solid;">
+                    <option value="" selected disabled hidden>Choose one</option>
                     <option value="Lifestyle">Lifestyle</option>
                     <option value="Education">Education</option>
                     <option value="Work">Work</option>
@@ -99,12 +63,16 @@
                     <span class="input-group-text" id="inputGroup-sizing-default">1.</span>
                 </div>
                 <input type="text" class="form-control" id="checkpoint1" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="date" class="form-control date-picker" aria-label="Date" aria-describedby="inputGroup-sizing-date">
+
+
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">2.</span>
                 </div>
                 <input type="text" class="form-control" id="checkpoint2" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -112,18 +80,7 @@
                 </div>
                 <input type="text" class="form-control" id="checkpoint3" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">4.</span>
-                </div>
-                <input type="text" class="form-control" id="checkpoint4" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-            </div>  
-             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">5.</span>
-                </div>
-                <input type="text" class="form-control" id="checkpoint5" style="border:solid;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-            </div>
+            
 
         <input class="btn" type="button" id="addCP" value="+ Add checkpoint" />
         </form>

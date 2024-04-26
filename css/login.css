@@ -4,28 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-/*Background animation
-body::before {
-    content: ""; 
-    position: fixed; 
-    z-index: -100; 
-    width: 100%;
-    height: 100%;
-    background-color: #FF53A0;
-    background-image: linear-gradient(to right, #F5D909 0%, #FF6BAD 49%, #F5D909 100%);
-    animation: bg-change 5s infinite;
-}
 
-@keyframes bg-change {
-    0%, 100% {
-        filter: hue-rotate(0deg);
-    }
-
-    50% {
-        filter: hue-rotate(-45deg);
-    }
-}
-*/
 body, html {
     font-family: 'Press Start 2P', system-ui;
     height: 100%; /* Ensure the full height of the page is used */
@@ -140,6 +119,26 @@ body, html {
 
 .content-area {
     padding: 20px;
+}
+
+.navbar-txt {
+    font-family: 'Press Start 2P', system-ui;
+    font-size: 21px;
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 1px 2px 2px rgb(0,0,0);
+}
+
+.navbar-position {
+    position: fixed; /* Fix the navbar's position relative to the viewport */
+    top: 0; /* Align the top edge of the navbar with the top edge of the viewport */
+    left: 0;
+    right: 0;
+    width: 100%; /* Make the navbar extend full width of the viewport */
+    padding: 10px 0; /* Add some padding for aesthetics */
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Optional: Adds shadow for better visibility over page content */
 }
 
 .bg-color {
