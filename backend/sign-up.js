@@ -1,8 +1,21 @@
 import {_supabase} from './client.js';
 
 let signup = document.querySelector("#submit");
-signup.addEventListener("click", async(e)=>{
+signup.addEventListener("click", signUp);
+async function signUp(e){
     e.preventDefault();
+    let username = document.querySelector("#inputusername").value;
+    //check username is not taken
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq("username", username);
+        if (data.length != 0) throw("username already exists in database");
+    } catch (err){
+        alert("Username is taken!")
+        throw err;
+    }
     let email = document.querySelector("#inputemail").value;
     let password = document.querySelector("#inputpassword").value;
     let password2 = document.querySelector("#reenterpassword").value;
@@ -13,17 +26,34 @@ signup.addEventListener("click", async(e)=>{
         });
         if (error) {
             console.log(error);
-            alert("Unable to register! Make sure password is at least 6 characters.");
+            alert(error.message);
         }
         else {
-            console.log(data);
+            console.log(data.user);
+            addUserTable({data, username});
             alert("Verify your email!");
             window.location.replace("./../index.html"); 
         }
+        
     }
     else {
         alert("Input fields missing!");
     }
     
-});
+};
 
+document.addEventListener("keydown", checkKey);
+function checkKey(event){
+    if(event.key == "Enter") signUp(event);
+}
+
+async function addUserTable(userData) {
+    let {data, error} = await _supabase
+    .from("user")
+    .insert({
+        user_id: userData.data.user.id,
+        username: userData.username,
+        email: userData.data.user.email
+    })
+    if (error) alert(error);
+}

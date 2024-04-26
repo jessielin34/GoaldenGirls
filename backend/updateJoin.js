@@ -7,10 +7,16 @@ import { _supabase } from "./client.js";
 
 let user_id = "a";
 const { data: { user },error } = await _supabase.auth.getUser();
-
+user_id = user.id;
 const updateUser = async()=>{
-    document.getElementById("user").textContent= user.email;
-    user_id = user.id;
+    //username
+    let {data, error_} = await _supabase
+    .from("user")
+    .select()
+    .eq('user_id', user_id);
+    console.log(data);
+    if (error_)  alert(error_);
+    else document.getElementById("user").textContent= '@' + data[0].username;
 
 }; updateUser();
 console.log(user);
