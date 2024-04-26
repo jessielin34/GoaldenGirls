@@ -109,15 +109,15 @@
             <div class="content-area bg-yellow">
                 <div class="subtitle">
                     <div class="subtitle">Got any questions or suggestions? Fill out this form to reach out!</div>
-                    <form class="txt" id="contact-form">
+                    <form class="txt" id="contact-form" action="https://formspree.io/f/xleqayjj" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control custom-input" id="inputname" placeholder="Name" name="name" required>
+                            <input type="text" class="form-control custom-input" id="full-name" placeholder="Full name" name="name" required>
 
-                            <input type="email" class="form-control custom-input" id="inputemail" placeholder="Email address" name="email" required>
+                            <input type="email" class="form-control custom-input" id="email-address" placeholder="Email address" name="_replyto" required>
 
-                            <input type="text" class="form-control custom-input" id="inputsubject" placeholder="Subject" name="email-subject" required>
-                            <textarea class="form-control custom-input" id="inputmessage" placeholder="Message" rows="4" name="message" required></textarea>
-                            <a id="submit" class="btn btn-light">Submit.</a>
+                            <textarea class="form-control custom-input" id="message" placeholder="Message" rows="5" name="message" required></textarea>
+                            <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                            <button type="submit" value="Submit" class="btn btn-light">Submit.</button>
                         </div>
                     </form>
                 </div>
