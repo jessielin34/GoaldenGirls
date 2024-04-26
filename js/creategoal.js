@@ -33,15 +33,22 @@ document.addEventListener('DOMContentLoaded', function () {
         newSpan.classList.add('input-group-text');
         newSpan.id = 'inputGroup-sizing-default';
 
-        var newInput = document.createElement('input');
-        newInput.type = 'text';
-        newInput.classList.add('form-control');
-        newInput.style.border = 'solid';
-        newInput.id = 'checkpoint' + counter;
+        var newTextInput = document.createElement('input');
+        newTextInput.type = 'text';
+        newTextInput.classList.add('form-control', 'text-input');
+        newTextInput.style.border = 'solid';
+        newTextInput.id = 'checkpoint-text' + counter;
+
+        var newDateInput = document.createElement('input');
+        newDateInput.type = 'date';
+        newDateInput.classList.add('form-control', 'date-input');
+        newDateInput.style.border = 'solid';
+        newDateInput.id = 'checkpoint-date' + counter;
 
         newPrepend.appendChild(newSpan);
         newCheckpoint.appendChild(newPrepend);
-        newCheckpoint.appendChild(newInput);
+        newCheckpoint.appendChild(newTextInput);
+        newCheckpoint.appendChild(newDateInput);
         addDeleteButtonToCheckpoint(newCheckpoint); // Add delete button to the checkpoint
 
         var form = document.getElementById('goal-form');

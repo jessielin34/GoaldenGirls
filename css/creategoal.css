@@ -134,10 +134,23 @@ form {
 }
 
 .input-group:hover .delete-checkpoint,
-.input-group input:focus + .delete-checkpoint {
+.input-group:focus-within .delete-checkpoint {
     display: block; /* This will show the delete button when the input is hovered over or focused */
 }
 
+.input-group .text-input {
+    flex-grow: 1; /* text input will fill up the extra space */
+    flex-shrink: 1;
+    flex-basis: auto; /* automatically adjust the starting width */
+    border-right: none !important;/* remove the right border to merge with date input */
+    width: 430px !important; 
+}
+
+.input-group .date-input {
+    flex-grow: 0; /* prevent the date input from growing */
+    flex-shrink: 0;
+    border-left: none !important; /* remove the left border to merge with text input */
+}
 
 
 /* Customize Scrollbar */
