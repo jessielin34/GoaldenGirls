@@ -109,18 +109,36 @@ form {
     padding-right:20%;
 }
 
+.input-group {
+    position: relative; /* Establish relative positioning context for absolute children */
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center items vertically */
+}
+
+    .input-group input {
+        width: calc(100% - 50px);
+    }
+
+
+/* Modify the .delete-checkpoint styles */
 .delete-checkpoint {
     cursor: pointer;
     padding: 0 10px;
-    line-height: 38px; /* Adjust the line-height to match your input's height */
+    line-height: 38px; /* Keep your line height as is */
+    position: absolute; /* Position absolutely to place on the right side */
+    right: -40px; /* Adjust this value to place the button on the side of the input */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
     display: none; /* Hide by default */
     color: red; /* Example color */
 }
 
-/* Only display delete button on hover of the input group */
-.input-group.mb-3:hover .delete-checkpoint {
-    display: block;
+.input-group:hover .delete-checkpoint,
+.input-group input:focus + .delete-checkpoint {
+    display: block; /* This will show the delete button when the input is hovered over or focused */
 }
+
+
 
 /* Customize Scrollbar */
 ::-webkit-scrollbar {
