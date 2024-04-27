@@ -3,9 +3,20 @@ import { addCheckpoint } from "./editGoalHelper.js";
 //import { user_data } from "./user.js";
 
 
-const { data: { user }, error1 } = await _supabase.auth.getUser();
-let user_id = user.id;
-document.getElementById("user").textContent= user.email;
+let user_id = "";
+//check user is signed in
+const updateUser = async()=>{
+    const { data: { user }, error } = await _supabase.auth.getUser();
+    user_id = user.id;
+    //username
+    let {data, error_} = await _supabase
+    .from("user")
+    .select()
+    .eq('user_id', user_id);
+    console.log(data);
+    if (error_)  alert(error_);
+    else document.getElementById("user").textContent= '@' + data[0].username;
+}; updateUser();
 
 //console.log(user_id);
 
@@ -32,21 +43,25 @@ else console.log(error_);
 //2. select all checkpoints and display
 const cpIdList = [];
 const cpNameList = [];
+const cpDateList =[];
 const {data, error} = await _supabase
 .from("Checkpoint")
 .select("*")
 .eq("goal_id", goal_id);
 if (data){
     for (let i in data){
-        if (data[i].checkpoint_order > 5){
+        if (data[i].checkpoint_order > 3){
+            console.log(data[i].checkpoint_order);
             addCheckpoint(data[i].checkpoint_order);
         }
-        console.log(data[i]);
-        let cp = document.querySelector(`#checkpoint${data[i].checkpoint_order}`);
+        let cp = document.querySelector(`#checkpoint-text${data[i].checkpoint_order}`);
+        console.log(cp);
         cp.value = data[i].name;
+        let cpDate = document.querySelector(`#checkpoint-date${data[i].checkpoint_order}`);
+        cpDate.value = data[i].date;
         cpNameList.push(data[i].name);
         cpIdList.push(data[i].id);
-        //add name to the textContent?
+        cpDateList.push(data[i].date);
     }
 }
 
@@ -55,15 +70,44 @@ let doneButton = document.querySelector("#done");
 doneButton.addEventListener('click', async(e)=>{
     e.preventDefault();
     let checkList = []; // list of names of all updated checkpoints
+    let dateList  = [];
     let checkpoints = document.querySelectorAll("input");
     //let counter = 1;
+    let textCounter = 1;
+    let dateCounter = 1;
     for (let check of checkpoints){
-        if (check.id.includes("checkpoint")){
+        //check if its cp text
+        if (check.id == 'checkpoint-text' + String(textCounter)){
             if (check.value) checkList.push(check.value);
-            //counter++;
+            textCounter++;
+        }
+        //check if cp has a date
+        if (check.id == 'checkpoint-date' + String(dateCounter)){
+            if (check.value && checkList[dateCounter-1] != undefined) {
+                if (check.value < Date()) {
+                    alert("Can't start in the past, must look into the present & the future!");
+                    return;
+                }
+                //make a separate function to check entire date arrray!
+                if (check.value < dateList[dateCounter-2]){
+                    alert("Checkpoint dates must be in chronological order");
+                    return;
+                }
+                dateList.push(check.value); 
+            }
+            else {
+                alert("Make sure checkpoints have a description!")
+                return;
+            }
+            dateCounter++;
         }
     }
-    console.log(checkList);
+
+    if (checkList.length != dateList.length){
+        alert("Make sure each checkpoint has a date!")
+        return;
+    }
+    console.log(checkList, dateList);
     //check if lists match
     //const updateCps = checkArrays(cpNameList, checkList);
     //console.log(updateCps);
@@ -76,20 +120,23 @@ doneButton.addEventListener('click', async(e)=>{
     console.log(checkList);
     let goal = document.querySelector("#goal-title").value;
     let description = document.querySelector("#goal-description").value;
+    let category = document.querySelector("#category-select").value;
     console.log(goal, description);
 
     console.log("woking..");
-    if(goal != "" && description != "" && checkpoints.length >= 2){
+    if(goal != "" && description != "" && checkpoints.length >= 3 && category!= ""){
         const {data, error} = await _supabase
         .from("Goals")
         .update({
             //user_id: user_id,
             goal_name: goal,
             description: description,
+            category: category,
         })
         .eq('id', goal_id);
         if (error){
             alert(error.message);
+            return;
         }
 
         // if # of cp < current : delete or 
@@ -102,11 +149,13 @@ doneButton.addEventListener('click', async(e)=>{
             .update([{
                 name: checkList[cp],
                 checkpoint_order: parseInt(cp)+1,
+                date: dateList[cp],
             }])
             .eq('id', cpIdList[cp]);
         }
         if (error){
             alert("unable to modify checkpoints");
+            return;
         }
 
         if (checkList.length > cpIdList.length){
@@ -116,9 +165,13 @@ doneButton.addEventListener('click', async(e)=>{
                 .insert([{
                     name: checkList[i], 
                     goal_id: goal_id, 
-                    checkpoint_order: i+1
+                    checkpoint_order: i+1,
+                    date: dateList[i],
                 }]);
-                if(error3) alert(error3);
+                if(error3){
+                    alert(error3);
+                    return;
+                }
             }
         }
         if (checkList.length  < cpIdList.length){
@@ -131,6 +184,7 @@ doneButton.addEventListener('click', async(e)=>{
                 if (error_){
                     console.log(error_);
                     alert("Unable to remove checkpoint :(")
+                    return;
                 }
             }
             

@@ -14,27 +14,59 @@ const updateUser = async()=>{
     if (error_)  alert(error_);
     else document.getElementById("user").textContent= '@' + data[0].username;
 }; updateUser();
-console.log(user);
+
 //
 let doneButton = document.querySelector("#done");
 doneButton.addEventListener("click", async(e)=> {
     e.preventDefault();
+    //get all checkpoints (text)
     let checkList = [];
+    let dateList = [];
     let checkpoints = document.querySelectorAll("input");
-    let counter = 1;
+    let textCounter = 1;
+    let dateCounter = 1;
     for (let check of checkpoints){
-        if (check.id == 'checkpoint' + counter){
+        //check if its cp text
+        if (check.id == 'checkpoint-text' + String(textCounter)){
             if (check.value) checkList.push(check.value);
-            counter++;
+            textCounter++;
+        }
+        //check if cp has a date
+        if (check.id == 'checkpoint-date' + String(dateCounter)){
+            if (check.value && checkList[dateCounter-1] != undefined) {
+                //make a separate function to check entire date arrray!
+                if (check.value < Date()) {
+                    alert("Can't start in the past, must look into the present & the future!");
+                    return;
+                }
+                if (check.value < dateList[dateCounter-2]){
+                    alert("Checkpoint dates must be in chronological order");
+                    return;
+                }
+                dateList.push(check.value); 
+            }
+            else {
+                alert("Make sure checkpoints have a description!")
+                return;
+            }
+            dateCounter++;
         }
     }
+
+    if (checkList.length != dateList.length){
+        alert("Make sure each checkpoint has a date!")
+        return;
+    }
+    
+    console.log(checkList);
+    console.log(dateList);
     
     let goal = document.querySelector("#goal-title").value;
     let description = document.querySelector("#goal-description").value;
     let category = document.querySelector("#category-select").value;
     let goal_id = 0;
     console.log("woking..");
-    if(goal != "" && description != "" && checkpoints.length >= 2){
+    if(goal != "" && description != "" && checkpoints.length >= 3 && category != ""){
         const {data, error} = await _supabase
         .from("Goals")
         .insert({
@@ -56,7 +88,8 @@ doneButton.addEventListener("click", async(e)=> {
             .insert([{
                 name: cp_name, 
                 goal_id: goal_id, 
-                checkpoint_order: order_counter
+                checkpoint_order: order_counter,
+                date: dateList[order_counter-1]
             }]);
             order_counter++;
         }
@@ -65,7 +98,7 @@ doneButton.addEventListener("click", async(e)=> {
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
         alert("Your goal has been added!");
-        window.location.replace("./../profile.html"); //hard-coded
+        //window.location.replace("./../profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");
