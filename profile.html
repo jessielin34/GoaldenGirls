@@ -13,7 +13,30 @@
 </head>
 <body>
     <div class="content">
-        <a class="btn btn-light" role="button" id="sign_out">Sign out</a>
+        <div class="nav-bar">
+            <a class="btn btn-light my-2 my-sm-0" role="button" id="sign_out">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                </svg>
+            </a>
+            <div class="nav-item dropleft" id="hamburger-menu">
+                <a class="btn btn-warning my-2 my-sm-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </a>
+                <div class="dropdown-menu subtitle" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.html #about-us">About Us</a>
+                    <a class="dropdown-item" href="index.html #contact-us">Contact</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="sign_out">SIGN OUT</a>
+                </div>
+            </div>
+
+        </div>
+
 
         <div class="profile-bg">
             <div class="img-bg">
@@ -47,87 +70,87 @@
         <ol class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-start bg-transparent">
                 <div class="ms-2 me-auto" id="upcoming">
-                    <div class="container fw-bold" id="goal1" ><h2>GOALS:</h2></div> 
+                    <div class="container fw-bold" id="goal1"><h2>GOALS:</h2></div>
                     <!-- <a href="timeline.html" style="color: black !important; ">
-                        <div class="card card-style" style="width: 20rem; height: 12rem; display: inline-block; ">
-                            <div class="card-body">
-                                <h5 class="card-title">Interview Practice</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Starts in 2 days</h6>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <button class="btn btn-light" value="1" type="button" onclick="getCheckPoints(this.value)">
-                                    expand
-                                </button>
+                    <div class="card card-style" style="width: 20rem; height: 12rem; display: inline-block; ">
+                        <div class="card-body">
+                            <h5 class="card-title">Interview Practice</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Starts in 2 days</h6>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            
+                            <button class="btn btn-light" value="1" type="button" onclick="getCheckPoints(this.value)">
+                                expand
+                            </button>
                         </div>
-                    </a> -->
+
+                    </div>
+                </a> -->
                 </div>
             </li>
             <!--
-            <li class="list-group-item d-flex justify-content-between align-items-start bg-transparent">
-                <div class="ms-2 me-auto">
-                    <div class="container fw-bold">ONGOING:</div>
-                    <a href="timeline.html" style="color: black !important; ">
-                        <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block; ">
-                            <div class="card-body">
-                                <h5 class="card-title">Marathon Training</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">75% done</h6>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+        <li class="list-group-item d-flex justify-content-between align-items-start bg-transparent">
+            <div class="ms-2 me-auto">
+                <div class="container fw-bold">ONGOING:</div>
+                <a href="timeline.html" style="color: black !important; ">
+                    <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block; ">
+                        <div class="card-body">
+                            <h5 class="card-title">Marathon Training</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">75% done</h6>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                    </a>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start bg-transparent">
-                <div class="ms-2 me-auto">
-                    <div class="container fw-bold">COMPLETED:</div>
-                    <a href="timeline.html" style="color: black !important; ">
-                        <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block;" onclick="getCheckPoints()">
-                            <div class="card-body">
-                                <h5 class="card-title">Learn Spanish</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Done!</h6>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                    </div>
+                </a>
+            </div>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start bg-transparent">
+            <div class="ms-2 me-auto">
+                <div class="container fw-bold">COMPLETED:</div>
+                <a href="timeline.html" style="color: black !important; ">
+                    <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block;" onclick="getCheckPoints()">
+                        <div class="card-body">
+                            <h5 class="card-title">Learn Spanish</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Done!</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                    </a>
-                    <a href="timeline.html" style="color: black !important; ">
-                        <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block;">
-                            <div class="card-body">
-                                <h5 class="card-title">Grad School Apps</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Done!</h6>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                    </div>
+                </a>
+                <a href="timeline.html" style="color: black !important; ">
+                    <div class="card card-style" style="width: 18rem; height: 10rem; display: inline-block;">
+                        <div class="card-body">
+                            <h5 class="card-title">Grad School Apps</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Done!</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                    </a>
-                </div>
-            </li>
-                -->
+                    </div>
+                </a>
+            </div>
+        </li>
+            -->
             <li class="list-group-item d-flex justify-content-between align-items-start bg-transparent" style="display: inline-block">
                 <div class="ms-2 me-auto" id="upcoming">
-                    <div class="container fw-bold" id="joinGoal" ><h2>JOINED:</h2></div> <!-- removed container from class-->
+                    <div class="container fw-bold" id="joinGoal"><h2>JOINED:</h2></div> <!-- removed container from class-->
                     <!-- <a href="timeline.html" style="color: black !important; ">
-                        <div class="card card-style" style="width: 20rem; height: 12rem; display: inline-block; ">
-                            <div class="card-body">
-                                <h5 class="card-title">Interview Practice</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Starts in 2 days</h6>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <button class="btn btn-light" value="1" type="button" onclick="getCheckPoints(this.value)">
-                                    expand
-                                </button>
+                    <div class="card card-style" style="width: 20rem; height: 12rem; display: inline-block; ">
+                        <div class="card-body">
+                            <h5 class="card-title">Interview Practice</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Starts in 2 days</h6>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            
+                            <button class="btn btn-light" value="1" type="button" onclick="getCheckPoints(this.value)">
+                                expand
+                            </button>
                         </div>
-                    </a> -->
+
+                    </div>
+                </a> -->
                 </div>
             </li>
         </ol>
