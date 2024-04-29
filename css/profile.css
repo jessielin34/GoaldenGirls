@@ -76,6 +76,14 @@
     /* background-color: black; */
 }
 
+.bio {
+    margin-left: 500px;
+    width: 50%;
+    justify-content: center;
+    color: white;
+    font-size: large;
+}
+
 .username {
     align-self: center;
     -webkit-text-stroke-width: 2px;
