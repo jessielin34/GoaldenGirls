@@ -113,11 +113,8 @@ form {
     position: relative; /* Establish relative positioning context for absolute children */
     display: flex; /* Use flexbox to align items */
     align-items: center; /* Center items vertically */
+    width: 100%; 
 }
-
-    .input-group input {
-        width: calc(100% - 50px);
-    }
 
 
 /* Modify the .delete-checkpoint styles */
@@ -139,17 +136,15 @@ form {
 }
 
 .input-group .text-input {
-    flex-grow: 1; /* text input will fill up the extra space */
-    flex-shrink: 1;
-    flex-basis: auto; /* automatically adjust the starting width */
-    border-right: none !important;/* remove the right border to merge with date input */
-    width: 430px !important; 
+    flex-grow: 1000 !important; /* text input will fill up the extra space */
+    border-right: none !important; /* remove the right border to merge with date input */
 }
 
 .input-group .date-input {
-    flex-grow: 0; /* prevent the date input from growing */
-    flex-shrink: 0;
     border-left: none !important; /* remove the left border to merge with text input */
+    margin-left: auto !important; /* This will push the date input to the far right */
+    width: auto !important; /* Add this to make sure the date input only takes the space it needs */
+    flex-shrink: 0 !important; /* Prevent the date input from shrinking */
 }
 
 .input-group.over {
