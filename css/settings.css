@@ -10,21 +10,31 @@ body {
 }
 
 .sidebar {
-    width: 200px;
+    width: 500px;
     height: 100vh;
-    background-color: #F5D909;
+    background-color: #ffc20d;
     color: #fff;
     box-sizing: border-box;
     position: fixed;
+    left: 0; /* Ensure that sidebar sticks to the left */
+    top: 0; /* Ensure that sidebar starts from the top */
+    text-align: center;
+    padding-top: 50px;
+}
+
+.options {
+    font-size: 20px;
+    text-shadow: 1px 2px 2px rgb(0,0,0);
 }
 
 .content {
     flex: 1;
-    padding: 20px;
+    padding: 50px;
     box-sizing: border-box;
-    margin-left: 200px;
-    text-align: justify;
+    margin-left: 500px;
+    text-align: center;
 }
+
 
 .sidebar a {
     display: block;
@@ -37,12 +47,12 @@ body {
 
     /* Change background color on hover */
     .sidebar a:hover {
-        background-color: #FF00A0;
+        background-color: #eb277a;
     }
 
 .btn {
     font-family: 'Press Start 2P', system-ui;
-    background-color: white;
+    background-color: black;
     color: black;
     padding: 15px 25px;
     border-radius: 12px;
@@ -56,11 +66,12 @@ body {
 
 .headline {
     font-family: 'Press Start 2P', system-ui;
-    font-size: 25px;
+    font-size: 40px;
     color: white;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
-    text-shadow: 1px 2px 2px rgb(0,0,0);
+    text-shadow: 1px 2px 3px rgb(0,0,0);
+    text-align: center;
 }
 
 
@@ -75,6 +86,99 @@ body {
 }
 
 
+
+.bg-color {
+    background-color: #FF6BAD;
+    background-image: radial-gradient(circle farthest-side at top right, transparent, #F5D909), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
+    animation: bg-change 10s infinite;
+}
+
+@keyframes bg-change {
+    0%, 100% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(-45deg);
+    }
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8;
+}
+
+.profile-button {
+    background: #BA68C8;
+    box-shadow: none;
+    border: none;
+}
+
+    .profile-button:hover {
+        background: #682773;
+    }
+
+    .profile-button:focus {
+        background: #682773;
+        box-shadow: none;
+    }
+
+    .profile-button:active {
+        background: #682773;
+        box-shadow: none;
+    }
+
+.cover {
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
+}
+
+
+.browser-window {
+    width: 500px;
+    height: auto;
+    border: 3px solid #000;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 10px auto;
+}
+
+.window-header {
+    display: flex;
+    justify-content: start;
+    padding: 5px;
+}
+
+    .window-header .circle {
+        height: 12px;
+        width: 12px;
+        border-radius: 10%;
+        margin-right: 4px;
+    }
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: rgb(29, 213, 99);
+}
+
+.address-bar {
+    background-color: #ddd;
+    border: none;
+    padding: 4px;
+    margin-top: 4px;
+}
+
+.content-area {
+    padding: 20px;
+}
 
 .bg-color {
     background-color: #FF6BAD;
