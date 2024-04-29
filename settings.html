@@ -18,17 +18,17 @@
                 <a href="#editprofile">Edit Profile</a><hr />
                 <a href="#changepass">Change Password</a><hr />
                 <a href="#accountprivacy">Account Privacy</a><hr />
-                <a href="#language">Language</a><hr />
+                <a href="#language">App Language</a><hr />
                 <a href="#help">Help</a><hr />
             </div>
             <br />
-            <a href="profile.html" class="btn">Apply & Save</a>
+            <a href="profile.html" class="btn btn-dark">Apply & Save</a>
         </div>
 
         <!-- Main Content -->
         <div class="content">
             <div id="editprofile">
-                <h1>Edit Profile</h1>
+                <h1 class="headline">Edit Profile</h1><br />
                     <div class="row">
                         <div class="col-md-4 border-right">
                             <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle mt-5" src="images/pro-img2.png" width="120"><span class="font-weight-bold"></span></div>
@@ -67,9 +67,9 @@
                         </div>
                     </div>
             </div>
-            <hr />
+            <hr /><br />
             <div id="changepass">
-                <h1>Change Password</h1>
+                <h1 class="headline">Change Password</h1><br />
                 <div class="browser-window my-4">
                     <div class="window-header">
                         <div class="circle red"></div>
@@ -85,45 +85,114 @@
                                 <input class="form-control custom-input" name="password" type="password" id="inputpassword" onkeyup='check();' placeholder="Enter new password">
                             </div>
                             <div class="form-group">
-                                <input class="form-control custom-input" name="confirm" type="password" id="reenterpassword" onkeyup='check();' placeholder="Re-enter password">
+                                <input class="form-control custom-input" name="confirm" type="password" id="reenterpassword" onkeyup='check();' placeholder="Re-enter new password">
                                 <small class="text-muted">
                                     To confirm, type the new password again.
                                 </small>
                             </div>
                             <a href="#" class="btn btn-light" id="reset">+ Change password +</a> 
                             
-                            <span id='message'></span>
                         </form>
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr /><br />
             <div id="accountprivacy">
-                <h1>Account Privacy</h1>
-                <p>
-                    beep boop
-                </p>
+                <h1 class="headline">Account Privacy</h1>
+                    <br />
+                    <p>Toggle switch 'ON' to make profile private.</p>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
             </div>
-            <hr />
-            <div id="language">
-                <h1>Language</h1>
-                <p>
-                    beep boop
-                </p>
-            </div>
-            <hr />
+            <hr /><br />
+                  <div id="language">
+                      <h1 class="headline">App Language</h1><br />
+                      <p>See buttons, titles, and other texts on Goalden in your preferred language.</p>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              English
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Spanish
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              French
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Arabic
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Korean
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Japanese
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Russian
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              German
+                          </label>
+                      </div>
+                  </div>
+            <hr /><br />
             <div id="help">
-                <h1>Help</h1>
-                <p>
-                    beep boop
-                </p>
+                <h1 class="headline">Help</h1>
+                <div class="browser-window my-4">
+                    <div class="window-header">
+                        <div class="circle red"></div>
+                        <div class="circle yellow"></div>
+                        <div class="circle green"></div>
+                    </div>
+                    <div class="content-area bg-color">
+                        <div class="subtitle">
+                            <div class="subtitle">Got any questions or suggestions? Fill out this form to reach out!</div>
+                            <form class="txt" id="contact-form" action="https://formspree.io/f/xleqayjj" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control custom-input" id="full-name" placeholder="Full name" name="name" required>
+                                    <br />
+                                    <input type="email" class="form-control custom-input" id="email-address" placeholder="Email address" name="_replyto" required>
+                                    <br />
+                                    <textarea class="form-control custom-input" id="message" placeholder="Message" rows="5" name="message" required></textarea><br />
+                                    <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                                    <button type="submit" value="Submit" class="btn btn-light">Submit.</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <hr />
         </div>
+            
     </div>
 
 
-    <script src="backend/log-in.js" type="module"></script>
+    <script src="" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
