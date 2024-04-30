@@ -11,7 +11,7 @@
     right: 0;
     bottom: 0;
     z-index: -1; /* Place behind the content */
-    background-image: linear-gradient(to right, #FF9CC8 0%, #dff7d5 49%, #FF9CC8 100%);
+    background-image: linear-gradient(to right, #ffffff 0%, #fff59e 49%, #ffffff 100%);
     animation: bg-change 5s infinite;
 }
 
@@ -151,6 +151,13 @@ form {
     border: 2px dashed #000; /* Example style */
 }
 
+.nav-bar {
+    display: flex;
+    justify-content: space-between; /* This will align the hamburger menu to the left and the sign-out button to the right */
+    padding: 10px; /* Same as your navbar padding for alignment */
+    position: relative; /* Relative to the content */
+    z-index: 10; /* Higher than the content but lower than the fixed navbar */
+}
 
 /* Customize Scrollbar */
 ::-webkit-scrollbar {
