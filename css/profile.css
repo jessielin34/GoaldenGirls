@@ -232,5 +232,21 @@ button {
 
 .card-header {
     height:6rem;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    background-color: #f7f7f7;
 }
+
+.header-part {
+    justify-content: center;
+}
+
+.unjoin-button {
+    font-size: small !important;
+}
+
+
+
+

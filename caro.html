@@ -77,108 +77,159 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                  <!-- Carousel items (sets of cards) will be inserted here -->
-                  <div class="card card-style mb-3">
+                  <!-- Carousel items (sets of cards) will be inserted here - first card starts here-->
+                  <div class="card card-style mb-3" style="background-color: rgb(241, 241, 244);">
                     <div class="card-body">
-                        <div class="card-header d-flex justify-content-between align-items-center"> 
-                            <div>
+                        <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                            <div class="header-part">
                                 <h5 class="card-title">Interview Practice</h5>
                             </div>
-                            <div> 
+                            <div class="header-part"> 
                                 <h6 class="category category-pink">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
                                         <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                                       </svg>
                                     CATEGORY</h6>
                             </div>
-                            <div>
+                            <div class="header-part">
                                 <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
                                 <h6>12/12/2024</h6>
                             </div>
-                            <div>
+                            <div class="header-part">
                                 <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                                   </svg></small>
                                 <h6>26</h6>
                             </div> <!--number of people joined-->
-                            <div>
-                                <a id="deletegoal">
-                                    <button class="btn btn-danger delete_my" value="${data[i].id}">
-                                        x
-                                    </button>
-                                </a>
+                            <div class="header-part">
                                 <a id="editgoal">
-                                    <button class="btn btn-success edit_my" style="margin-left: -30px;" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                    <button class="btn btn-success edit_my" value="${data[i].id}" onclick="setGoalId(this)"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                                         </svg> 
                                     </button>
                                 </a>
+                                <a id="deletegoal">
+                                    <button class="btn btn-danger delete_my" style="margin-left: -30px;" value="${data[i].id}">
+                                        x
+                                    </button>
+                                </a>
+                                
                             </div>
                         </div>
-                        <!--need timeline here-->
+                        <!--mini timeline-->
                         <div class="mini-timeline">
-                            <div class="checkpoint active"></div>  <!-- Active or completed checkpoint -->
-                            <div class="checkpoint"></div>         <!-- Upcoming checkpoint -->
-                            <div class="checkpoint"></div>         <!-- Upcoming checkpoint -->
-                            <div class="checkpoint"></div>         <!-- Upcoming checkpoint -->
-                            <div class="checkpoint"></div>         <!-- Upcoming checkpoint -->
-                            <div class="checkpoint"></div>         <!-- Upcoming checkpoint -->
-                            <!-- Add more checkpoints as needed -->
+                            <div class="checkpoint active"></div>  <!-- completed checkpoint -->
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <!-- add more checkpoints as needed -->
                         </div>
                     </div>
                 <!-- one card is done -->
                   </div>
-                  <div class="card card-style mb-3">
+                  <div class="card card-style mb-3" style="background-color: rgb(241, 241, 244);">
                     <div class="card-body">
-                        <a id="deletegoal">
-                            <button class="btn btn-danger delete_my" value="${data[i].id}" style="align-items: center">
-                                x
-                            </button>
-                        </a>
-                        <a id="editgoal">
-                            <button class="btn btn-success edit_my" value="${data[i].id}" style="align-items: center" onclick="setGoalId(this)"> 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
-                                </svg> 
-                            </button>
-                        </a>
-                        <h5 class="card-title">Interview Practice</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">do all practice questions</h6>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                            <div class="header-part">
+                                <h5 class="card-title">Interview Practice</h5>
+                            </div>
+                            <div class="header-part"> 
+                                <h6 class="category category-pink">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                        <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                      </svg>
+                                    CATEGORY</h6>
+                            </div>
+                            <div class="header-part">
+                                <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                                <h6>12/12/2024</h6>
+                            </div>
+                            <div class="header-part">
+                                <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                  </svg></small>
+                                <h6>26</h6>
+                            </div> <!--number of people joined-->
+                            <div class="header-part">
+                                <a id="editgoal">
+                                    <button class="btn btn-success edit_my" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                        </svg> 
+                                    </button>
+                                </a>
+                                <a id="deletegoal">
+                                    <button class="btn btn-danger delete_my" style="margin-left: -30px;" value="${data[i].id}">
+                                        x
+                                    </button>
+                                </a>
+                                
+                            </div>
                         </div>
-                        <button class="btn btn-light" value="${data[i].id}" type="button" onclick="setGoalId(this)">
-                            expand
-                        </button>
+                        <!--mini timeline-->
+                        <div class="mini-timeline">
+                            <div class="checkpoint active"></div>  <!-- completed checkpoint -->
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <!-- add more checkpoints as needed -->
+                        </div>
                     </div>
                   </div>
-                  <div class="card card-style mb-3">
+                  <!--joined goal-->
+                  <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
                     <div class="card-body">
-                        <a id="deletegoal">
-                            <button class="btn btn-danger delete_my" value="${data[i].id}" style="align-items: center">
-                                x
-                            </button>
-                        </a>
-                        <a id="editgoal">
-                            <button class="btn btn-success edit_my" value="${data[i].id}" style="align-items: center" onclick="setGoalId(this)"> 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
-                                </svg> 
-                            </button>
-                        </a>
-                        <h5 class="card-title">Interview Practice</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">do all practice questions</h6>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                            <div class="header-part">
+                                <small class="text-muted" style="font-size: small;">@berry</small>
+
+                                <h5 class="card-title">Drink more water</h5>
+                            </div>
+                            <div class="header-part"> 
+                                <h6 class="category category-pink">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                        <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                      </svg>
+                                    CATEGORY</h6>
+                            </div>
+                            <div class="header-part">
+                                <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                                <h6>12/12/2024</h6>
+                            </div>
+                            <div class="header-part">
+                                <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                  </svg></small>
+                                <h6>26</h6>
+                            </div> <!--number of people joined-->
+                            <div class="header-part">
+                                <a id="unjoingoal">
+                                    <button class="btn btn-danger unjoin_my unjoin-button" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                        UNJOIN 
+                                    </button>
+                                </a>
+                            </div>
                         </div>
-                        <button class="btn btn-light" value="${data[i].id}" type="button" onclick="setGoalId(this)">
-                            expand
-                        </button>
+                        <!--mini timeline-->
+                        <div class="mini-timeline">
+                            <div class="checkpoint active"></div>  <!-- completed checkpoint -->
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <div class="checkpoint"></div>         
+                            <!-- add more checkpoints as needed -->
+                        </div>
                     </div>
                   </div>
+                  <!--joined goal done-->
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item"> <!--next slide-->
                     <div class="card card-style mb-3">
                         <div class="card-body">
                             <a id="deletegoal">
