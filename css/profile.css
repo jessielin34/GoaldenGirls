@@ -226,7 +226,24 @@ button {
     text-shadow: 1px 2px 3px rgb(0,0,0);
 }
 
-.category-pink {
+.lifestyle-category {
+    background-color: lightblue;
+}
+
+.education-category {
+    background-color: lightgreen;
+}
+
+.work-category {
+    background-color: rgb(224, 190, 248);
+}
+
+.fitness-category {
+    background-color: rgb(232, 232, 165);
+
+}
+
+.other-category {
     background-color: #fab8e1;
 }
 
@@ -247,6 +264,9 @@ button {
     font-size: small !important;
 }
 
+.carousel-item {
+    min-height: 33rem;
+}
 
 
 
