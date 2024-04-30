@@ -116,10 +116,9 @@ button {
  }
 
 .card-style {
-    display: inline-block;
-    border: 5px solid blue;
     box-shadow: 10px 10px black;
-    vertical-align: top;
+    height: 10rem;
+    width: 100% !important;
 }
 
 .btn {
@@ -145,8 +144,7 @@ button {
 }
 
 
-
-
+  
 /* Customize Scrollbar */
  ::-webkit-scrollbar {
     width: 20px;
