@@ -313,6 +313,27 @@ img {
     border: solid;
 }
 
+.progress-bar {
+    display: inline-block; /* Container will fit the size of the button */
+    text-align: center; /* Centers the button if there's any additional width */
+    padding: 2px; /* Provides padding around the button */
+}
+
+.progress-bar button {
+    background-color: white; 
+    color: black; /* Text color */
+    border: dotted 1px black; /* Styles the border as seen in your screenshot */
+    border-radius: 8px; /* Adds rounded corners */
+    padding: 10px 15px; /* Padding inside the button, adjust as needed */
+    font-size: 16px; /* Font size for the text inside the button */
+    cursor: pointer; /* Changes cursor to pointer to indicate it's clickable */
+    outline: none; /* Removes outline on focus for cleaner look */
+}
+
+.progress-bar button:hover {
+    background-color: #eeffe7; /* Slightly darker on hover for feedback */
+}
+
 
 .new-box > p, .timeline-container > p {
     padding: 10px 15px; /* Apply padding to the content inside the box */
