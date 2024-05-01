@@ -11,8 +11,8 @@
     right: 0;
     bottom: 0;
     z-index: -1; /* Place behind the content */
-    background-color: #FF9CC8;
-    background-image: linear-gradient(to right, #FF6BAD 0%, #FF9CC8 49%, #FF6BAD 100%);
+    background-color: white;
+    background-image: linear-gradient(to right, #ffffff 0%, #ffcee4 49%, #ffffff 100%);
     animation: bg-change 5s infinite;
 } 
 
@@ -76,6 +76,14 @@
     /* background-color: black; */
 }
 
+.bio {
+    margin-left: 500px;
+    width: 50%;
+    justify-content: center;
+    color: white;
+    font-size: large;
+}
+
 .username {
     align-self: center;
     -webkit-text-stroke-width: 2px;
@@ -108,10 +116,12 @@ button {
  }
 
 .card-style {
-    display: inline-block;
-    border: 5px solid blue;
-    box-shadow: 10px 10px black;
-    vertical-align: top;
+    box-shadow: 5px 5px black;
+    height: 10rem;
+    width: 95%; /* Reduces width to 95% of the parent container */
+    margin: 0 auto; /* Centers the card in the available horizontal space */
+    margin-bottom: 10px; /* Optional: Adds space between cards */
+
 }
 
 .btn {
@@ -128,7 +138,16 @@ button {
     border: solid !important;
 }
 
+.nav-bar {
+    display: flex;
+    justify-content: space-between; /* This will align the hamburger menu to the left and the sign-out button to the right */
+    padding: 10px; /* Same as your navbar padding for alignment */
+    position: relative; /* Relative to the content */
+    z-index: 10; /* Higher than the content but lower than the fixed navbar */
+}
 
+
+  
 /* Customize Scrollbar */
  ::-webkit-scrollbar {
     width: 20px;
@@ -150,3 +169,114 @@ button {
     ::-webkit-scrollbar-thumb:hover {
         background: #F5D909;
     }
+
+.caro-style {
+    margin-bottom: -30px;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+   }
+   
+   .carousel-control-next-icon {
+     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;    
+    }
+
+    .carousel-control-prev {
+        left: -80px !important;
+    }
+    
+    .carousel-control-next {
+        right: -80px !important;
+    }
+
+    .carousel .carousel-indicators li {  background-color: gray; }
+
+    .carousel-control-prev span, .carousel-control-next span {
+        cursor: pointer; /* Ensures that the cursor changes to a pointer only over the icon */
+    }
+
+    .headline {
+        font-family: 'Press Start 2P', system-ui;
+    font-size: 32px;
+    color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 1px 2px 3px rgb(0,0,0);
+    text-align: center;
+    }
+
+    
+    .mini-timeline {
+        display: flex;
+        align-items: center;
+        height: 20px; /* Set height of the timeline */
+        position: relative;
+        background-color: #e0e0e0; /* Light grey background for the timeline */
+        border-radius: 10px; /* Rounded edges for the timeline */
+    }
+    
+    .checkpoint {
+        width: 15px; /* Diameter of the checkpoint */
+        height: 15px; /* Diameter of the checkpoint */
+        border-radius: 50%; /* Makes the dots circular */
+        background-color: #bbb; /* Light grey color for upcoming checkpoints */
+        margin: 0 75px; /* Spacing between checkpoints */
+    }
+    
+    .checkpoint.active {
+        background-color: #4CAF50; /* Green color for active checkpoints */
+    }
+
+.category {
+    border: dotted black;
+    padding: 10px;
+    color: white;
+    -webkit-text-stroke-color: black;
+    text-shadow: 1px 2px 3px rgb(0,0,0);
+}
+
+.lifestyle-category {
+    background-color: lightblue;
+}
+
+.education-category {
+    background-color: lightgreen;
+}
+
+.work-category {
+    background-color: rgb(224, 190, 248);
+}
+
+.fitness-category {
+    background-color: rgb(232, 232, 165);
+
+}
+
+.other-category {
+    background-color: #fab8e1;
+}
+
+.card-header {
+    height:6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #f7f7f7;
+}
+
+.header-part {
+    justify-content: center;
+}
+
+.unjoin-button {
+    font-size: small !important;
+}
+
+.carousel-item {
+    min-height: 33rem;
+}
+
+
+
