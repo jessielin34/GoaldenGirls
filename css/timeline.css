@@ -238,3 +238,45 @@ img {
 .other-category {
     background-color: #fab8e1;
 }
+
+.goal-container {
+    display: flex;
+    justify-content: space-between; /* Aligns children on opposite ends */
+    align-items: center; /* Centers children vertically */
+    padding: 20px; /* Add padding as necessary */
+}
+
+.goal-details {
+    /* This contains the goal title, description, and category tag */
+    flex-grow: 1; /* Allows this div to grow and take up space as needed */
+}
+
+.goal-info-box {
+    display: flex;
+    align-items: center; /* Aligns the text and image vertically */
+    background-color: #ffffff; /* Background color of the box */
+    border: dashed;
+    padding: 10px;
+    border-radius: 8px; 
+}
+
+.goal-info-box div {
+    display: block; /* This ensures the p tags are displayed as block elements */
+}
+
+.owner-title {
+    margin: 0; /* Removes default margin to tighten spacing */
+    font-size: 20px; /* Adjust font size as necessary */
+    margin-right: 10px;
+}
+
+.owner-name {
+    margin: 0; /* Removes default margin to tighten spacing */
+    font-size: 14px; /* Adjust font size as necessary */
+}
+
+.goal-info-box img {
+    width: 130px; /* Set image size */
+    height: 130px; /* Set image size */
+    margin: 10px;
+}
