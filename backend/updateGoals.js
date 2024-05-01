@@ -8,6 +8,7 @@
 
 import {_supabase} from './client.js';
 
+const currentDate = new Date();
 let user_id = "a";
 let { data: { user }, error } = await _supabase.auth.getUser();
 const updateUser = async()=>{
@@ -25,7 +26,7 @@ const updateUser = async()=>{
 }; updateUser();
 
 
-const checkDB = async()=> {
+const updateGoals = async()=> {
     let goals = "";
     let {data, error} = await _supabase
     .from("Goals")
@@ -35,7 +36,7 @@ const checkDB = async()=> {
         //https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
         //https://youtu.be/4bqKagS5X88?si=VcavSSC0LfeBryZ3
         for (let i in data){
-            goals += // line 40 where the edit button is - no logic is there for it to work!
+            goals += 
             `<a href="timeline.html" style="color: black !important; ">
                 <div class="card card-style" style="width: 20rem; height: 15rem; display: inline-block; ">
                     <div class="card-body">
@@ -104,11 +105,18 @@ const checkDB = async()=> {
     };
 
 };
+updateGoals();
 
-checkDB();
-//edit goal
-let edit = document.querySelector("#sign_out");
-
+//ONGOING, UPCOMING, COMPLETED
+// - checkOwned()
+// - checkStatus() --> see checkpoint 1 and compare it to current date // later compare to user_progress_status
+// have global var that holds Goal status
+// have 3 global lists each element holds html code for goals
+// - setUpcoming(id, name, description)
+// check if its own or joined
+// - setOngoing(id, name, description)
+// - setCompleted(id, name, description)
+// - checkJoined()
 
 //signout
 let signout = document.querySelector("#sign_out");
