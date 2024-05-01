@@ -7,11 +7,18 @@
 
 body, html {
     font-family: 'Press Start 2P', system-ui;
-    height: 100%; /* Ensure the full height of the page is used */
-    display: flex; /* Establish flex container */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
 }
+
+    body > .container {
+        flex: 1; /* This will make the container take up all available space */
+        display: flex; /* This makes it a flex container */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        padding-top: 60px; /* Add padding-top to account for the fixed navbar */
+    }
 
 
 .container {
@@ -131,7 +138,7 @@ body, html {
 }
 
 .navbar-position {
-    position: fixed; /* Fix the navbar's position relative to the viewport */
+    position: fixed !important; /* Fix the navbar's position relative to the viewport */
     top: 0; /* Align the top edge of the navbar with the top edge of the viewport */
     left: 0;
     right: 0;

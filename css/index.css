@@ -15,7 +15,7 @@ body {
 .container {
     max-width: 960px;
     margin: auto;
-    padding-top: 20px;
+    padding-top: 140px;
 }
 
 .logo-img {
@@ -173,7 +173,7 @@ body {
 }
 
 .navbar-position {
-    position: fixed; /* Fix the navbar's position relative to the viewport */
+    position: fixed !important;/* Fix the navbar's position relative to the viewport */
     top: 0; /* Align the top edge of the navbar with the top edge of the viewport */
     left: 0;
     right: 0;
