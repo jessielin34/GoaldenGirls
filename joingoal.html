@@ -15,14 +15,28 @@
     <div class="content">
         <div class="nav-bar">
             <a class="btn btn-light my-2 my-sm-0" role="button" id="sign_out">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
                     <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
                 </svg>
             </a>
-            <div class="nav-item dropleft" id="hamburger-menu">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 btn" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn my-2 my-sm-0" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                      </svg>
+                </button>
+            </form>
+            <div class="nav-item dropdown" id="hamburger-menu">
+                <a class="btn btn-info my-2 my-sm-0" style="margin-right: -10px;" role="button" id="feed">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
+                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707z"/>
+                        <path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018"/>
+                      </svg>
+                </a> 
                 <a class="btn btn-warning my-2 my-sm-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                     </svg>
                 </a>
@@ -36,6 +50,8 @@
             </div>
 
         </div>
+
+
         <div class="profile-bg">
             <div class="img-bg"> </div>
         </div>
@@ -52,13 +68,620 @@
             <a class="btn btn-light" href="creategoal.html" role="button">Create a new goal</a><br />
         </div>
 
-        <br /> <br /> <br /><br />
+        <br /> <br /> <br />
 
-        <ol class="list-group">
-            
-                    
+       <!--LIFESTYLE CARO-->
+       <div class="container">
+       <h2 class="headline">+ LIFESTYLE +</h2>
+       <div id="lifestyleCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+           <ol class="carousel-indicators caro-style">
+             <li data-target="#lifestyleCarousel" data-slide-to="0" class="active"></li>
+             <li data-target="#lifestyleCarousel" data-slide-to="1"></li> <!--add more bar indicators if need be-->
+           </ol>
+           <div class="carousel-inner">
+               <div class="carousel-item active">
+             <!-- Carousel items (sets of cards) will be inserted here - first card starts here-->
+             <div class="card-set">
+             <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+               <div class="card-body">
+                   <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                       <div class="header-part">
+                           <a href="timeline.html" style="color:black;">
+                           <h5 class="card-title">Interview Practice</h5>
+                           </a>
+                       </div>
+                       <div class="header-part"> 
+                            <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                            <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                       </div>
+                       <div class="header-part">
+                           <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                           <h6>12/12/2024</h6>
+                       </div>
+                       <div class="header-part">
+                           <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                             </svg></small>
+                           <h6>26</h6>
+                       </div> <!--number of people joined-->
+                       <div class="header-part">
+                        <a id="joingoal">
+                            <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                JOIN 
+                            </button>
+                        </a>
+                           
+                       </div>
+                   </div>
+                   <!--mini timeline-->
+                   <a href="timeline.html">
+                   <div class="mini-timeline">
+                       <div class="checkpoint "></div>  <!-- completed checkpoint -->
+                       <div class="checkpoint "></div>         
+                       <div class="checkpoint "></div>         
+                       <div class="checkpoint "></div>         
+                       <div class="checkpoint "></div>         
+                       <div class="checkpoint "></div>         
+                       <!-- add more checkpoints as needed -->
+                   </div>
+                    </a>
+               </div>
+             </div>
+                     <!-- one card is done -->
+
+             </div>
+           </div>
+           <div class="carousel-item"> <!--next slide-->
+                 <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                   <div class="card-body">
+                       <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                           <div class="header-part">
+                               <a href="timeline.html" style="color:black;">
+                               <h5 class="card-title">Drink more water</h5>
+                               </a>
+                           </div>
+                           <div class="header-part"> 
+                                <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                                <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                            </div>
+                           <div class="header-part">
+                               <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                               <h6>12/12/2024</h6>
+                           </div>
+                           <div class="header-part">
+                               <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                 </svg></small>
+                               <h6>26</h6>
+                           </div> <!--number of people joined-->
+                           <div class="header-part">
+                               <a id="joingoal">
+                                   <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                       JOIN 
+                                   </button>
+                               </a>
+                           </div>
+                       </div>
+                       <!--mini timeline-->
+                       <a href="timeline.html">
+                       <div class="mini-timeline">
+                           <div class="checkpoint "></div>  <!-- all are completed -->
+                           <div class="checkpoint "></div>         
+                           <div class="checkpoint "></div>         
+                           <div class="checkpoint "></div>         
+                           <div class="checkpoint "></div>         
+                           <div class="checkpoint "></div>         
+                           <!-- add more checkpoints as needed -->
+                       </div>
+                       </a>
+                   </div>
+                 </div>
+                         <!-- one card is done -->
+
+           </div>
+           </div>
+           <a class="carousel-control-prev" href="#lifestyleCarousel" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+           </a>
+           <a class="carousel-control-next" href="#lifestyleCarousel" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+           </a>
+       </div>   
+
+
+       <br><hr><br>
+    <!--EDUCATION CARO-->
+    <h2 class="headline">+ EDUCATION +</h2>
+    <div id="educationCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <ol class="carousel-indicators caro-style">
+          <li data-target="#educationCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#educationCarousel" data-slide-to="1"></li> <!--add more bar indicators if need be-->
         </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+          <!-- Carousel items (sets of cards) will be inserted here - first card starts here-->
+          <div class="card-set">
+            <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                <div class="card-body">
+                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                        <div class="header-part">
+                            <a href="timeline.html" style="color:black;">
+                            <h5 class="card-title">Drink more water</h5>
+                            </a>
+                        </div>
+                        <div class="header-part"> 
+                             <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                             <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                         </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                            <h6>12/12/2024</h6>
+                        </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg></small>
+                            <h6>26</h6>
+                        </div> <!--number of people joined-->
+                        <div class="header-part">
+                            <a id="joingoal">
+                                <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                    JOIN 
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <!--mini timeline-->
+                    <a href="timeline.html">
+                    <div class="mini-timeline">
+                        <div class="checkpoint "></div>  <!-- all are completed -->
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <!-- add more checkpoints as needed -->
+                    </div>
+                    </a>
+               </div>
+          </div>
+                  <!-- one card is done -->
+
+        </div>
     </div>
+        <div class="carousel-item"> <!--next slide-->
+            <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                <div class="card-body">
+                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                        <div class="header-part">
+                            <a href="timeline.html" style="color:black;">
+                            <h5 class="card-title">Drink more water</h5>
+                            </a>
+                        </div>
+                        <div class="header-part"> 
+                             <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                             <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                         </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                            <h6>12/12/2024</h6>
+                        </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg></small>
+                            <h6>26</h6>
+                        </div> <!--number of people joined-->
+                        <div class="header-part">
+                            <a id="joingoal">
+                                <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                    JOIN 
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <!--mini timeline-->
+                    <a href="timeline.html">
+                    <div class="mini-timeline">
+                        <div class="checkpoint "></div>  <!-- all are completed -->
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <!-- add more checkpoints as needed -->
+                    </div>
+                    </a>
+                </div>
+              </div>
+                      <!-- one card is done -->
+
+              
+        </div>
+        </div>
+        <a class="carousel-control-prev" href="#educationCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#educationCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>   
+    
+
+    <br><hr><br>
+<!--WORK CARO-->
+    <h2 class="headline">+ WORK +</h2>
+    <div id="workCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <ol class="carousel-indicators caro-style">
+          <li data-target="#workCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#workCarousel" data-slide-to="1"></li> <!--add more bar indicators if need be-->
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+          <!-- Carousel items (sets of cards) will be inserted here - first card starts here-->
+          <div class="card-set">
+            <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                <div class="card-body">
+                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                        <div class="header-part">
+                            <a href="timeline.html" style="color:black;">
+                            <h5 class="card-title">Drink more water</h5>
+                            </a>
+                        </div>
+                        <div class="header-part"> 
+                             <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                             <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                         </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                            <h6>12/12/2024</h6>
+                        </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg></small>
+                            <h6>26</h6>
+                        </div> <!--number of people joined-->
+                        <div class="header-part">
+                            <a id="joingoal">
+                                <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                    JOIN 
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <!--mini timeline-->
+                    <a href="timeline.html">
+                    <div class="mini-timeline">
+                        <div class="checkpoint "></div>  <!-- all are completed -->
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <!-- add more checkpoints as needed -->
+                    </div>
+                    </a>
+            </div>
+          </div>
+                  <!-- one card is done -->
+
+        </div>
+    </div>
+        <div class="carousel-item"> <!--next slide-->
+            <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                <div class="card-body">
+                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                        <div class="header-part">
+                            <a href="timeline.html" style="color:black;">
+                            <h5 class="card-title">Drink more water</h5>
+                            </a>
+                        </div>
+                        <div class="header-part"> 
+                             <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                             <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                         </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                            <h6>12/12/2024</h6>
+                        </div>
+                        <div class="header-part">
+                            <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg></small>
+                            <h6>26</h6>
+                        </div> <!--number of people joined-->
+                        <div class="header-part">
+                            <a id="joingoal">
+                                <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                    JOIN 
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <!--mini timeline-->
+                    <a href="timeline.html">
+                    <div class="mini-timeline">
+                        <div class="checkpoint "></div>  <!-- all are completed -->
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <div class="checkpoint "></div>         
+                        <!-- add more checkpoints as needed -->
+                    </div>
+                    </a>
+                </div>
+              </div>
+
+                      <!-- one card is done -->
+
+              
+        </div>
+        </div>
+        <a class="carousel-control-prev" href="#workCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#workCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+    
+    <br><hr><br>
+
+  <!-- FITNESS CARO-->
+    <h2 class="headline">+ FITNESS +</h2>
+            <div id="fitnessCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators caro-style">
+                  <li data-target="#fitnessCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#fitnessCarousel" data-slide-to="1"></li> <!--add more bar indicators if need be-->
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                  <!-- Carousel items (sets of cards) will be inserted here - first card starts here-->
+                  <div class="card-set">
+                    <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                        <div class="card-body">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                                <div class="header-part">
+                                    <a href="timeline.html" style="color:black;">
+                                    <h5 class="card-title">Drink more water</h5>
+                                    </a>
+                                </div>
+                                <div class="header-part"> 
+                                     <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                                     <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                                 </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                                    <h6>12/12/2024</h6>
+                                </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                      </svg></small>
+                                    <h6>26</h6>
+                                </div> <!--number of people joined-->
+                                <div class="header-part">
+                                    <a id="joingoal">
+                                        <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                            JOIN 
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--mini timeline-->
+                            <a href="timeline.html">
+                            <div class="mini-timeline">
+                                <div class="checkpoint "></div>  <!-- all are completed -->
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <!-- add more checkpoints as needed -->
+                            </div>
+                            </a>
+                    </div>
+                  </div>
+                                  <!-- one card is done -->
+
+                </div>
+            </div>
+                <div class="carousel-item"> <!--next slide-->
+                    <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                        <div class="card-body">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                                <div class="header-part">
+                                    <a href="timeline.html" style="color:black;">
+                                    <h5 class="card-title">Drink more water</h5>
+                                    </a>
+                                </div>
+                                <div class="header-part"> 
+                                     <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                                     <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                                 </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                                    <h6>12/12/2024</h6>
+                                </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                      </svg></small>
+                                    <h6>26</h6>
+                                </div> <!--number of people joined-->
+                                <div class="header-part">
+                                    <a id="joingoal">
+                                        <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                            JOIN 
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--mini timeline-->
+                            <a href="timeline.html">
+                            <div class="mini-timeline">
+                                <div class="checkpoint "></div>  <!-- all are completed -->
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <!-- add more checkpoints as needed -->
+                            </div>
+                            </a>
+                        </div>
+                      </div>
+                              <!-- one card is done -->
+
+                      
+                </div>
+                </div>
+                <a class="carousel-control-prev" href="#fitnessCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#fitnessCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>   
+            
+
+            <br><hr><br>
+    <!--OTHER CARO-->
+            <h2 class="headline">+ OTHER +</h2>
+            <div id="otherCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators caro-style">
+                  <li data-target="#otherCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#otherCarousel" data-slide-to="1"></li> <!--add more bar indicators if need be-->
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                  <!-- Carousel items (sets of cards) will be inserted here - first card starts here-->
+                  <div class="card-set">
+                    <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                        <div class="card-body">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                                <div class="header-part">
+                                    <a href="timeline.html" style="color:black;">
+                                    <h5 class="card-title">Drink more water</h5>
+                                    </a>
+                                </div>
+                                <div class="header-part"> 
+                                     <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                                     <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                                 </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                                    <h6>12/12/2024</h6>
+                                </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                      </svg></small>
+                                    <h6>26</h6>
+                                </div> <!--number of people joined-->
+                                <div class="header-part">
+                                    <a id="joingoal">
+                                        <button class="btn btn-info join_my unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                            JOIN 
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--mini timeline-->
+                            <a href="timeline.html">
+                            <div class="mini-timeline">
+                                <div class="checkpoint "></div>  <!-- all are completed -->
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <!-- add more checkpoints as needed -->
+                            </div>
+                            </a>
+                    </div>
+                  </div>
+                                  <!-- one card is done -->
+
+                  
+                </div>
+            </div>
+                <div class="carousel-item"> <!--next slide-->
+                    <div class="card card-style mb-3" style="background-color: rgb(255, 242, 219);">
+                        <div class="card-body">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                                <div class="header-part">
+                                    <a href="timeline.html" style="color:black;">
+                                    <h5 class="card-title">Drink more water</h5>
+                                    </a>
+                                </div>
+                                <div class="header-part"> 
+                                     <small class="text-muted" style="font-size: small;">MADE BY</small> 
+                                     <h6>@berry</h6> <!--add a link here to go to the profile of this user later-->
+                                 </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;">Starting in 2 days</small>
+                                    <h6>12/12/2024</h6>
+                                </div>
+                                <div class="header-part">
+                                    <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                      </svg></small>
+                                    <h6>26</h6>
+                                </div> <!--number of people joined-->
+                                <div class="header-part">
+                                    <a id="joingoal">
+                                        <button class="btn btn-info unjoin-button border" value="${data[i].id}" onclick="setGoalId(this)"> 
+                                            JOIN 
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--mini timeline-->
+                            <a href="timeline.html">
+                            <div class="mini-timeline">
+                                <div class="checkpoint "></div>  <!-- all are completed -->
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <div class="checkpoint "></div>         
+                                <!-- add more checkpoints as needed -->
+                            </div>
+                            </a>
+                        </div>
+                      </div>
+                              <!-- one card is done -->
+
+                </div>
+                </div>
+                <a class="carousel-control-prev" href="#otherCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#otherCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>   
+
+        </div>
+        
+    </div>
+
+</div>
+
+</div>
 
     <script src="js/profile.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
