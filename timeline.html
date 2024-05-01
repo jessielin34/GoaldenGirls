@@ -119,12 +119,14 @@
                                     <div class="left">
                                         <!--REMOVED FADING IN FROM LEFT AND MADE IT FADING IN FROM RIGHT! :D-->
                                         <div class="icon animate fadeInRight" data-wow-delay="1.2s">
-                                            <img src="images/colorwheel-unscreen.gif" alt="" />
+                                            <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
+                                            <input type="checkbox" class="mark-complete" id="cp1" style="display: none;">
+                                            <label for="cp1" style="display: none;">Mark as completed</label>
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>First Checkpoint</h4>
-                                        <p>
+                                        <h4 class="checkpoint-date">12/12/2024</h4>
+                                        <p class="checkpoint-text">
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut labore et dolore magna aliqua.
                                         </p>
@@ -138,7 +140,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Second Checkpoint</h4>
+                                        <h4>12/13/2024</h4>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut labore et dolore magna aliqua.
@@ -153,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Third Checkpoint</h4>
+                                        <h4>12/14/2024</h4>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut labore et dolore magna aliqua.
@@ -168,7 +170,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Fourth Checkpoint</h4>
+                                        <h4>12/15/2024</h4>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut labore et dolore magna aliqua.
@@ -183,7 +185,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body">
-                                        <h4>Fifth Checkpoint</h4>
+                                        <h4>12/16/2024</h4>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut labore et dolore magna aliqua.
@@ -225,7 +227,7 @@
 
 
 
-
+    <script src="js/markcomplete.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
     <script src="backend/timeline.js" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

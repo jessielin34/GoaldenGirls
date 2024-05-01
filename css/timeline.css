@@ -318,7 +318,7 @@ img {
     text-align: center; /* Centers the button if there's any additional width */
     padding: 2px; /* Provides padding around the button */
 }
-
+ 
 .progress-bar button {
     background-color: white; 
     color: black; /* Text color */
@@ -364,4 +364,23 @@ img {
     height: 50px; /* Set your desired height */
     margin-right: 10px; /* Space between image and username */
     border-radius: 50%; /* Makes the image circular */
+}
+
+.icon {
+    position: relative;
+    display: inline-block;
+}
+
+.mark-complete, .mark-complete + label {
+    position: absolute;
+    top: -20px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+    z-index: 10;
+    display: block; /* Ensures visibility, adjust as needed */
+}
+
+.checkpoint-text.completed, .checkpoint-date.completed {
+    text-decoration: line-through; /* Adds strike-through */
+    color: grey; /* Optional: Change color to grey to indicate completion */
 }
