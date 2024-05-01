@@ -280,3 +280,67 @@ img {
     height: 130px; /* Set image size */
     margin: 10px;
 }
+
+.content-container {
+    display: flex;
+    justify-content: space-between; /* Ensures spacing between the two containers */
+    align-items: start; /* Aligns items at the top of the container */
+    padding: 20px;
+}
+
+.new-box {
+    flex: 1; /* Takes up 1 part of the available space */
+    padding: 10px;
+    margin-right: 20px; /* Adds some space between the new box and the timeline */
+    border-radius: 8px;
+    border: solid;
+}
+
+.timeline-container {
+    flex: 2; /* Takes up 2 parts of the available space, making it larger than the new box */
+    padding: 10px;
+    border-radius: 8px;
+    border: dashed;
+}
+
+.top-bar {
+    background-color: white; /* Example: a nice blue color */
+    color: black; /* White text color */
+    padding: 10px 15px; /* Padding inside the bar */
+    font-size: 16px; /* Larger text size */
+    border-top-left-radius: 8px; /* Match the border-radius of the box */
+    border-top-right-radius: 8px; /* Match the border-radius of the box */
+    border: solid;
+}
+
+
+.new-box > p, .timeline-container > p {
+    padding: 10px 15px; /* Apply padding to the content inside the box */
+}
+
+
+.new-box ul li p {
+    font-size: large; 
+}
+
+.user-list ul {
+    list-style-type: none; /* Removes bullet points */
+    padding: 0; /* Removes padding */
+    padding-top: 25px; 
+
+}
+
+.user-list li {
+    display: flex;
+    align-items: center; /* Centers items vertically */
+    justify-content: start; /* Aligns items to the start of the li */
+    padding: 10px; /* Adds padding inside each li */
+    padding-left: 50px;
+}
+
+.user-list img {
+    width: 50px; /* Set your desired width */
+    height: 50px; /* Set your desired height */
+    margin-right: 10px; /* Space between image and username */
+    border-radius: 50%; /* Makes the image circular */
+}
