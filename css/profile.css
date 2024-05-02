@@ -213,7 +213,7 @@ button {
         height: 20px; /* Set height of the timeline */
         position: relative;
         background-color: #e0e0e0; /* Light grey background for the timeline */
-        border-radius: 10px; /* Rounded edges for the timeline */
+        border-radius: 3px; /* Rounded edges for the timeline */
     }
     
     .checkpoint {
@@ -264,6 +264,7 @@ button {
     align-items: center;
     width: 100%;
     background-color: #f7f7f7;
+    border: solid;
 }
 
 .header-part {
@@ -272,6 +273,8 @@ button {
 
 .unjoin-button {
     font-size: small !important;
+    text-shadow: 1px 1px 1px rgb(0,0,0);
+    border: solid black !important;
 }
 
 .carousel-item {
