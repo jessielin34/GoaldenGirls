@@ -7,25 +7,27 @@
 // console.log(_supabase);
 
 import {_supabase} from './client.js';
+import { user } from './user.js';
 
 const currentDate = new Date();
-let user_id = "a";
-let { data: { user }, error } = await _supabase.auth.getUser();
+let user_id = user.id;
 const updateUser = async()=>{
-    user_id = user.id;
-    console.log(user);
     //username
-    let {data, error} = await _supabase
-    .from("user")
-    .select()
-    .eq('user_id', user_id);
-    console.log(data);
-    if (error)  alert(error);
-    else document.getElementById("user").textContent= '@' + data[0].username;
-
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq('user_id', user_id);
+        if (error) throw (error);
+        else document.getElementById("user").textContent= '@' + data[0].username;
+    }catch(err){
+        console.error(err);
+    }
 }; updateUser();
 
-
+var upcoming = [];
+var ongoing = [];
+var completed  = [];
 const updateGoals = async()=> {
     let goals = "";
     let {data, error} = await _supabase
@@ -108,10 +110,53 @@ const updateGoals = async()=> {
 updateGoals();
 
 //ONGOING, UPCOMING, COMPLETED
-// - checkOwned()
-// - checkStatus() --> see checkpoint 1 and compare it to current date // later compare to user_progress_status
-// have global var that holds Goal status
-// have 3 global lists each element holds html code for goals
+async function checkOwned(){
+    let goals = [];
+    let owned = null;
+    try{
+        let {data, error} = await _supabase
+        .from("Goals")
+        .select("*")
+        .eq('user_id', user_id);
+        owned = data;
+        throw (error);
+    }catch(err){
+        console.error(err);
+    }
+    for (let goal of owned){
+        checkStartDate(goal.id, goal.owner_status);
+        goals.push(goal.id);
+    }
+    
+}
+async function checkStartDate(goalId, status){
+    let startDate = null;
+    let numb
+    try{
+        let {data, error} = await _supabase
+        .from('Checkpoint')
+        .select()
+        .eq('goal_id', goalId);
+        for (let cp of data){
+            if (cp.checkpoint_order == 1){
+                startDate = cp.date;
+                return;
+            }
+        }
+        throw error;
+    }catch(err){
+        console.error(err);
+    }
+    if (startDate > currentDate && status == 0){
+        
+    }
+    else if (startDate < currentDate && status == 0){
+        
+    }
+}
+// - checkStartDate() --> see checkpoint 1 and compare it to current date // later compare to user_progress_status// start_date!
+// have global var that holds Goal status 
+// have 3 global lists of objects: html, id, name, description, joined_peeps, 
 // - setUpcoming(id, name, description)
 // check if its own or joined
 // - setOngoing(id, name, description)
@@ -130,9 +175,4 @@ signout.addEventListener("click", async(e)=>{
         alert("Unable to sign out\n", error);
     }
 });
-
-
-
-
-     
 
