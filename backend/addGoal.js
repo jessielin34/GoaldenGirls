@@ -35,7 +35,7 @@ doneButton.addEventListener("click", async(e)=> {
         if (check.id == 'checkpoint-date' + String(dateCounter)){
             if (check.value && checkList[dateCounter-1] != undefined) {
                 //make a separate function to check entire date arrray!
-                if (check.value < Date()) {
+                if (check.value < new Date()) {
                     alert("Can't start in the past, must look into the present & the future!");
                     return;
                 }

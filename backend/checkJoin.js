@@ -4,7 +4,7 @@ let user_id = "a";
 let { data: { user }, error } = await _supabase.auth.getUser();
 user_id = user.id;
 
-
+///DEPRECATED
 const checkJoin = async()=>{
     let goal = "";
     let goal_ids = [];
@@ -74,6 +74,6 @@ const checkJoin = async()=>{
             } 
         })
     }
-}; checkJoin();
+}; 
 
 

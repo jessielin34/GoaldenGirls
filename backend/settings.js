@@ -17,7 +17,7 @@ function googleTranslateElementInit() {
 document.getElementById("updateSettings").addEventListener('click', async(e)=>{
     e.preventDefault();
     let newLang = google.translate.TranslateElement().g.Fc;
-    await(updateLang(newLang));
+    updateLang(newLang);
     
     //await(updateLang());
     // let langs = document.querySelectorAll('.form-check-input');
@@ -41,7 +41,7 @@ async function updateLang(newLang){
         if (!error){
             console.log(newLang);
             alert("Successfully updated settings!");
-            window.location.replace("./../profile.html"); 
+            //window.location.replace("./../profile.html"); 
         }
         else throw error;
     }catch(err){
