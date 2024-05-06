@@ -282,8 +282,25 @@ button {
 }
 
 .carousel-item {
-    min-height: 33rem;
+    /* min-height: 33rem; */
 }
 
 
 
+
+
+/* Remove Google Translate Header */
+body {
+top: 0px !important;
+}
+
+body > .skiptranslate > iframe.skiptranslate {
+display: none !important;
+visibility: hidden !important;
+}
+
+/* Other Alternative 
+.VIpgJd-ZVi9od-ORHb-OEVmcd{
+    display: none;
+}
+*/

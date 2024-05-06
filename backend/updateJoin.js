@@ -1,25 +1,28 @@
 import { _supabase } from "./client.js";
+import { user } from "./user.js";
 //check user is signed in
 
 // var script = document.createElement('script');
 // script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
 // document.getElementsByTagName('head')[0].appendChild(script);
 
-let user_id = "a";
-const { data: { user },error } = await _supabase.auth.getUser();
-user_id = user.id;
+const currentDate = new Date();
+let user_id = user.id;
 const updateUser = async()=>{
     //username
-    let {data, error_} = await _supabase
-    .from("user")
-    .select()
-    .eq('user_id', user_id);
-    console.log(data);
-    if (error_)  alert(error_);
-    else document.getElementById("user").textContent= '@' + data[0].username;
-
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq('user_id', user_id);
+        if (error) throw (error);
+        else {
+            document.getElementById("user").textContent= '@' + data[0].username;
+        }
+    }catch(err){
+        console.error(err);
+    }
 }; updateUser();
-console.log(user);
 
 //array with categories
 let categories = [];
@@ -130,4 +133,64 @@ const checkDB = async()=> {
     };
 
 };
-checkDB();
+
+async function displayGoals(){
+    await getGoals();
+    sort ()
+    await addDeleteButtonListener();
+    await addUnjoinListener();
+    $('.spinner-border').hide();
+
+} displayGoals();
+
+let unJoinedGoals = [];//list of goal objects
+
+async function getGoals(){
+    let goal_ids = [];
+    let { data: goals, error_} = await _supabase
+    .from("Join")
+    .select("*")
+    .eq("user_id", user_id);
+    for (let i =0; i <goals.length; i++){
+        goal_ids.push(goals[i].goal_id);
+    }
+    console.log(goals[0]);
+    let goal = "";
+    const {data, error} = await _supabase
+    .from("Goals")
+    .select("*")
+    .neq('user_id', user_id);
+    if (data){
+        //https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
+        //https://youtu.be/4bqKagS5X88?si=VcavSSC0LfeBryZ3
+        for (let i in data){
+            let repeat = false;
+            for (let j in goal_ids){
+                if (data[i].id == goal_ids[j]){
+                    repeat = true;
+                }    
+            }
+            if (!repeat){
+                let category = data[i].category;
+                if (!categories.includes(category)){ //add category sections
+                    categories.push(category);
+                    $('.list-group').append(
+                        $('<li/>')
+                        .attr("id", category)
+                        .addClass("list-group-item d-flex justify-content-between align-items-start bg-transparent")
+                    );
+                    $('#'+category).append(
+                        $('<div/>')
+                        .addClass("ms-2 me-auto")
+                        .attr("id", category +"div")
+                    )
+                    $(`#${category}div`).append(
+                        $('<div/>')
+                        .addClass('container fw-bold')
+                        .text(category)
+                    )
+                }
+            }
+        }
+    }
+}
