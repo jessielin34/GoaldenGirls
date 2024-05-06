@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function handleDrop(e) {
         if (e.stopPropagation) {
-            e.stopPropagation();
+            e.stopPropagation(); // Stops the browser from redirecting.
         }
 
         this.classList.remove('over');
 
         if (dragSrcEl !== this) {
-            // Swap the DOM elements
-            swapElements(dragSrcEl, this);
+            // Perform the move
+            moveElement(dragSrcEl, this);
             updateCheckpointIdsAndNumbers();
         }
 
@@ -64,22 +64,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function swapElements(src, target) {
-        // Create markers in the DOM to mark places for swapping
-        var srcNext = src.nextElementSibling;
-        var targetNext = target.nextElementSibling;
-        var parentNode = src.parentNode;
-
-        if (srcNext === target) {
-            parentNode.insertBefore(target, src);
-        } else if (targetNext === src) {
+    function moveElement(src, target) {
+        var parentNode = target.parentNode;
+        if (src === target.nextElementSibling) {
+            // Insert src before target
             parentNode.insertBefore(src, target);
+        } else if (src === target.previousElementSibling) {
+            // Insert src after target
+            parentNode.insertBefore(src, target.nextSibling);
         } else {
-            if (srcNext) parentNode.insertBefore(target, srcNext);
-            else parentNode.appendChild(target);
+            // General case: decide based on position in the NodeList
+            var srcIndex = Array.from(parentNode.children).indexOf(src);
+            var targetIndex = Array.from(parentNode.children).indexOf(target);
 
-            if (targetNext) parentNode.insertBefore(src, targetNext);
-            else parentNode.appendChild(src);
+            if (srcIndex < targetIndex) {
+                parentNode.insertBefore(src, target.nextSibling);
+            } else {
+                parentNode.insertBefore(src, target);
+            }
         }
     }
 
