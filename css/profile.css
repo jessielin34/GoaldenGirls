@@ -210,11 +210,15 @@ button {
     .mini-timeline {
         display: flex;
         align-items: center;
+        justify-content: center; /* Centers the checkpoints within the timeline */
         height: 20px; /* Set height of the timeline */
         position: relative;
         background-color: #e0e0e0; /* Light grey background for the timeline */
         border-radius: 3px; /* Rounded edges for the timeline */
+        padding: 5px; /* Ensures there is padding around the checkpoints */
+        box-sizing: border-box;
     }
+    
     
     .checkpoint {
         width: 15px; /* Diameter of the checkpoint */
