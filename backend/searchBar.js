@@ -31,27 +31,36 @@ function filterUsers(value) {
   }
 
 function renderDropdown(filteredUsers) {
-  dropdownMenu.innerHTML = ""; // Clear previous dropdown items
-
-  if (filteredUsers.length === 0) {
-    const dropdownItem = document.createElement("a");
-    dropdownItem.classList.add("dropdown-item", "text-muted");
-    dropdownItem.textContent = "No users found";
-    dropdownMenu.appendChild(dropdownItem);
-  } else {
-    filteredUsers.forEach((user) => {
+    dropdownMenu.innerHTML = ""; // Clear previous dropdown items
+  
+    if (filteredUsers.length === 0) {
       const dropdownItem = document.createElement("a");
-      dropdownItem.classList.add("dropdown-item");
-      dropdownItem.textContent = user.username;
-      dropdownItem.href = "#"; // Add your link here
-
+      dropdownItem.classList.add("dropdown-item", "text-muted");
+      dropdownItem.textContent = "No users found";
       dropdownMenu.appendChild(dropdownItem);
-    });
+    } else {
+      filteredUsers.forEach((user) => {
+        const dropdownItem = document.createElement("div");
+        dropdownItem.classList.add("dropdown-item", "d-flex", "justify-content-between", "align-items-center");
+        
+        const userInfo = document.createElement("span");
+        userInfo.textContent = user.username;
+        dropdownItem.appendChild(userInfo);
+  
+        const followButton = document.createElement("button");
+        followButton.classList.add("btn", "btn-sm", "btn-primary");
+        followButton.textContent = user.following ? "Unfollow" : "Follow";
+        followButton.onclick = () => toggleFollow(user.user_id);
+        dropdownItem.appendChild(followButton);
+  
+        dropdownMenu.appendChild(dropdownItem);
+      });
+    }
+  
+    // Show dropdown menu
+    dropdownMenu.classList.add("show");
   }
-
-  // Show dropdown menu
-  dropdownMenu.classList.add("show");
-}
+  
 
 searchInput.addEventListener("input", async (e) => {
   const value = e.target.value.trim().toLowerCase();
