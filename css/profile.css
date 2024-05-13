@@ -48,6 +48,42 @@
     overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
 }
 
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #f5c2b3;  /* Assuming you want to keep the same background */
+    z-index: 1000000000;
+    opacity: 1;
+    overflow: hidden;  
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center {
+    position: relative;
+}
+
+.one {
+    width: 300px;
+    height: 30px;   
+    border-radius: 20px;
+    background:
+     repeating-linear-gradient(135deg,#f03355 0 10px,#ffa516 0 20px) 0/0%   no-repeat,
+     repeating-linear-gradient(135deg,#ddd    0 10px,#eee    0 20px) 0/100%; 
+    animation: l3 2s infinite;   
+}
+
+   
+
+@keyframes l3 {
+    100% {background-size:100%}
+}
+
+
 
 #edit {
     visibility: hidden;
@@ -280,11 +316,11 @@ button {
     text-shadow: 1px 1px 1px rgb(0,0,0);
     border: solid black !important;
 }
-
+/*
 .carousel-item {
-    /* min-height: 33rem; */
+     min-height: 33rem; 
 }
-
+*/
 
 
 
@@ -317,4 +353,48 @@ visibility: hidden !important;
 .dropdown-menu.show {
     display: block;
     width: 100%; /* Adjust as needed */
+}
+
+.read-only-text {
+    text-align: center; /* Center the text box within the div */
+    margin-bottom: 50px; /* Space between the text box and the UPCOMING headline */
+}
+
+.read-only-text input {
+    border: dashed rgb(175, 174, 174);
+    background-color: white;
+    color: #626262; /* Set text color */
+    text-align: center;
+    font-size: large;
+    padding: 10px;
+    font-family: 'Press Start 2P', sans-serif; 
+    width: 60%; /* Adjust the width as needed */
+}
+
+.social-stats {
+    display: flex;
+    justify-content: center; /* Align items to center to bring them closer */
+    align-items: center; /* Align items vertically */ 
+    margin-bottom: 20px; /* Space between this section and the read-only text box */
+}
+
+.social-stats div {
+    text-align: center; /* Center the text within each div */
+    margin: 0 20px; 
+    border: dashed rgb(175, 174, 174);
+    padding: 20px; 
+    background-color: white;
+
+}
+
+.social-stats h3 {
+    font-size: 1rem; /* Adjust size as needed */
+    color: rgb(175, 174, 174); /* Set text color */
+    margin-top: 5px; /* Space between number and header */
+}
+
+.social-stats p {
+    font-size: 1.2rem; /* Larger text for numbers */
+    font-weight: bold; /* Make the number bold */
+    color: #626262; /* Number color */
 }

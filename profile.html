@@ -15,7 +15,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
+
+
 <body>
+    <div id="loader">
+        <div class="center">
+            <div class="one"></div>
+        </div>
+    </div>
+
     <div class="content">
         <div class="nav-bar">
             <a class="btn btn-light my-2 my-sm-0" role="button" id="sign_out">
@@ -87,11 +95,23 @@
         </div>
 
         <!--div to hold the user elements-->
-        <div class="user-container"></div>
-
-        <br /> <br /> <br />
+        <div class="user-container"></div> 
 
         <div class="container">
+            <div class="social-stats">
+                <div class="followers">
+                    <p id="follower-count">1234</p> 
+                    <h3>FOLLOWERS</h3>
+                </div>
+                <div class="following">
+                    <p id="following-count">567</p>
+                    <h3>FOLLOWING</h3>
+                </div>
+            </div>
+            <div class="read-only-text">
+                <input type="text" value="this is my bio hehe hi <3" readonly>
+            </div>
+            <r>
             <h2 class="headline">- UPCOMING -</h2>
             <div id="upcomingCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
             </div>   
@@ -136,7 +156,26 @@
     </div>
     <!-- <div id="google_translate_element"></div> -->
 
+   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/wow.min.js"></script>
+
     <script>
+        jQuery(document).ready(function ($) {
+            "use strict"
+            $("#loader").delay(1000).fadeOut("slow");
+
+            var wow = new WOW({
+                boxClass: 'animate',
+                animateClass: 'animated',
+                offset: 90,
+                mobile: false
+            });
+            wow.init();
+
+        });
+    </script>
+    <script>
+
         document.addEventListener("DOMContentLoaded", function () {
             function updateCheckpointMargins() {
                 var timelines = document.querySelectorAll('.mini-timeline'); // Select all mini-timeline elements
