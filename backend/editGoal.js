@@ -2,7 +2,7 @@ import { _supabase } from "./client.js";
 import { addCheckpoint } from "./editGoalHelper.js";
 //import { user_data } from "./user.js";
 
-
+const currentDate = new Date();
 let user_id = "";
 //check user is signed in
 const updateUser = async()=>{
@@ -84,7 +84,8 @@ doneButton.addEventListener('click', async(e)=>{
         //check if cp has a date
         if (check.id == 'checkpoint-date' + String(dateCounter)){
             if (check.value && checkList[dateCounter-1] != undefined) {
-                if (check.value < Date()) {
+                if (check.value < currentDate) {
+                    console.log(check.value);
                     alert("Can't start in the past, must look into the present & the future!");
                     return;
                 }

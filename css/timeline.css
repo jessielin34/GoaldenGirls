@@ -151,12 +151,12 @@ img {
     border-radius:50%;
 }
 
-.two img { 
+.even img { 
     margin-left: -50px; 
     margin-top: -20px; 
 }
 
-.three img { 
+.odd img { 
     margin-left: -50px; 
 }
 
@@ -218,24 +218,24 @@ img {
     text-shadow: 1px 2px 3px rgb(0,0,0);
 }
 
-.lifestyle-category {
+.Lifestyle-category {
     background-color: lightblue;
 }
 
-.education-category {
+.Education-category {
     background-color: lightgreen;
 }
 
-.work-category {
+.Work-category {
     background-color: rgb(224, 190, 248);
 }
 
-.fitness-category {
+.Fitness-category {
     background-color: rgb(232, 232, 165);
 
 }
 
-.other-category {
+.Other-category {
     background-color: #fab8e1;
 }
 

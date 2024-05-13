@@ -263,8 +263,8 @@ button {
         border: solid black !important;
     }
     
-    .carousel-item {
-        /* min-height: 33rem; */
+    .carousel-static {
+        min-height: 33rem;
     }
 
    
