@@ -21,41 +21,68 @@
 
         const _supabase = createClient(supabaseUrl, supabaseKey);
 
-        //fetch goals from the database
-        async function fetchGoals() {
+        // Fetch goals from the users the current user follows
+        async function fetchFeed() {
             try {
-                const {data, error} = await _supabase
-                .from('Goals')
-                .select('*');
+                const currentUserID = await getCurrentUserID();
+                const { data: followData, error: followError } = await _supabase
+                    .from('user_relationships')
+                    .select('followed_id')
+                    .eq('follower_id', currentUserID);
 
-                if (error) {
-                    throw error;
-                }
+                if (followError) throw followError;
 
-                return data;
+                const followedUserIDs = followData.map(item => item.followed_id);
+
+                const { data: goalsData, error: goalsError } = await _supabase
+                    .from('Goals')
+                    .select('*')
+                    .in('user_id', followedUserIDs)
+                    .order('created_at', { ascending: false }); // Order by created_at in descending order
+
+                if (goalsError) throw goalsError;
+
+                return goalsData;
             } catch (error) {
-                console.error('Error fetching goals:', error.message);
+                console.error('Error fetching feed:', error.message);
+                return [];
             }
         }
 
-        //display goals in the feed
+
+        // Display goals in the feed
         async function displayFeed() {
             const feedElement = document.getElementById('feed');
             feedElement.innerHTML = '';
 
-            const goals = await fetchGoals();
+            const goals = await fetchFeed();
 
             goals.forEach(goal => {
                 const goalElement = document.createElement('div'); 
-                //only problem is we don't have username in Goals column instead it's user_id
                 goalElement.innerHTML = `
                     <h3>${goal.username}</h3> 
                     <p><strong>Goal:</strong> ${goal.goal_name}</p>
                     <p><strong>Description:</strong> ${goal.description}</p>
                     <p><strong>Category:</strong> ${goal.category}</p>
-                `
+                    <p><strong># of People</strong> ${goal.ppl_num}</p>
+                    <p><strong># of Checkpoint:</strong> ${goal.cp_num}</p>
+                `;
+                feedElement.appendChild(goalElement);
             });
         }
+
+        // Get current user ID
+        async function getCurrentUserID() {
+            try {
+                const { data: { session }, error } = await _supabase.auth.getSession();
+                if (error) throw error;
+                return session ? session.user.id : null;
+            } catch (error) {
+                console.error('Error getting current user ID:', error.message);
+                return null;
+            }
+        }
+
         displayFeed();
     </script>
 </body>
