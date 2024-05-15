@@ -262,6 +262,7 @@ button {
         text-shadow: 1px 1px 1px rgb(0,0,0);
         border: solid black !important;
     }
+
     /*
     .carousel-item {
          min-height: 33rem;
@@ -305,6 +306,10 @@ button {
     /* Style for active section */
     .navbar a.active {
         color: gray!important; /* Highlight color for active link */
+  }
+    .carousel-static {
+        min-height: 33rem;
+
     }
     
 
