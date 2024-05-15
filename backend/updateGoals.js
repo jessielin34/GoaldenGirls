@@ -133,13 +133,13 @@ async function displayGoals(){
     sortGoals(ongoing);
     sortGoals(completed);
     sortGoals(failed);
+    $('.spinner-border').hide();
     await setUpcoming();
     await setOngoing();
     await setCompleted();
     await setFailed();
     await addDeleteButtonListener();
     await addUnjoinListener();
-    $('.spinner-border').hide();
 
 } displayGoals();
 async function checkOwned(){
@@ -223,7 +223,7 @@ async function checkGoalStatus(index, start, status, id, type){
     }
     if (numOfCp == 0) console.log(id);
     //push to appropriate goal status
-    if (startDate > currentDate && status == 0){
+    if (startDate > currentDate && status >= 0){
         upcoming.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
     else if (startDate < currentDate && status == numOfCp)
@@ -232,7 +232,7 @@ async function checkGoalStatus(index, start, status, id, type){
         ongoing.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
     else {
-        //console.log({index: index, date: start});
+        console.log({index: index, date: start});
         failed.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
 }
@@ -713,7 +713,6 @@ async function setCarousel(type, array, size){
         let owner = '';
         let color = '';
         let buttons ='';
-        let dayPhrase = '';
         if (obj.type == "joined"){
             color = 'rgb(255, 242, 219)';
             owner = await getUsername(goals[obj.index].user_id);
@@ -746,18 +745,18 @@ async function setCarousel(type, array, size){
             </div>`;
         }
         if (type == 'upcoming'){
-            dayPhrase = `
-            <div class="header-part">
-                <small class="text-muted" style="font-size: xx-small;">Starting in ${obj.date.getDate() - new Date().getDate()} days</small>
-                <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
-            </div>`;
+            // dayPhrase = `
+            // <div class="header-part">
+            //     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
+            //     <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+            // </div>`;
         }
         else if (type == 'ongoing'){
-            dayPhrase = `
-            <div class="header-part">
-                <small class="text-muted" style="font-size: xx-small;">Started ${new Date().getDate() - obj.date.getDate()} days ago</small>
-                <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
-            </div>`;
+            // dayPhrase = `
+            // <div class="header-part">
+            //     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
+            //     <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+            // </div>`;
             buttons =``;
         }
         else if (type == 'completed'){
@@ -800,7 +799,8 @@ async function setCarousel(type, array, size){
                 $('#'+type+String(counter)).addClass('carousel-static');
             }
         }
-        if (goals[obj.index].goal_name.length > 17) goals[obj.index].goal_name = goals[obj.index].goal_name.substr(0,17) + '...';
+        let abbr = goals[obj.index].goal_name;
+        if (goals[obj.index].goal_name.length > 17) abbr = goals[obj.index].goal_name.substr(0,17) + '...';
         $('#'+type+String(counter - counter%3)).append(
             $('<div/>')
             .addClass('card card-style mb-3')
@@ -810,8 +810,8 @@ async function setCarousel(type, array, size){
                 <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
                     <div class="header-part">
                         <small class="text-muted" style="font-size: small;">${owner}</small>
-                        <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);">
-                        <h5 class="card-title">${goals[obj.index].goal_name}</h5>
+                        <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0); title="${goals[obj.index].goal_name}" ">
+                        <h5 class="card-title">${abbr}</h5>
                         </a>
                     </div>
                     <div class="header-part"> 
@@ -821,7 +821,11 @@ async function setCarousel(type, array, size){
                               </svg>
                               ${goals[obj.index].category}</h6>
                     </div>
-                    ${dayPhrase}
+                    <div class="header-part">
+                    <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
+                    <h6>${obj.date.getMonth()+1}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+                    </div>
+                    
                     <div class="header-part">
                         <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
@@ -881,6 +885,43 @@ async function setCarousel(type, array, size){
     
 }
 
+function getDatePhrase(type, date){
+    if (type == "upcoming"){
+        if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() == 1))
+            return "Starts in 1 day";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 7)) 
+            return "Starts in " + String(date.getDate() - currentDate.getDate()) + " days";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 14))
+            return "Starts in 1 week";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() > 7)) 
+            return "Starts in " + String(Math.floor((date.getDate() - currentDate.getDate())/7)) + " weeks";
+        else if ((date.getMonth() - currentDate.getMonth() == 1))
+            return "Starts in 1 month";
+        else if ((date.getMonth() - currentDate.getMonth() > 1))
+            return "Starts in " + String(date.getMonth() - currentDate.getMonth()) + " months";
+    }
+    else {
+        if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() == 1))
+            return "Started 1 day ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() < 7))
+            return "Started " + String(currentDate.getDate() - date.getDate()) + " days ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() < 14))
+            return "Started 1 week ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() > 7)) 
+            return "Started " + String(Math.floor((currentDate.getDate() - date.getDate())/7)) + " weeks ago";
+         else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - date.getDate() < 0)){
+            if (Math.floor((currentDate.getDate() + (30 - date.getDate()))/7) == 1) return "Started 1 week ago";
+            else return "Started " + String(Math.floor((currentDate.getDate() + (30 - date.getDate()))/7)) + " weeks ago";
+         } 
+        else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - date.getDate() > 0))
+            return "Started 1 month ago";
+        else if ((currentDate.getMonth() - date.getMonth() > 1))
+            return "Started " + String(currentDate.getMonth() - date.getMonth()) + " months ago";
+    }
+
+    
+    
+}
 
 
 // async function getUser(id){
