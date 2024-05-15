@@ -66,7 +66,6 @@
                 </div>
             </div>
         </div>
-
         
         <div class="profile-bg">
             <div class="img-bg">
@@ -204,7 +203,20 @@
             window.addEventListener('resize', updateCheckpointMargins); // Adjust margins on window resize
         });
     </script>
-    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+        await getUsers();
+        // Redirect to user profile when clicking a user in the dropdown
+        document.querySelectorAll(".dropdown-item span").forEach((item) => {
+            item.addEventListener("click", () => {
+            const userId = item.dataset.userId;
+            window.location.href = `user_profile.html?user_id=${userId}`;
+            });
+        });
+        });
+    </script>
+  
 
         <script src="js/profile.js"></script>
         <script src="backend/updateGoals.js" type="module"></script>
