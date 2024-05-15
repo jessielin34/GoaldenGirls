@@ -54,45 +54,20 @@ ul li {
 }
 
 div.one {
-    width: 8vmax; 
-    height: 8vmax; 
-    border-right: 4px solid white; 
-    border-radius: 100%; 
-    animation: spinRight 800ms linear infinite; 
+    width: 300px;
+    height: 30px; 
+    border-radius: 20px;
+    background:
+     linear-gradient(orange 0 0) 0/0% no-repeat
+     lightblue;
+    animation: l2 2s infinite steps(20);  
 }
-
-    div.one:before,
-    div.one:after {
-        content: '';
-        width: 6vmax;
-        height: 6vmax;
-        display: block; 
-        position: absolute;
-        top: calc(50% - 3vmax);
-        left: calc(50% - 3vmax);
-        border-left: 3px solid #000000;
-        border-radius: 100%;
-        animation: spinLeft 800ms linear infinite;
+ 
+   
+    @keyframes l2 {
+        100% {background-size:110%} 
     }
 
-    div.one:after {
-        width: 4vmax;
-        height: 4vmax;
-        top: calc(50% - 2vmax);
-        left: calc(50% - 2vmax);
-        border: 0;
-        border-right: 2px solid #757373;
-        animation: none;
-    }
-
-@keyframes spinRight{
-    from{
-        transform: rotate(360deg);
-    }
-    to {
-        transform: rotate(0deg); 
-    }
-}
 
 .center{
     left: 50%;

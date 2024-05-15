@@ -70,9 +70,7 @@
         
         <div class="profile-bg">
             <div class="img-bg">
-                <div id="edit">
-                    <a type="button" class="btn btn-light" href="settings.html">Edit</a>
-                </div>
+                <!-- no need to edit in this page -->
             </div>
         </div>
 
@@ -85,21 +83,16 @@
             </div>
         </div>
 
-        <div class="dropdown new-goal">
-            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                + NEW GOAL
+        <div class="new-goal">
+            <button class="btn btn-light" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                FOLLOW
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" style="text-align: center" href="creategoal.html">Create a New Goal</a>
-                <a class="dropdown-item" style="text-align: center" href="joingoal.html">Join an Existing Goal</a>
-            </div>
         </div>
 
         <!--div to hold the user elements-->
         <div class="user-container"></div> 
 
         <div class="container">
-
             <div class="social-stats">
                 <div class="followers">
                     <p id="follower-count">1234</p> 
@@ -114,14 +107,7 @@
                 <input type="text" value="this is my bio hehe hi <3" readonly>
             </div>
             <r>
-
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden"></span>
-                </div>
-            </div>
-            <!-- <h2 class="headline">- UPCOMING -</h2>
-
+            <h2 class="headline">- UPCOMING -</h2>
             <div id="upcomingCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
             </div>   
             <div class="d-flex justify-content-center">
@@ -129,9 +115,9 @@
                   <span class="visually-hidden"></span>
                 </div>
             </div>
-            <br><hr><br> -->
+            <br><hr><br>
     <!--ONGOING CARO-->
-            <!-- <h2 class="headline">- ONGOING -</h2>
+            <h2 class="headline">- ONGOING -</h2>
             <div id="ongoingCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                 
             </div>   
@@ -141,9 +127,9 @@
                 </div>
             </div>
 
-            <br><hr><br> -->
+            <br><hr><br>
     <!--COMPLETED CARO-->
-            <!-- <h2 class="headline">- COMPLETED -</h2>
+            <h2 class="headline">- COMPLETED -</h2>
             <div id="completedCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
         
             </div>
@@ -152,9 +138,9 @@
                   <span class="visually-hidden"></span>
                 </div>
             </div>
-            <br><hr><br> -->
+            <br><hr><br>
      <!--FAILED CARO-->
-     <!-- <h2 class="headline">- FAILED -</h2>
+     <h2 class="headline">- FAILED -</h2>
      <div id="failedCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
  
      </div>
@@ -162,9 +148,8 @@
         <div class="spinner-border" role="status">
           <span class="visually-hidden"></span>
         </div>
-    </div> -->
-    <!-- <div id="google_translate_element"></div> -->
     </div>
+    <!-- <div id="google_translate_element"></div> -->
 
    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="js/wow.min.js"></script>
@@ -211,6 +196,19 @@
     
             updateCheckpointMargins();
             window.addEventListener('resize', updateCheckpointMargins); // Adjust margins on window resize
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const followButton = document.getElementById('dropdownMenuButton');
+
+            followButton.addEventListener('click', function() {
+                if (followButton.textContent.trim() === "FOLLOW") {
+                    followButton.textContent = "UNFOLLOW";
+                } else {
+                    followButton.textContent = "FOLLOW";
+                }
+            });
         });
     </script>
     

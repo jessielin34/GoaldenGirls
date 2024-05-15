@@ -262,11 +262,63 @@ button {
         text-shadow: 1px 1px 1px rgb(0,0,0);
         border: solid black !important;
     }
+
+    /*
+    .carousel-item {
+         min-height: 33rem;
+    }
+ */
+    .navbar {
+        position: fixed;/* Fix position to top of viewport */
+        top: 0; /* Align to top */
+        width: 100%; /* Full width */
+        background-color: white; /* Pink background or any color that matches your design */
+        z-index: 1000; /* Ensures navbar stays on top */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Optional: adds shadow for better visibility */
+        padding: 10px 0; /* Add some padding */
+        text-align: center; /* Centers the navigation links */
+        border: dashed black; 
+    }
     
+    .navbar ul {
+        list-style-type: none; /* Removes bullet points from list */
+        padding: 0; /* Removes padding */
+        margin: 0 auto;  /* Ensures it centers aligns if not taking full width */
+        display: flex; /* Enables flexbox layout */
+        justify-content: center;/* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        width: fit-content;  /* Adjusts width to content inside */
+    }
+    
+    .navbar li {
+        margin: 0 20px; /* Space between items */
+    }
+    
+    .navbar a {
+        text-decoration: none; /* Removes underline from links */
+        color: black; /* Sets link color */
+        font-family: 'Press Start 2P', sans-serif; /* Pixel art style font */
+        font-size: 16px; /* Sets font size */
+        padding: 5px 10px;  /* Adds padding around the text for better tap targets */
+
+    }
+    
+    /* Style for active section */
+    .navbar a.active {
+        color: gray!important; /* Highlight color for active link */
+  }
     .carousel-static {
         min-height: 33rem;
-    }
 
+    }
+    
+
+    .fixed-navbar {
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        left: 0;
+    }
    
     
     

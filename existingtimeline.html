@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Goal timeline</title>
+    <link rel="stylesheet" href="css/timeline.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+</head>
+<body>
+        <div id="loader">
+            <div class="center">
+                <div class="one"></div>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <a class="btn btn-light my-2 my-sm-0" href="" role="button" id="back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-backspace-fill" viewBox="0 0 16 16">
+                    <path d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8z"/>
+                  </svg>
+                go back
+            </a>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 btn" style="background-color: white !important;" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn my-2 my-sm-0" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                      </svg>
+                </button>
+            </form>
+            <div class="nav-item dropleft" id="hamburger-menu">
+                <a class="btn btn-info my-2 my-sm-0" style="margin-right: -10px;" role="button" id="feed">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
+                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707z"/>
+                        <path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018"/>
+                      </svg>
+                </a> 
+                <a class="btn btn-warning my-2 my-sm-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </a>
+                <div class="dropdown-menu subtitle" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.html #about-us">About Us</a>
+                    <a class="dropdown-item" href="index.html #contact-us">Contact</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="sign_out">SIGN OUT</a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="wrap" class="home">
+            <div id="content">
+                <section class="process">
+                    <div class="container">
+                        <br /><br />
+                <div class="goal-container">
+                    <div class="goal-details">
+                        <h4 class="heading" id="cp_title"> Goal Name </h4>
+                        <h5 class="heading" id="cp_title"> Goal Description </h5>
+                        <br>
+                        <h6 class="category lifestyle-category">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-arms-up" viewBox="0 0 16 16">
+                                <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                <path d="m5.93 6.704-.846 8.451a.768.768 0 0 0 1.523.203l.81-4.865a.59.59 0 0 1 1.165 0l.81 4.865a.768.768 0 0 0 1.523-.203l-.845-8.451A1.5 1.5 0 0 1 10.5 5.5L13 2.284a.796.796 0 0 0-1.239-.998L9.634 3.84a.7.7 0 0 1-.33.235c-.23.074-.665.176-1.304.176-.64 0-1.074-.102-1.305-.176a.7.7 0 0 1-.329-.235L4.239 1.286a.796.796 0 0 0-1.24.998l2.5 3.216c.317.316.475.758.43 1.204Z"/>
+                              </svg>
+                            LIFESTYLE
+                        </h6>
+                    </div>
+                    <div class="goal-info-box">
+                        <img src="images/pro-img2.png" alt="profile pic">
+                        <div>
+                            <p class="owner-title text-muted">OWNED BY</p>
+                            <p class="owner-name">@berry</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <div class="new-box text-center">
+                        <!-- users box -->
+                        <div class="user-list">
+                        <div class="top-bar">
+                            <small class="text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg><br>2 Users Joined</small>
+                        </div>
+                        <ul>
+                            <li>
+                                <img src="images/pro-img2.png" alt="Description of Image">
+                                <p>@cherry</p> <!-- can add a link here to go to the users profile-->
+                            </li>
+                            <li>
+                                <img src="images/pro-img2.png" alt="Description of Image">
+                                <p>@peaches</p>
+                            </li>
+                            <!-- add more list items as needed -->
+                        </ul>     
+                        </div>
+                    </div>
+                    <div class="timeline-container">
+                        <div class="top-bar">
+                            <div class="progress-bar">
+                                <button>JOIN GOAL</button>
+                            </div>
+                        </div>
+                        <!-- timeline -->
+                        <div class="start">
+                            <ul class="row">
+                                <!--<h5 id="cp1"></h5>-->
+                                <li>
+                                    <div class="left">
+                                        <!--REMOVED FADING IN FROM LEFT AND MADE IT FADING IN FROM RIGHT! :D-->
+                                        <div class="icon animate fadeInRight" data-wow-delay="1.2s">
+                                            <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
+                                            <input type="checkbox" class="mark-complete" id="cp1" style="display: none;">
+                                            <label for="cp1" style="display: none;">click to mark as complete</label>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="checkpoint-date">12/12/2024</h4>
+                                        <p class="checkpoint-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left two">
+                                        <div class="icon animate fadeInRight" data-wow-delay="1.5s">
+                                            <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
+                                            <input type="checkbox" class="mark-complete" id="cp2" style="display: none;">
+                                            <label for="cp2" style="display: none;">click to mark as complete</label>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="checkpoint-date">12/13/2024</h4>
+                                        <p class="checkpoint-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left three">
+                                        <div class="icon animate fadeInRight" data-wow-delay="0.9s">
+                                            <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
+                                            <input type="checkbox" class="mark-complete" id="cp3" style="display: none;">
+                                            <label for="cp3" style="display: none;">click to mark as complete</label>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="checkpoint-date">12/14/2024</h4>
+                                        <p class="checkpoint-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left four">
+                                        <div class="icon animate fadeInRight" data-wow-delay="0.7s">
+                                            <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
+                                            <input type="checkbox" class="mark-complete" id="cp4" style="display: none;">
+                                            <label for="cp4" style="display: none;">click to mark as complete</label>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="checkpoint-date">12/15/2024</h4>
+                                        <p class="checkpoint-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left five">
+                                        <div class="icon animate fadeInRight" data-wow-delay="0.5s">
+                                            <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
+                                            <input type="checkbox" class="mark-complete" id="cp5" style="display: none;">
+                                            <label for="cp5" style="display: none;">click to mark as complete</label>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="checkpoint-date">12/16/2024</h4>
+                                        <p class="checkpoint-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </li> 
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                        
+                    </div>
+                </section>
+            </div>
+        </div>
+    
+  
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict"
+            $("#loader").delay(1000).fadeOut("slow");
+
+            var wow = new WOW({
+                boxClass: 'animate',
+                animateClass: 'animated',
+                offset: 90,
+                mobile: false
+            });
+            wow.init();
+
+        });
+    </script>
+
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
+    <script src="backend/timeline.js" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
