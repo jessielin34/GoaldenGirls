@@ -1,5 +1,6 @@
 import { _supabase } from "./client.js";
 
+const currentDate = new Date();
 let user_id = "";
 //check user is signed in
 const updateUser = async()=>{
@@ -20,6 +21,7 @@ let doneButton = document.querySelector("#done");
 doneButton.addEventListener("click", async(e)=> {
     e.preventDefault();
     //get all checkpoints (text)
+    let start_date = $('#start-date').val();
     let checkList = [];
     let dateList = [];
     let checkpoints = document.querySelectorAll("input");
@@ -35,7 +37,7 @@ doneButton.addEventListener("click", async(e)=> {
         if (check.id == 'checkpoint-date' + String(dateCounter)){
             if (check.value && checkList[dateCounter-1] != undefined) {
                 //make a separate function to check entire date arrray!
-                if (check.value < new Date()) {
+                if (check.value < currentDate) {
                     alert("Can't start in the past, must look into the present & the future!");
                     return;
                 }
@@ -74,6 +76,10 @@ doneButton.addEventListener("click", async(e)=> {
             goal_name: goal,
             description: description,
             category: category,
+            start_date: start_date,
+            status: 0,
+            cp_num: checkList.length,
+            ppl_num: 1
         }).select();
         if (error){
             alert(error.message);

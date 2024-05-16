@@ -21,6 +21,7 @@ const updateUser = async()=>{
         if (error) throw (error);
         else {
             document.getElementById("user").textContent= '@' + data[0].username;
+            $('#bio').val(data[0].bio);
         }
     }catch(err){
         console.error(err);
@@ -133,13 +134,13 @@ async function displayGoals(){
     sortGoals(ongoing);
     sortGoals(completed);
     sortGoals(failed);
+    $('.spinner-border').hide();
     await setUpcoming();
     await setOngoing();
     await setCompleted();
     await setFailed();
     await addDeleteButtonListener();
     await addUnjoinListener();
-    $('.spinner-border').hide();
 
 } displayGoals();
 async function checkOwned(){
@@ -156,7 +157,7 @@ async function checkOwned(){
         console.error(err);
     }
     for (let goal in goals){
-        await checkGoalStatus(goal, goals[goal].start_date, goals[goal].owner_status, goals[goal].id, "owned");
+        await checkGoalStatus(goal, goals[goal].start_date, goals[goal].status, goals[goal].id, "owned");
     }
     
 }
@@ -223,7 +224,7 @@ async function checkGoalStatus(index, start, status, id, type){
     }
     if (numOfCp == 0) console.log(id);
     //push to appropriate goal status
-    if (startDate > currentDate && status == 0){
+    if (startDate > currentDate && status >= 0){
         upcoming.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
     else if (startDate < currentDate && status == numOfCp)
@@ -232,7 +233,7 @@ async function checkGoalStatus(index, start, status, id, type){
         ongoing.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
     else {
-        //console.log({index: index, date: start});
+        console.log({index: index, date: start});
         failed.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
 }
@@ -247,30 +248,30 @@ async function setUpcoming(){
         console.log("No Upcoming Goals")
     } 
     else {
-        setIndicators("upcoming", upcoming.length);
-        await setCarousel("upcoming", upcoming);
+        // setIndicators("upcoming", upcoming.length);
+        await setCarousel("upcoming", upcoming, upcoming.length);
     }
     
 }
 
 async function setOngoing(){
-    if (upcoming.length == 0){
+    if (ongoing.length == 0){
         console.log("No Ongoing Goals")
     } 
     else {
-        setIndicators("ongoing", ongoing.length);
-        await setCarousel("ongoing", ongoing);
+        //setIndicators("ongoing", ongoing.length);
+        await setCarousel("ongoing", ongoing, ongoing.length);
     }
     //button to delete should be gone 
 }
 
 async function setCompleted(){
-    if (upcoming.length == 0){
+    if (completed.length == 0){
         console.log("No Completed Goals")
     } 
     else {
-        setIndicators("completed", completed.length);
-        await setCarousel("completed", completed);
+        //setIndicators("completed", completed.length);
+        await setCarousel("completed", completed, completed.length);
     }
 }
 
@@ -279,8 +280,7 @@ async function setFailed(){
         console.log("No Failed Goals")
     } 
     else{
-        setIndicators("failed", failed.length);
-        await setCarousel("failed", failed);
+        await setCarousel("failed", failed, failed.length);
     }
 }
 
@@ -292,7 +292,6 @@ function setIndicators(type, size){
     )
     let set = 1;
     if (size/3 > 1) set = Math.ceil(size/3);
-    console.log(type, set);
     //<li data-target="#upcomingCarousel" data-slide-to="0" class="active"></li>
     for (let i =0; i < set; i++){
         if (i == 0){
@@ -312,10 +311,9 @@ function setIndicators(type, size){
         }
     }
     console.log($('#'+'ol'+type));
-    
 
 }
-async function setCarousel(type, array){
+async function setCarousel1(type, array){
     $('#'+type+'Carousel').append(
         $('<div/>')
         .attr('id', 'carousel-inner-'+type)
@@ -329,18 +327,7 @@ async function setCarousel(type, array){
         let dayPhrase = '';
         if (obj.type == "joined"){
             color = 'rgb(255, 242, 219)';
-            try{
-                let {data, error} = await _supabase
-                .from('user')
-                .select()
-                .eq('user_id', goals[obj.index].user_id)
-                if (!error) {
-                    owner = '@'+data[0].username;
-                }
-                else throw error;
-            }catch(err){
-                console.error(err);
-            }
+            owner = await getUsername(goals[obj.index].user_id);
             buttons = `
             <div class="header-part">
             <a id="unjoingoal">
@@ -355,7 +342,7 @@ async function setCarousel(type, array){
             buttons = `
             <div class="header-part">
             <a id="editgoal">
-                <button class="btn btn-success edit_my unjoin-button" value="${goals[obj.index].id}" onclick="setGoalId(this)"> 
+                <button class="btn btn-success edit_my unjoin-button" onclick="setEditId(${goals[obj.index].id})"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                     </svg> 
@@ -373,14 +360,14 @@ async function setCarousel(type, array){
             dayPhrase = `
             <div class="header-part">
                 <small class="text-muted" style="font-size: xx-small;">Starting in ${obj.date.getDate() - new Date().getDate()} days</small>
-                <h6>${goals[obj.index].start_date}</h6>
+                <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
             </div>`;
         }
         else if (type == 'ongoing'){
             dayPhrase = `
             <div class="header-part">
                 <small class="text-muted" style="font-size: xx-small;">Started ${new Date().getDate() - obj.date.getDate()} days ago</small>
-                <h6>${goals[obj.index].start_date}</h6>
+                <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
             </div>`;
             buttons =``;
         }
@@ -390,7 +377,7 @@ async function setCarousel(type, array){
         else {
             buttons =``;
         }
-        let timeline =`<a href="timeline.html">
+        let timeline =`<a onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);"">
         <div class="mini-timeline">
         `;
         for (let i =0; i < obj.cp; ++i){
@@ -404,6 +391,7 @@ async function setCarousel(type, array){
         timeline += `</div>
         </a>`
         if (counter == 0){
+            
             $('#carousel-inner-'+type).append(
                 $('<div/>')
                 .addClass("carousel-item active")
@@ -414,7 +402,7 @@ async function setCarousel(type, array){
                     <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
                         <div class="header-part">
                             <small class="text-muted" style="font-size: small;">${owner}</small>
-                            <a href="timeline.html" style="color:black;">
+                            <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);">
                             <h5 class="card-title">${goals[obj.index].goal_name}</h5>
                             </a>
                         </div>
@@ -441,6 +429,9 @@ async function setCarousel(type, array){
               </div>
                 `)
             )
+            if(goals[obj.index].cp_num > 3){
+                $('#'+type+String(counter)).addClass('carousel-static');
+            }
         }
         else if (counter%3 == 0){
             console.log("new slide", counter);
@@ -455,7 +446,7 @@ async function setCarousel(type, array){
                     <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
                         <div class="header-part">
                             <small class="text-muted" style="font-size: small;">${owner}</small>
-                            <a href="timeline.html" style="color:black;">
+                            <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);">
                             <h5 class="card-title">${goals[obj.index].goal_name}</h5>
                             </a>
                         </div>
@@ -482,6 +473,9 @@ async function setCarousel(type, array){
               </div>
                 `)
             );
+            if(goals[obj.index].cp_num > 3){
+                $('#'+type+String(counter)).addClass('carousel-static');
+            }
         }
         else if(counter < 3){
             $('#' + type + '-active').append(
@@ -493,7 +487,7 @@ async function setCarousel(type, array){
                     <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
                         <div class="header-part">
                             <small class="text-muted" style="font-size: small;">${owner}</small>
-                            <a href="timeline.html" style="color:black;">
+                            <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);">
                             <h5 class="card-title">${goals[obj.index].goal_name}</h5>
                             </a>
                         </div>
@@ -529,7 +523,7 @@ async function setCarousel(type, array){
                     <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
                         <div class="header-part">
                             <small class="text-muted" style="font-size: small;">${owner}</small>
-                            <a href="timeline.html" style="color:black;">
+                            <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);">
                             <h5 class="card-title">${goals[obj.index].goal_name}</h5>
                             </a>
                         </div>
@@ -584,8 +578,22 @@ async function setCarousel(type, array){
             `)
         )
     }
+    
 }
-
+async function getUsername(id){
+    try{
+        let {data, error} = await _supabase
+        .from('user')
+        .select()
+        .eq('user_id', id)
+        if (!error) {
+            return '@'+data[0].username;
+        }
+        else throw error;
+    }catch(err){
+        console.error(err);
+    }
+}
 async function addDeleteButtonListener(){
     const mine = document.querySelectorAll(".delete_my");
         for (let i =0; i<mine.length; i++){
@@ -636,15 +644,287 @@ async function addUnjoinListener(){
                 .delete({user_id: user_id})
                 .eq('goal_id', joined_goal);
                 if (!error){
+                    await getNumberOfPpl(joined_goal);
                     alert("Successfully unjoined goal!");
                     window.location.replace("./../profile.html"); 
                 }
             }catch(err){
                 console.error(err);
             }
+            tryz
         })
     }
 }
+
+
+async function getNumberOfPpl(id){
+    try{
+        let {data, error} = await _supabase
+        .from("Goals")
+        .select('ppl_num')
+        .eq('id', id)
+        if (error) throw error;
+        else{
+            await updateNumOfPpl(data[0].ppl_num, id);
+        }
+    }catch(err){
+        console.error(err);
+    }
+}
+
+async function updateNumOfPpl(num, id){
+    try{
+        let {data, error} = await _supabase
+        .from('Goals')
+        .update({
+            ppl_num: num - 1
+        })
+        .eq('id', id)
+        if (error) throw error;
+        // else {
+        //     alert("Successfully unjoined goal!");
+        // }
+    }catch(err){
+        console.error(err);
+    }
+}
+
+
+async function setCarousel(type, array, size){
+    $('.container').append(
+        $('<h2/>')
+        .addClass('headline')
+        .text(type)
+    )
+    $('.container').append(
+        $('<div/>')
+        .addClass('carousel slide')
+        .attr('id', type+'Carousel')
+        .attr('data-ride', 'carousel')
+        .attr('data-interval', 'false')
+    )
+    setIndicators(type, size);
+    $('#'+type+'Carousel').append(
+        $('<div/>')
+        .attr('id', 'carousel-inner-'+type)
+        .addClass('carousel-inner')
+    )
+    let counter = 0;
+    for (let obj of array){
+        let owner = '';
+        let color = '';
+        let buttons ='';
+        if (obj.type == "joined"){
+            color = 'rgb(255, 242, 219)';
+            owner = await getUsername(goals[obj.index].user_id);
+            buttons = `
+            <div class="header-part">
+            <a id="unjoingoal">
+                <button class="btn btn-danger unjoin_my unjoin-button" value="${goals[obj.index].id}"> 
+                    UNJOIN 
+                </button>
+            </a>
+            </div>`;
+        }
+        else {
+            color = 'rgb(241, 241, 244)';
+            buttons = `
+            <div class="header-part">
+            <a id="editgoal">
+                <button class="btn btn-success edit_my unjoin-button" onclick="setEditId(${goals[obj.index].id})"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                    </svg> 
+                </button>
+            </a>
+            <a id="deletegoal">
+                <button class="btn btn-danger delete_my unjoin-button" style="margin-left: -30px;" value="${goals[obj.index].id}">
+                    x
+                </button>
+            </a>
+            
+            </div>`;
+        }
+        if (type == 'upcoming'){
+            // dayPhrase = `
+            // <div class="header-part">
+            //     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
+            //     <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+            // </div>`;
+        }
+        else if (type == 'ongoing'){
+            // dayPhrase = `
+            // <div class="header-part">
+            //     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
+            //     <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+            // </div>`;
+            buttons =``;
+        }
+        else if (type == 'completed'){
+            buttons =``;
+        }
+        else {
+            buttons =``;
+        }
+        let timeline =`<a onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);"">
+        <div class="mini-timeline">
+        `;
+        for (let i =0; i < obj.cp; ++i){
+            if (obj.status > i){
+                timeline += `<div class="checkpoint active"></div>`
+            }
+            else {
+                timeline += `<div class="checkpoint"></div>`;
+            }
+        }
+        timeline += `</div>
+        </a>`
+        if (counter ==0){//first card
+            $('#carousel-inner-'+type).append(
+                $('<div/>')
+                .attr('id', type+String(counter))
+                .addClass('carousel-item active')
+            )
+            if(size > 3){
+                $('#'+type+String(counter)).addClass('carousel-static');
+            }
+        }
+        if (counter%3 == 0 && counter != 0){
+            console.log(counter)
+            $('#carousel-inner-'+type).append(
+                $('<div/>')
+                .attr('id', type+String(counter))
+                .addClass('carousel-item')
+            )
+            if(size > 3){
+                $('#'+type+String(counter)).addClass('carousel-static');
+            }
+        }
+        let abbr = goals[obj.index].goal_name;
+        if (goals[obj.index].goal_name.length > 17) abbr = goals[obj.index].goal_name.substr(0,17) + '...';
+        $('#'+type+String(counter - counter%3)).append(
+            $('<div/>')
+            .addClass('card card-style mb-3')
+            .attr('style', 'background-color: '+ color)
+            .html(`
+            <div class="card-body">
+                <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
+                    <div class="header-part">
+                        <small class="text-muted" style="font-size: small;">${owner}</small>
+                        <a style="color:black;" onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0); title="${goals[obj.index].goal_name}" ">
+                        <h5 class="card-title">${abbr}</h5>
+                        </a>
+                    </div>
+                    <div class="header-part"> 
+                        <h6 class="category other-category">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                              </svg>
+                              ${goals[obj.index].category}</h6>
+                    </div>
+                    <div class="header-part">
+                    <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
+                    <h6>${obj.date.getMonth()+1}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+                    </div>
+                    
+                    <div class="header-part">
+                        <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                          </svg></small>
+                        <h6>${goals[obj.index].ppl_num}</h6>
+                    </div> <!--number of people joined-->
+                    ${buttons}
+                </div>
+                <!--mini timeline-->
+                ${timeline}
+            </div>
+        <!-- one card is done -->
+          </div>
+            `)
+        )
+        if (counter == size-1 && size > 3){
+            $('#'+type+'Carousel').append(
+                $('<a/>')
+                .addClass("carousel-control-prev")
+                .attr('href', `#${type}Carousel`)
+                .attr('role', 'button')
+                .attr('data-slide', 'prev')
+                .html(
+                   `
+                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                   `
+                )
+            );
+            $('#'+type+'Carousel').append(
+                $('<a/>')
+                .addClass("carousel-control-next")
+                .attr('href', `#${type}Carousel`)
+                .attr('role', 'button')
+                .attr('data-slide', 'next')
+                .html(`
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                `)
+            )
+        }
+        counter++;
+    }
+    //add the buttons for carousel
+    $('#'+type+'Carousel').after(
+        $('<br>')
+        
+    )
+    $('#'+type+'Carousel').after(
+        $('<hr>')
+        
+    )
+    $('#'+type+'Carousel').after(
+        $('<br>')
+        
+    )
+    
+}
+
+function getDatePhrase(type, date){
+    if (type == "upcoming"){
+        if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() == 1))
+            return "Starts in 1 day";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 7)) 
+            return "Starts in " + String(date.getDate() - currentDate.getDate()) + " days";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 14))
+            return "Starts in 1 week";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() > 7)) 
+            return "Starts in " + String(Math.floor((date.getDate() - currentDate.getDate())/7)) + " weeks";
+        else if ((date.getMonth() - currentDate.getMonth() == 1))
+            return "Starts in 1 month";
+        else if ((date.getMonth() - currentDate.getMonth() > 1))
+            return "Starts in " + String(date.getMonth() - currentDate.getMonth()) + " months";
+    }
+    else {
+        if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() == 1))
+            return "Started 1 day ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() < 7))
+            return "Started " + String(currentDate.getDate() - date.getDate()) + " days ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() < 14))
+            return "Started 1 week ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() > 7)) 
+            return "Started " + String(Math.floor((currentDate.getDate() - date.getDate())/7)) + " weeks ago";
+         else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - date.getDate() < 0)){
+            if (Math.floor((currentDate.getDate() + (30 - date.getDate()))/7) == 1) return "Started 1 week ago";
+            else return "Started " + String(Math.floor((currentDate.getDate() + (30 - date.getDate()))/7)) + " weeks ago";
+         } 
+        else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - date.getDate() > 0))
+            return "Started 1 month ago";
+        else if ((currentDate.getMonth() - date.getMonth() > 1))
+            return "Started " + String(currentDate.getMonth() - date.getMonth()) + " months ago";
+    }
+
+    
+    
+}
+
+
 // async function getUser(id){
 //     try{
 //         let {data, error} = _supabase
@@ -671,15 +951,19 @@ async function addUnjoinListener(){
 // - checkJoined()
 
 //signout
-let signout = document.querySelector("#sign_out");
+let signout = document.getElementById('sign_out');
+console.log(signout);
 signout.addEventListener("click", async(e)=>{ 
     e.preventDefault();
-    const { error } = await _supabase.auth.signOut();
-    if (!error){
-        window.location.replace("./../index.html"); 
-    }
-    else {
-        alert("Unable to sign out\n", error);
+    console.log(signout);
+    try{
+        let { data, error } = await _supabase.auth.signOut();
+        if (!error){
+            window.location.replace("./../index.html"); 
+        }
+        else throw error;
+    }catch(err){
+        console.error(err);
     }
 });
 

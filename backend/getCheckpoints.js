@@ -10,10 +10,18 @@
 // });
 // export {goal_id};
 
-function setGoalId(val){
-    localStorage.setItem('goal_id', val.value);
-    console.log(val.value);
+function setEditId(id){
+    localStorage.setItem('goal_id', id);
+    console.log(id);
     console.log(localStorage.getItem('goal_id'));
-    if (val.textContent.includes('expand')) window.location.replace("./../timeline.html"); 
-    else window.location.replace("./../editgoal.html")
+    window.location.replace("./../editgoal.html")
+}
+
+function setTimelineId(id){
+    localStorage.setItem('goal_id', id);
+    console.log(id);
+    console.log(localStorage.getItem('goal_id'));
+    window.location.replace("./../timeline.html");
+    // if (val.textContent.includes('expand')) window.location.replace("./../timeline.html"); 
+    // else window.location.replace("./../editgoal.html")
 }
