@@ -404,3 +404,19 @@ visibility: hidden !important;
     font-weight: bold; /* Make the number bold */
     color: #626262; /* Number color */
 }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 300px; /* Set a minimum width */
+    width: auto; /* Allows the width to be determined by content */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block;
+    width: auto; /* Ensures the width adjusts based on content */
+    max-width: 600px; /* Set a maximum width if needed */
+}
