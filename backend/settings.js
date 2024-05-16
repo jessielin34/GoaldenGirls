@@ -1,9 +1,26 @@
 import { _supabase } from "./client.js";
 import { user } from "./user.js";
 
-var user_id = user.id;
-
 //display current user information 
+async function getInfo(){
+    //get username
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq('user_id', user.id);
+        if (error) throw (error);
+        else {
+            $('#username').val(data[0].username);
+            $('#bio').val(data[0].bio);
+        }
+    }catch(err){
+        console.error(err);
+    }
+   
+}getInfo();
+
+
  //make new translate element 
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
@@ -17,7 +34,9 @@ function googleTranslateElementInit() {
 document.getElementById("updateSettings").addEventListener('click', async(e)=>{
     e.preventDefault();
     let newLang = google.translate.TranslateElement().g.Fc;
-    updateLang(newLang);
+    let username = $('#username').val();
+    let bio = $('#bio').val();
+    updateUser(newLang, username, bio);
     
     //await(updateLang());
     // let langs = document.querySelectorAll('.form-check-input');
@@ -28,23 +47,40 @@ document.getElementById("updateSettings").addEventListener('click', async(e)=>{
 
 });
 
-async function updateLang(newLang){
-    
+async function updateUser(newLang, username, bio){
     console.log(newLang);
+    //check username is not taken
+    if (username != $('#username').val()){
+        try {
+            let {data, error} = await _supabase
+            .from("user")
+            .select()
+            .eq("username", username);
+            if (data.length != 0) throw("username already exists in database");
+        } catch (err){
+            alert("Username is taken!")
+            throw err;
+        }
+    }
     try {
         let {data, error} = await _supabase
         .from('user')
         .update({
             language: newLang,
+            username: username,
+            bio: bio
         })
-        .eq('user_id', user_id);
+        .eq('user_id', user.id);
         if (!error){
             console.log(newLang);
             alert("Successfully updated settings!");
-            //window.location.replace("./../profile.html"); 
+            window.location.replace("./../profile.html"); 
         }
         else throw error;
     }catch(err){
         console.error(err);
     }
 }
+
+
+

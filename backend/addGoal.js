@@ -77,7 +77,7 @@ doneButton.addEventListener("click", async(e)=> {
             description: description,
             category: category,
             start_date: start_date,
-            owner_status: 0,
+            status: 0,
             cp_num: checkList.length,
             ppl_num: 1
         }).select();

@@ -21,6 +21,7 @@ const updateUser = async()=>{
         if (error) throw (error);
         else {
             document.getElementById("user").textContent= '@' + data[0].username;
+            $('#bio').val(data[0].bio);
         }
     }catch(err){
         console.error(err);
@@ -156,7 +157,7 @@ async function checkOwned(){
         console.error(err);
     }
     for (let goal in goals){
-        await checkGoalStatus(goal, goals[goal].start_date, goals[goal].owner_status, goals[goal].id, "owned");
+        await checkGoalStatus(goal, goals[goal].start_date, goals[goal].status, goals[goal].id, "owned");
     }
     
 }

@@ -357,6 +357,8 @@ img {
     border-radius: 8px;
     padding: 2px 5px; /* Padding inside the border */
     z-index: 10;
+    background-color: #ff6e7c;
+    color: white;
 }
 
 .checkpoint-text.completed, .checkpoint-date.completed {
