@@ -7,6 +7,7 @@
 // console.log(_supabase);
 
 import {_supabase} from './client.js';
+import { user } from './user.js';
 const categoryPaths = {
     Other:`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
 <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
@@ -16,8 +17,10 @@ const categoryPaths = {
     <path d="m5.93 6.704-.846 8.451a.768.768 0 0 0 1.523.203l.81-4.865a.59.59 0 0 1 1.165 0l.81 4.865a.768.768 0 0 0 1.523-.203l-.845-8.451A1.5 1.5 0 0 1 10.5 5.5L13 2.284a.796.796 0 0 0-1.239-.998L9.634 3.84a.7.7 0 0 1-.33.235c-.23.074-.665.176-1.304.176-.64 0-1.074-.102-1.305-.176a.7.7 0 0 1-.329-.235L4.239 1.286a.796.796 0 0 0-1.24.998l2.5 3.216c.317.316.475.758.43 1.204Z"/>
   </svg>`
 };
+const currentDate = new Date();
 const setTimeline = async()=> {
     let goal_id = parseInt(localStorage.getItem("goal_id"));
+    let cp_status = 0;
     console.log(goal_id);
     try{
         let { data: goal, error_}  = await _supabase
@@ -25,6 +28,7 @@ const setTimeline = async()=> {
         .select("")
         .eq("id", goal_id);
         if (!error_){
+            //set goal info
             $('#cp_title').text(goal[0].goal_name);
             $('#cp_description').text(goal[0].description);
             $('.category').html(
@@ -33,18 +37,40 @@ const setTimeline = async()=> {
             $('.category').addClass(goal[0].category+'-category');
             let username = await getUsername(goal[0].user_id);
             $('.owner-name').text('@'+username);
+            //check if goal has started
+            console.log(goal[0].start_date);
+            if( new Date(goal[0].start_date) > currentDate){
+                console.log("hello");
+                $('.progress-bar').text('Goal Starts: ' + goal[0].start_date);
+                $('.top-bar').eq(1).append(
+                $('<div/>').html(`
+                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+              </div>
+                `)
+                );
+            }
             await setJoinedUsers(goal_id);
+            if (goal[0].user_id == user.id){
+                cp_status = goal[0].status;
+                editButton('Goals', goal_id);
+            }
+            else {
+                cp_status = await getJoinStatus(goal_id);
+                editButton('Join', goal_id);
+            }
         }
         else throw error;
     }catch(err){
         console.error(err);
     }
-   
-    await setCheckpoints(goal_id);
+
+    await setCheckpoints(goal_id, cp_status);
 }; setTimeline();
 
-async function setCheckpoints(id){
-    //$('.row').append($)
+
+async function setCheckpoints(id, status){
+    console.log(status);
     try{
         let {data, error} = await _supabase
         .from("Checkpoint")
@@ -62,21 +88,31 @@ async function setCheckpoints(id){
                     <div class="left ${addClass}">
                     <div class="icon animate fadeInRight" data-wow-delay="1.2s">
                         <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
-                        <input type="checkbox" class="mark-complete" id="cp${i+1}" style="display: none;">
-                        <label for="cp${i+1}" style="display: none;">click to mark as complete</label>
+                        <input type="checkbox" class="mark-complete" id="cp${parseInt(i)+1}" style="display: none;">
+                        <label for="cp${parseInt(i)+1}" style="display: none;">Mark as Completed</label>
                     </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="checkpoint-date">${new Date(data[i].date).getMonth()}/${new Date(data[i].date).getDate()}/${new Date(data[i].date).getFullYear()}</h4>
+                        <h4 class="checkpoint-date">${new Date(data[i].date).getMonth()+1}/${new Date(data[i].date).getDate()+1}/${new Date(data[i].date).getFullYear()}</h4>
                         <p class="checkpoint-text">
                             ${data[i].name}
                         </p>
                     </div>
+                    
                     `
-
                     )
                 )
             }
+            if (status == data.length) {
+                $('.progress-bar').text('Completed');
+                $('.top-bar').eq(1).css("background-color", "gold");
+                setCompleted(status);
+            }
+            else {
+                setCompleted(status);
+                markCompleted();
+            }
+             
         
         // const template = document.createElement("li");
         // template.innerHTML = checkpoints.trim();
@@ -88,29 +124,8 @@ async function setCheckpoints(id){
     }catch(err){
         console.error(err);
     }
-    markCompleted();
 }
-function markCompleted(){
-    document.querySelectorAll('.mark-complete').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            let container = checkbox.closest('li'); // Getting the closest 'li' parent
-            let image = container.querySelector('.checkpoint-image');
-            let text = container.querySelector('.checkpoint-text'); // Get the description text
-            let date = container.querySelector('.checkpoint-date'); // Get the date text
-            if (checkbox.checked) {
-                image.src = 'images/trophy-cp.png'; // Path to trophy image
-                image.classList.add('completed');
-                text.classList.add('completed'); // Apply strike-through to description text
-                date.classList.add('completed'); // Apply strike-through to date
-            } else {
-                image.src = 'images/colorwheel-unscreen.gif'; // Path to original image
-                image.classList.remove('completed');
-                text.classList.remove('completed'); // Remove strike-through from description text
-                date.classList.remove('completed'); // Remove strike-through from date
-            }
-        });
-    });
-}
+
 async function setJoinedUsers(id){
     let joinedUsers = [];
     try{
@@ -155,6 +170,113 @@ async function getUsername(id){
         .eq('user_id', id)
         if (!error && data.length!=0)return data[0].username;
         else throw error;
+    }catch(err){
+        console.error(err);
+    }
+}
+
+async function getJoinStatus(goal_id){
+    try{
+        let {data, error} = await _supabase
+        .from('Join')
+        .select('status')
+        .eq('goal_id', goal_id)
+        .eq('user_id', user.id)
+        if (!error && data.length!=0)return data[0].status;
+        else {
+            //user has not joined goal -> dont allow them to edit
+            $('.progress-bar button').text("Join Goal")
+            throw error;
+        }
+    }catch(err){
+        console.error(err);
+    }
+}
+
+function editButton(table, id){
+    document.querySelector('.progress-bar button').addEventListener('click', function() {
+        // Toggle checkboxes visibility
+        document.querySelectorAll('.mark-complete, .mark-complete + label').forEach(function(elem) {
+            elem.style.display = elem.style.display === 'none' ? 'block' : 'none';
+        });
+    
+        // Toggle button text between "Edit Progress" and "Done"
+        if (this.textContent === "Edit Progress") {
+            this.textContent = "Done";
+            // Additional actions to enable edit mode can be added here
+        } else {
+            this.textContent = "Edit Progress";
+            //check # of checked cbs
+            let checkboxes = document.querySelectorAll('.mark-complete');
+            let status = 0;
+            for (let checkbox of checkboxes){
+                if(checkbox.checked) status++;
+            }
+            console.log(table,id);
+            updateStatus(table, id, status)
+            // Additional actions to disable edit mode can be added here
+        }
+    });
+}
+
+
+function markCompleted(){
+    document.querySelectorAll('.mark-complete').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            let checkboxLabel = document.querySelector('label[for="'+checkbox.id+'"]'); //get specific label for checkbox
+            let container = checkbox.closest('li'); // Getting the closest 'li' parent
+            let image = container.querySelector('.checkpoint-image');
+            let text = container.querySelector('.checkpoint-text'); // Get the description text
+            let date = container.querySelector('.checkpoint-date'); // Get the date text
+            if (checkbox.checked) {
+                image.src = 'images/trophy-cp.png'; // Path to trophy image
+                image.classList.add('completed');
+                text.classList.add('completed'); // Apply strike-through to description text
+                date.classList.add('completed'); // Apply strike-through to date
+                checkboxLabel.textContent = "Completed";
+                checkboxLabel.style.backgroundColor = "lightgreen"
+            } else {
+                image.src = 'images/colorwheel-unscreen.gif'; // Path to original image
+                image.classList.remove('completed');
+                text.classList.remove('completed'); // Remove strike-through from description text
+                date.classList.remove('completed'); // Remove strike-through from date
+                checkboxLabel.textContent = "Mark as Completed";
+                checkboxLabel.style.backgroundColor = "#ff6e7c"
+            }
+        });
+    });
+}
+
+
+function setCompleted(int){
+    for (let i=1; i <= int; i++){
+        $('#cp'+String(i)).prop("checked", true); //check the checkbox
+        let checkboxLabel = document.querySelector('label[for="'+"cp"+String(i)+'"]'); 
+        let container = document.querySelector('#cp'+String(i)).closest('li');
+        let image = container.querySelector('.checkpoint-image');
+        let text = container.querySelector('.checkpoint-text'); // Get the description text
+        let date = container.querySelector('.checkpoint-date'); // Get the date text
+        image.src = 'images/trophy-cp.png'; // Path to trophy image
+        image.classList.add('completed');
+        text.classList.add('completed'); // Apply strike-through to description text
+        date.classList.add('completed'); // Apply strike-through to date
+        checkboxLabel.textContent = "Completed";
+        checkboxLabel.style.backgroundColor = "lightgreen"
+    }
+}
+
+async function updateStatus(table, id, status){
+    let colId = "id";
+    if (table == "Join") colId = 'goal_id';
+    try{
+        let {data, error} = await _supabase
+        .from(table)
+        .update({status: status})
+        .eq(colId, id)
+        .eq('user_id', user.id)
+        if (error){
+            throw error;
+        }
     }catch(err){
         console.error(err);
     }

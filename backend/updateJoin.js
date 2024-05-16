@@ -296,7 +296,8 @@ function displayCards(type, size){
     //add all cards to category
     for(let goal of unJoinedGoals){
         let currentDate = new Date();
-        let timeline = getTimeline(goal.cp_num);
+        
+        let timeline = getTimeline(goal.cp_num, goal.id);
         if (goal.category == type){
             let datePhrase = '';
             if (goal.date.getDate() - currentDate.getDate() == 0 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
@@ -341,6 +342,7 @@ function displayCards(type, size){
                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: white;"> 
                        <div class="header-part">
                            <a style="color:black;" onclick="setTimelineId(${goal.id});" href="javascript:void(0);">
+                          
                            <h5 class="card-title">${goal.name}</h5>
                            </a>
                        </div>
@@ -415,8 +417,8 @@ function displayCards(type, size){
     )
 }
 
-function getTimeline(size){
-    let timeline =`<a href="timeline.html">
+function getTimeline(size, id){
+    let timeline =`<a onclick="setTimelineId(${id});" href="javascript:void(0);">
         <div class="mini-timeline">`;
     for (let i =0; i < size; ++i){
         timeline += `<div class="checkpoint"></div>`;
@@ -455,7 +457,7 @@ async function addJoinListener(){
                     status: 0
                 });
                 if (error){
-                    alert("Unable to join goal :(")
+                    alert("Unable to join goal :(");
                     throw error;
                 } 
                 else await getNumberOfPpl(join_goal);
