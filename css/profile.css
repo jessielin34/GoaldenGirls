@@ -420,3 +420,76 @@ visibility: hidden !important;
     width: auto; /* Ensures the width adjusts based on content */
     max-width: 600px; /* Set a maximum width if needed */
 }
+
+.level-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto; /* Center the box */ 
+    padding: 15px;
+    width: 40%; /* Set a fixed width */
+    border: 2px dashed black; /* Dashed border */
+    border-radius: 10px; /* Rounded corners */
+    font-family: 'Press Start 2P', system-ui;
+    font-size: x-large;
+    -webkit-text-stroke-width: 1px; 
+    -webkit-text-stroke-color: black; 
+    text-shadow: 1px 2px 2px rgb(0,0,0);
+    color: white; 
+    position: relative;
+}
+
+.level-box p {
+    margin: 0 10px 0 0; /* Margin to the right of the text */
+    display: inline-block;
+}
+
+.level-box svg {
+    margin-left: 10px; /* Margin to the left of the icon */
+    color: gold; /* Gold color for the trophy */
+}
+
+.level-box .progress-container {
+    display: none; /* Hide progress bar by default */
+    position: absolute;
+    top: -170%; /* Position below the level box */
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 80%;
+    padding: 10px;
+    background-color: #f3c6c6;
+    border: 1px dashed black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.level-box:hover .progress-container {
+    display: block; /* Show progress bar on hover */
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #ec5b5b;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 20px; 
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #f4506c;
+    width: 0;
+}
+
+.progress-label {
+    text-align: center;
+    margin-bottom: 5px;
+    font-family: 'Press Start 2P', system-ui;
+}
+
+.bg-color {
+    background-color: #FF6BAD;
+    background-image: radial-gradient(circle farthest-side at top right, transparent, #F5D909), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #FF00A0);
+    animation: bg-change 10s infinite;
+}
