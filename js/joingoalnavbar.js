@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('.navbar a'); // Select all navbar links
     const sections = document.querySelectorAll('.section'); // Select all sections
     const offsetTop = navbar.offsetTop;
+    const navbarWidth = navbar.offsetWidth; // Store the initial width of the navbar
 
     function onScroll() {
         let scrollPosition = window.pageYOffset;
@@ -22,8 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Make navbar fixed when scrolling past its initial position
         if (scrollPosition >= offsetTop) {
             navbar.classList.add('fixed-navbar');
+            navbar.style.width = `${navbarWidth}px`; // Set width to the initial width
         } else {
             navbar.classList.remove('fixed-navbar');
+            navbar.style.width = ''; // Reset the width style
         }
     }
 

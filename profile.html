@@ -43,12 +43,12 @@
                 </div>
             </form>
             <div class="nav-item dropdown" id="hamburger-menu">
-                <a href="feed.html" class="btn btn-info my-2 my-sm-0" style="margin-right: -10px;" role="button" id="home">
+                <!--<a href="feed.html" class="btn btn-info my-2 my-sm-0" style="margin-right: -10px;" role="button" id="home">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
                         <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707z"/>
                         <path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018"/>
                     </svg>
-                </a>           
+                </a>    -->       
                 <a class="btn btn-warning my-2 my-sm-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
@@ -95,7 +95,18 @@
         <div class="user-container"></div> 
         
         <div class="container">
-
+            <div class="level-box bg-color">
+                <p>LEVEL 0</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+                    <path d="M3 1.5A1.5 1.5 0 0 0 1.5 3v1a1.5 1.5 0 0 0 1 1.415V6a5.002 5.002 0 0 0 4 4.9V13H5.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1H9v-2.1a5.002 5.002 0 0 0 4-4.9V5.415A1.5 1.5 0 0 0 14.5 4V3A1.5 1.5 0 0 0 13 1.5h-2a1.5 1.5 0 0 0-3 0H6a1.5 1.5 0 0 0-3 0H3Zm1 0a.5.5 0 0 1 1 0h6a.5.5 0 0 1 1 0h.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3.5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5H4Zm9 3V6a4 4 0 0 1-8 0V4h8Z"/>
+                </svg>
+                <div class="progress-container">
+                    <div class="progress-label "><small>Progress to </small>Level <span id="next-level">1</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" id="progress-fill" style="width: 0;"></div>
+                    </div>
+                </div>
+            </div>
             <div class="social-stats">
                 <div class="followers">
                     <p id="follower-count">0</p> 

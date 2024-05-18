@@ -74,7 +74,7 @@ body {
 
 .username {
     align-self: center;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     text-shadow: 1px 2px 2px rgb(0,0,0);
     font-size: large; 
@@ -272,6 +272,7 @@ button {
         position: fixed;/* Fix position to top of viewport */
         top: 0; /* Align to top */
         width: 100%; /* Full width */
+        max-width: 100%;
         background-color: white; /* Pink background or any color that matches your design */
         z-index: 1000; /* Ensures navbar stays on top */
         box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Optional: adds shadow for better visibility */
@@ -287,7 +288,7 @@ button {
         display: flex; /* Enables flexbox layout */
         justify-content: center;/* Center items horizontally */
         align-items: center; /* Center items vertically */
-        width: fit-content;  /* Adjusts width to content inside */
+        width: 100%;  /* Adjusts width to content inside */
     }
     
     .navbar li {
@@ -317,7 +318,8 @@ button {
         position: fixed !important;
         top: 0;
         width: 100%;
-        left: 0;
+        left: 6%;
+        max-width: 100%;
     }
    
     
