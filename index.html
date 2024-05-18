@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    <div id="loader">
+        <div class="center">
+            <div class="one"></div>
+        </div>
+    </div>
     <nav class="navbar navbar-position navbar-light bg-light justify-content-between">
         <a class="navbar-brand">
             <img src="images/g-logo.png" width="60" height="60" class="d-inline-block align-top" alt="">
@@ -129,6 +134,25 @@
             <br />
         </footer>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict"
+            $("#loader").delay(1000).fadeOut("slow");
+
+            var wow = new WOW({
+                boxClass: 'animate',
+                animateClass: 'animated',
+                offset: 90,
+                mobile: false
+            });
+            wow.init();
+
+        });
+    </script>
 
                 <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

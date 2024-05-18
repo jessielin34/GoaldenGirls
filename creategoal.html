@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    <div id="loader">
+        <div class="center">
+            <div class="one"></div>
+        </div>
+    </div>
     <div class="content">
         <div class="nav-bar">
             <a class="btn btn-light my-2 my-sm-0" role="button" id="sign_out">
@@ -126,6 +131,24 @@
         </form>
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict"
+            $("#loader").delay(1000).fadeOut("slow");
+
+            var wow = new WOW({
+                boxClass: 'animate',
+                animateClass: 'animated',
+                offset: 90,
+                mobile: false
+            });
+            wow.init();
+
+        });
+    </script>
     <script src="js/creategoal.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

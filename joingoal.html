@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    <div id="loader">
+        <div class="center">
+            <div class="one"></div>
+        </div>
+    </div>
     <div class="content">
         <div class="nav-bar">
             <a class="btn btn-light my-2 my-sm-0" role="button" id="sign_out">
@@ -138,5 +143,24 @@
             window.addEventListener('resize', updateCheckpointMargins); // Adjust margins on window resize
         });
     </script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="js/wow.min.js"></script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        "use strict"
+        $("#loader").delay(1000).fadeOut("slow");
+
+        var wow = new WOW({
+            boxClass: 'animate',
+            animateClass: 'animated',
+            offset: 90,
+            mobile: false
+        });
+        wow.init();
+
+    });
+</script>
 </body>
 </html>
