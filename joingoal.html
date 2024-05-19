@@ -98,7 +98,36 @@
 </div>
 
 </div>
+<script>
 
+    document.addEventListener("DOMContentLoaded", function () {
+        function updateCheckpointMargins() {
+            console.log("dynamic cps")
+            var timelines = document.querySelectorAll('.mini-timeline'); // Select all mini-timeline elements
+            timelines.forEach(function (container) { // Process each timeline individually
+                var checkpoints = container.querySelectorAll('.checkpoint');
+                var baseMargin = 75; // Base margin for 6 checkpoints
+                var numberOfCheckpoints = checkpoints.length;
+                var marginDifference = 6 - numberOfCheckpoints; // Difference from base number of checkpoints
+                var currentMargin = baseMargin + (marginDifference * 10);
+
+                checkpoints.forEach(function (checkpoint, index) {
+                    // Apply equal margin on both sides for each checkpoint except the last
+                    checkpoint.style.marginRight = index !== checkpoints.length - 1 ? currentMargin + 'px' : '0px';
+                    checkpoint.style.marginLeft = currentMargin + 'px';
+                });
+
+                // Remove left margin of the first checkpoint to maintain center alignment
+                if (checkpoints.length > 0) {
+                    checkpoints[0].style.marginLeft = '0px';
+                }
+            });
+        }
+
+        updateCheckpointMargins();
+        window.addEventListener('resize', updateCheckpointMargins); // Adjust margins on window resize
+    });
+</script>
 
     <script src="js/profile.js"></script>
     <script src="js/joingoalnavbar.js"></script>
@@ -107,36 +136,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./backend/getCheckpoints.js"></script>
-    <script src="backend/updateJoin.js" type="module"></script>
+    <script src="./backend/updateJoin.js" type="module"></script>
 
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-            function updateCheckpointMargins() {
-                var timelines = document.querySelectorAll('.mini-timeline'); // Select all mini-timeline elements
-                timelines.forEach(function (container) { // Process each timeline individually
-                    var checkpoints = container.querySelectorAll('.checkpoint');
-                    var baseMargin = 75; // Base margin for 6 checkpoints
-                    var numberOfCheckpoints = checkpoints.length;
-                    var marginDifference = 6 - numberOfCheckpoints; // Difference from base number of checkpoints
-                    var currentMargin = baseMargin + (marginDifference * 10);
     
-                    checkpoints.forEach(function (checkpoint, index) {
-                        // Apply equal margin on both sides for each checkpoint except the last
-                        checkpoint.style.marginRight = index !== checkpoints.length - 1 ? currentMargin + 'px' : '0px';
-                        checkpoint.style.marginLeft = currentMargin + 'px';
-                    });
-    
-                    // Remove left margin of the first checkpoint to maintain center alignment
-                    if (checkpoints.length > 0) {
-                        checkpoints[0].style.marginLeft = '0px';
-                    }
-                });
-            }
-    
-            updateCheckpointMargins();
-            window.addEventListener('resize', updateCheckpointMargins); // Adjust margins on window resize
-        });
-    </script>
 </body>
 </html>

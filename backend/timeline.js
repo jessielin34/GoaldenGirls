@@ -8,15 +8,9 @@
 
 import {_supabase} from './client.js';
 import { user } from './user.js';
-const categoryPaths = {
-    Other:`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
-<path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-</svg>`, 
-    Lifestyle: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-arms-up" viewBox="0 0 16 16">
-    <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
-    <path d="m5.93 6.704-.846 8.451a.768.768 0 0 0 1.523.203l.81-4.865a.59.59 0 0 1 1.165 0l.81 4.865a.768.768 0 0 0 1.523-.203l-.845-8.451A1.5 1.5 0 0 1 10.5 5.5L13 2.284a.796.796 0 0 0-1.239-.998L9.634 3.84a.7.7 0 0 1-.33.235c-.23.074-.665.176-1.304.176-.64 0-1.074-.102-1.305-.176a.7.7 0 0 1-.329-.235L4.239 1.286a.796.796 0 0 0-1.24.998l2.5 3.216c.317.316.475.758.43 1.204Z"/>
-  </svg>`
-};
+import { categoryPaths } from './categories.js';
+
+
 const currentDate = new Date();
 const setTimeline = async()=> {
     let goal_id = parseInt(localStorage.getItem("goal_id"));
@@ -39,17 +33,16 @@ const setTimeline = async()=> {
             $('.owner-name').text('@'+username);
             //check if goal has started
             console.log(goal[0].start_date);
-            if( new Date(goal[0].start_date) > currentDate){
-                console.log("hello");
-                $('.progress-bar').text('Goal Starts: ' + goal[0].start_date);
-                $('.top-bar').eq(1).append(
-                $('<div/>').html(`
-                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
-              </div>
-                `)
-                );
-            }
+            
+            // $('.top-bar').eq(1).append(
+            //     $('<a/>')
+            //     .attr('id', 'joingoal')
+            //     .html(
+            //     `<button class="btn btn-info join_my unjoin-button border" value="${goal_id}"> 
+            //         JOIN 
+            //     </button>
+            //     `)
+            // );
             await setJoinedUsers(goal_id);
             if (goal[0].user_id == user.id){
                 cp_status = goal[0].status;
@@ -57,8 +50,20 @@ const setTimeline = async()=> {
             }
             else {
                 cp_status = await getJoinStatus(goal_id);
-                editButton('Join', goal_id);
+                if (cp_status != undefined) editButton('Join', goal_id);//if user has joinedd goal add editButtton functionality
+                
             }
+            if( new Date(goal[0].start_date) > currentDate && cp_status != undefined){
+                $('.progress-bar').text('Goal Starts: ' + goal[0].start_date);
+                $('.top-bar').eq(1).append(
+                $('<div/>').html(`
+                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+              
+                `)
+                );
+            }
+            
         }
         else throw error;
     }catch(err){
@@ -104,21 +109,14 @@ async function setCheckpoints(id, status){
                 )
             }
             if (status == data.length) {
-                $('.progress-bar').text('Completed');
+                $('.progress-bar').text('COMPLETED');
                 $('.top-bar').eq(1).css("background-color", "gold");
                 setCompleted(status);
             }
             else {
-                setCompleted(status);
-                markCompleted();
+                setCompleted(status);//check off the proper # of cps
+                markCompleted(); //allow cps to be edited
             }
-             
-        
-        // const template = document.createElement("li");
-        // template.innerHTML = checkpoints.trim();
-        // let sibling = document.getElementById("cp1");
-        // let parent = sibling.parentNode;
-        // parent.insertBefore(template, sibling);
         }  
         else throw error;
     }catch(err){
@@ -185,8 +183,74 @@ async function getJoinStatus(goal_id){
         if (!error && data.length!=0)return data[0].status;
         else {
             //user has not joined goal -> dont allow them to edit
-            $('.progress-bar button').text("Join Goal")
+            $('.progress-bar button')
+            .text('Join')
+            .attr('id', 'joingoal');
+            await addJoinListener(user.id, goal_id);
+            updateBack();
             throw error;
+        }
+    }catch(err){
+        console.error(err);
+    }
+}
+
+function updateBack(){
+    $('#back').on('click', function(e){
+        e.preventDefault();
+        window.location.replace("./../joingoal.html");
+    })
+}
+
+async function addJoinListener(user_id, goal_id){
+    $('#joingoal').on('click', async function(){
+        try{
+            let {data, error} = await _supabase
+            .from("Join")
+            .insert({
+                user_id: user_id,
+                goal_id: goal_id,
+                status: 0
+            });
+            if (error){
+                alert("Unable to join goal :(");
+                throw error;
+            } 
+            else await getNumberOfPpl(goal_id);
+        }catch(err){
+            console.error(err);
+        }
+    })
+    
+}
+
+async function getNumberOfPpl(id){
+    try{
+        let {data, error} = await _supabase
+        .from("Goals")
+        .select('ppl_num')
+        .eq('id', id)
+        if (error) throw error;
+        else{
+            await updateNumOfPpl(data[0].ppl_num, id);
+        }
+    }catch(err){
+        console.error(err);
+    }
+}
+
+async function updateNumOfPpl(num, id){
+    try{
+        let {data, error} = await _supabase
+        .from('Goals')
+        .update({
+            ppl_num: num + 1
+        })
+        .eq('id', id)
+        if (error) throw error;
+        else {
+            alert("Successfully joined goal!");
+            window.location.replace("./../timeline.html"); 
         }
     }catch(err){
         console.error(err);
@@ -219,7 +283,7 @@ function editButton(table, id){
     });
 }
 
-
+//
 function markCompleted(){
     document.querySelectorAll('.mark-complete').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {

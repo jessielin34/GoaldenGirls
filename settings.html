@@ -69,7 +69,7 @@
             </div>
             <hr /><br />
             <div id="changepass">
-                <h1 class="headline">Change Password</h1><br />
+                <h3 class="headline">Change Password</h3>
                 <div class="browser-window my-4">
                     <div class="window-header">
                         <div class="circle red"></div>
@@ -79,19 +79,12 @@
                     <div class="content-area bg-color">
                         <form class="txt">
                             <div class="form-group">
-                                <input class="form-control custom-input" name="currpassword" type="password" id="inputcurrpassword" onkeyup='check();' placeholder="Enter current password">
+                                <p class="card-text py-2">
+                                    Enter your email address and we'll send you an email with instructions to reset your password.
+                                </p>
+                                <input type="email" class="form-control custom-input" id="inputemail" placeholder="Type your email address">
                             </div>
-                            <div class="form-group">
-                                <input class="form-control custom-input" name="password" type="password" id="inputpassword" onkeyup='check();' placeholder="Enter new password">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control custom-input" name="confirm" type="password" id="reenterpassword" onkeyup='check();' placeholder="Re-enter new password">
-                                <small class="text-muted">
-                                    To confirm, type the new password again.
-                                </small>
-                            </div>
-                            <a href="#" class="btn btn-light" id="reset">+ Change password +</a> 
-                            
+                            <a href="#" class="btn btn-light" id="reset">+ Send Email +</a> <!--probably will need an alert to go check email-->
                         </form>
                     </div>
                 </div>

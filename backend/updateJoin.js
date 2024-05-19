@@ -352,7 +352,7 @@ function displayCards(type, size){
                        </div>
                        <div class="header-part">
                            <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(goal.date)}</small>
-                           <h6>${goal.date.getMonth()+1}/${goal.date.getDate()}/${goal.date.getFullYear()}</h6>
+                           <h6>${goal.date.getMonth()+1}/${goal.date.getDate()+1}/${goal.date.getFullYear()}</h6>
                        </div>
                        <div class="header-part">
                            <small class="text-muted" style="font-size: xx-small;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -428,20 +428,23 @@ function getTimeline(size, id){
 }
 
 function getDatePhrase(date){
-    if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() == 1))
+    if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() == 0))
+        return "Starts Today";
+    if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 1))
         return "Starts in 1 day";
-    else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 7)) 
-        return "Starts in " + String(date.getDate() - currentDate.getDate()) + " days";
-    else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 14))
+    else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() < 7)) 
+        return "Starts in " + String((date.getDate()+1) - currentDate.getDate()) + " days";
+    else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() < 14))
         return "Starts in 1 week";
-    else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() > 7)) 
-        return "Starts in " + String(Math.floor((date.getDate() - currentDate.getDate())/7)) + " weeks";
+    else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() > 7)) 
+        return "Starts in " + String(Math.floor((date.getDate()+1 - currentDate.getDate())/7)) + " weeks";
     else if ((date.getMonth() - currentDate.getMonth() == 1))
         return "Starts in 1 month";
     else if ((date.getMonth() - currentDate.getMonth() > 1))
         return "Starts in " + String(date.getMonth() - currentDate.getMonth()) + " months";
     
 }
+
 
 async function addJoinListener(){
     let joined = document.querySelectorAll(".join_my");

@@ -30,9 +30,9 @@ async function signUp(e){
         }
         else {
             console.log(data.user);
-            addUserTable({data, username});
+            await addUserTable({data, username});
             alert("Verify your email!");
-            window.location.replace("./../index.html"); 
+            window.location.replace("./../login.html"); 
         }
         
     }
@@ -53,7 +53,8 @@ async function addUserTable(userData) {
     .insert({
         user_id: userData.data.user.id,
         username: userData.username,
-        email: userData.data.user.email
+        email: userData.data.user.email,
+        bio: "Let's get Goalden!"
     })
     if (error) alert(error);
 }

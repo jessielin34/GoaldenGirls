@@ -8,6 +8,7 @@
 
 import {_supabase} from './client.js';
 import { user } from './user.js';
+import { categoryPaths } from './categories.js';
 
 const currentDate = new Date();
 let user_id = user.id;
@@ -209,6 +210,7 @@ async function checkGoalStatus(index, start, status, id, type){
     if (id == 22) console.log('learn react', status);
     let numOfCp = 0;
     let startDate = new Date(start);
+    let firstCpDate = null;
     //check total number of cps
     try{
         let {data, error} = await _supabase
@@ -217,6 +219,9 @@ async function checkGoalStatus(index, start, status, id, type){
         .eq('goal_id', parseInt(id));
         if (!error){
             numOfCp = data.length;
+            for (let cp of data){
+                if (cp.checkpoint_order == 1) firstCpDate = new Date(cp.date);
+            }
         }
         else throw error;
     }catch(err){
@@ -229,7 +234,8 @@ async function checkGoalStatus(index, start, status, id, type){
     }
     else if (startDate < currentDate && status == numOfCp)
         completed.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
-    else if (startDate < currentDate && status > 0){
+    else if (startDate <= currentDate && firstCpDate >= currentDate){
+        console.log(firstCpDate)
         ongoing.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
     else {
@@ -249,7 +255,7 @@ async function setUpcoming(){
     } 
     else {
         // setIndicators("upcoming", upcoming.length);
-        await setCarousel("upcoming", upcoming, upcoming.length);
+        await setCarousel("Upcoming", upcoming, upcoming.length);
     }
     
 }
@@ -260,7 +266,7 @@ async function setOngoing(){
     } 
     else {
         //setIndicators("ongoing", ongoing.length);
-        await setCarousel("ongoing", ongoing, ongoing.length);
+        await setCarousel("Ongoing", ongoing, ongoing.length);
     }
     //button to delete should be gone 
 }
@@ -271,7 +277,7 @@ async function setCompleted(){
     } 
     else {
         //setIndicators("completed", completed.length);
-        await setCarousel("completed", completed, completed.length);
+        await setCarousel("Completed", completed, completed.length);
     }
 }
 
@@ -280,7 +286,7 @@ async function setFailed(){
         console.log("No Failed Goals")
     } 
     else{
-        await setCarousel("failed", failed, failed.length);
+        await setCarousel("Failed", failed, failed.length);
     }
 }
 
@@ -313,6 +319,7 @@ function setIndicators(type, size){
     console.log($('#'+'ol'+type));
 
 }
+//DEPRECATED
 async function setCarousel1(type, array){
     $('#'+type+'Carousel').append(
         $('<div/>')
@@ -356,14 +363,14 @@ async function setCarousel1(type, array){
             
             </div>`;
         }
-        if (type == 'upcoming'){
+        if (type == 'Upcoming'){
             dayPhrase = `
             <div class="header-part">
                 <small class="text-muted" style="font-size: xx-small;">Starting in ${obj.date.getDate() - new Date().getDate()} days</small>
                 <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
             </div>`;
         }
-        else if (type == 'ongoing'){
+        else if (type == 'Ongoing'){
             dayPhrase = `
             <div class="header-part">
                 <small class="text-muted" style="font-size: xx-small;">Started ${new Date().getDate() - obj.date.getDate()} days ago</small>
@@ -371,7 +378,7 @@ async function setCarousel1(type, array){
             </div>`;
             buttons =``;
         }
-        else if (type == 'completed'){
+        else if (type == 'Completed'){
             buttons =``;
         }
         else {
@@ -408,9 +415,7 @@ async function setCarousel1(type, array){
                         </div>
                         <div class="header-part"> 
                             <h6 class="category other-category">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
-                                    <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                                  </svg>
+                                ${categoryPaths[goals[obj.index].category]}
                                   ${goals[obj.index].category}</h6>
                         </div>
                         ${dayPhrase}
@@ -601,6 +606,7 @@ async function addDeleteButtonListener(){
             let my_goal = parseInt(mine[i].value);
             mine[i].addEventListener('click', async(e)=>{
                 e.preventDefault();
+                //removes goal from Goals table
                 try{
                     let {data, error} = await _supabase
                     .from("Goals")
@@ -613,11 +619,25 @@ async function addDeleteButtonListener(){
                 }catch(err){
                     console.error(err)
                 }
+                //removes goal checkpoints
                 try{
                     let {data, error} = await _supabase
                     .from("Checkpoint")
                     .delete({user_id: user_id})
                     .eq('goal_id', my_goal);
+                    if (!error){
+                        console.log("Deleted checkpoints");
+                    }
+                    else throw error;
+                }catch(err){
+                    console.error(err);
+                }
+                //removes any users that joined
+                try{
+                    let {data, error} = await _supabase
+                    .from("Join")
+                    .delete({user_id: user_id})
+                    .eq('goal_id', my_goal)
                     if (!error){
                         alert("Successfully deleted goal!");
                         window.location.replace("./../profile.html"); 
@@ -745,22 +765,13 @@ async function setCarousel(type, array, size){
             
             </div>`;
         }
-        if (type == 'upcoming'){
-            // dayPhrase = `
-            // <div class="header-part">
-            //     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
-            //     <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
-            // </div>`;
+        if (type == 'Upcoming'){
+
         }
-        else if (type == 'ongoing'){
-            // dayPhrase = `
-            // <div class="header-part">
-            //     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
-            //     <h6>${obj.date.getMonth()}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
-            // </div>`;
+        else if (type == 'Ongoing'){
             buttons =``;
         }
-        else if (type == 'completed'){
+        else if (type == 'Completed'){
             buttons =``;
         }
         else {
@@ -816,15 +827,13 @@ async function setCarousel(type, array, size){
                         </a>
                     </div>
                     <div class="header-part"> 
-                        <h6 class="category other-category">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="margin-right: -10px;" class="bi bi-tag-fill" viewBox="0 0 16 16">
-                                <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                              </svg>
+                        <h6 class="category ${goals[obj.index].category}-category">
+                            ${categoryPaths[goals[obj.index].category]}
                               ${goals[obj.index].category}</h6>
                     </div>
                     <div class="header-part">
                     <small class="text-muted" style="font-size: xx-small;">${getDatePhrase(type, obj.date)}</small>
-                    <h6>${obj.date.getMonth()+1}/${obj.date.getDate()}/${obj.date.getFullYear()}</h6>
+                    <h6>${obj.date.getMonth()+1}/${obj.date.getDate()+1}/${obj.date.getFullYear()}</h6>
                     </div>
                     
                     <div class="header-part">
@@ -842,6 +851,7 @@ async function setCarousel(type, array, size){
           </div>
             `)
         )
+        //add carousel prev and next buttons if theres more than 3 goals
         if (counter == size-1 && size > 3){
             $('#'+type+'Carousel').append(
                 $('<a/>')
@@ -887,34 +897,37 @@ async function setCarousel(type, array, size){
 }
 
 function getDatePhrase(type, date){
-    if (type == "upcoming"){
-        if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() == 1))
+    if (type == "Upcoming"){
+        if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 1))
             return "Starts in 1 day";
-        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 7)) 
-            return "Starts in " + String(date.getDate() - currentDate.getDate()) + " days";
-        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() < 14))
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() < 7)) 
+            return "Starts in " + String((date.getDate()+1) - currentDate.getDate()) + " days";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() < 14))
             return "Starts in 1 week";
-        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() > 7)) 
-            return "Starts in " + String(Math.floor((date.getDate() - currentDate.getDate())/7)) + " weeks";
+        else if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() > 7)) 
+            return "Starts in " + String(Math.floor((date.getDate()+1 - currentDate.getDate())/7)) + " weeks";
         else if ((date.getMonth() - currentDate.getMonth() == 1))
             return "Starts in 1 month";
         else if ((date.getMonth() - currentDate.getMonth() > 1))
             return "Starts in " + String(date.getMonth() - currentDate.getMonth()) + " months";
     }
     else {
-        if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() == 1))
+        console.log(date, currentDate.getMonth(), date.getMonth());
+        if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 0))
+            return "Started Today";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) == 1))
             return "Started 1 day ago";
-        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() < 7))
-            return "Started " + String(currentDate.getDate() - date.getDate()) + " days ago";
-        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() < 14))
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) < 7))
+            return "Started " + String(currentDate.getDate() - (date.getDate()+1)) + " days ago";
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) < 14))
             return "Started 1 week ago";
-        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - date.getDate() > 7)) 
+        else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) > 7)) 
             return "Started " + String(Math.floor((currentDate.getDate() - date.getDate())/7)) + " weeks ago";
-         else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - date.getDate() < 0)){
-            if (Math.floor((currentDate.getDate() + (30 - date.getDate()))/7) == 1) return "Started 1 week ago";
-            else return "Started " + String(Math.floor((currentDate.getDate() + (30 - date.getDate()))/7)) + " weeks ago";
+         else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - (date.getDate()+1) < 0)){
+            if (Math.floor((currentDate.getDate() + (30 - (date.getDate()+1)))/7) == 1) return "Started 1 week ago";
+            else return "Started " + String(Math.floor((currentDate.getDate() + (30 - (date.getDate()+1)))/7)) + " weeks ago";
          } 
-        else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - date.getDate() > 0))
+        else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - (date.getDate()+1) > 0))
             return "Started 1 month ago";
         else if ((currentDate.getMonth() - date.getMonth() > 1))
             return "Started " + String(currentDate.getMonth() - date.getMonth()) + " months ago";
