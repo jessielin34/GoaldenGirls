@@ -29,7 +29,9 @@ const setTimeline = async()=> {
                 `${categoryPaths[goal[0].category]} ${goal[0].category}`
             );
             $('.category').addClass(goal[0].category+'-category');
-            let username = await getUsername(goal[0].user_id);
+            let {username, pro_pic} = await getUsername(goal[0].user_id);
+            console.log(pro_pic)
+            $('#owner-img').attr('src', pro_pic);
             $('.owner-name').text('@'+username);
             //check if goal has started
             console.log(goal[0].start_date);
@@ -140,6 +142,7 @@ async function setJoinedUsers(id){
     }catch(err){
         console.error(err);
     }
+    console.log(joinedUsers);
     $('#num-joined').append(
         $('<small/>')
         .addClass('text-muted')
@@ -153,8 +156,8 @@ async function setJoinedUsers(id){
         $('#joined-users').append(
             $('<li/>')
             .html(
-                `<img src="images/pro-img2.png" alt="Description of Image">
-                <p>@${user}</p>`
+                `<img src="${user.pro_pic}" alt="Description of Image">
+                <p>@${user.username}</p>`
             )
         )
     }
@@ -164,9 +167,14 @@ async function getUsername(id){
     try{
         let {data, error} = await _supabase
         .from('user')
-        .select('username')
+        .select('')
         .eq('user_id', id)
-        if (!error && data.length!=0)return data[0].username;
+        if (!error && data.length!=0){
+            let username = data[0].username;
+            let pro_pic = data[0].pro_pic;
+            console.log(pro_pic);
+            return {username, pro_pic};
+        }
         else throw error;
     }catch(err){
         console.error(err);
@@ -277,7 +285,7 @@ function editButton(table, id){
                 if(checkbox.checked) status++;
             }
             console.log(table,id);
-            updateStatus(table, id, status)
+            updateStatus(table, id, status, checkboxes.length)
             // Additional actions to disable edit mode can be added here
         }
     });
@@ -329,19 +337,40 @@ function setCompleted(int){
     }
 }
 
-async function updateStatus(table, id, status){
-    let colId = "id";
-    if (table == "Join") colId = 'goal_id';
+async function updateStatus(table, id, status, num_cp){
+    let col_id = "id";
+    if (table == "Join") col_id = 'goal_id';
+    if (status == num_cp){
+        try{
+            let {data, error} = await _supabase
+            .from(table)
+            .update({completed_date: new Date()})
+            .eq(col_id, id)
+            .eq('user_id', user.id)
+            if (error){
+                throw error;
+            }
+            else{
+                alert('completed marked!');
+            }
+        }catch(err){
+            console.error(err);
+        }
+    }
     try{
         let {data, error} = await _supabase
         .from(table)
         .update({status: status})
-        .eq(colId, id)
+        .eq(col_id, id)
         .eq('user_id', user.id)
         if (error){
             throw error;
         }
+        else{
+            window.location.replace("./../timeline.html"); 
+        }
     }catch(err){
         console.error(err);
     }
+
 }

@@ -42,12 +42,12 @@
                                     Edit
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><img src="images/pro-img2.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/avatars/blue-boy.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-girl.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-boy.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-eye-girl.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-eye-boy.png"></a>
+                                    <a class="dropdown-item"  onclick="setProPic('images/pro-img2.png')" href="javascript:void(0);"><img src="images/pro-img2.png"></a>
+                                    <a class="dropdown-item" onclick="setProPic('images/avatars/blue-boy.png')" href="javascript:void(0);"><img src="images/avatars/blue-boy.png"></a>
+                                    <a class="dropdown-item" onclick="setProPic('images/avatars/purple-girl.png')" href="javascript:void(0);"><img src="images/avatars/purple-girl.png"></a>
+                                    <a class="dropdown-item" onclick="setProPic('images/avatars/purple-boy.png')" href="javascript:void(0);"><img src="images/avatars/purple-boy.png"></a>
+                                    <a class="dropdown-item" onclick="setProPic('images/avatars/purple-eye-girl.png')" href="javascript:void(0);"><img src="images/avatars/purple-eye-girl.png"></a>
+                                    <a class="dropdown-item" onclick="setProPic('images/avatars/purple-eye-boy.png')" href="javascript:void(0);"><img src="images/avatars/purple-eye-boy.png"></a>
                                 </div>
                             </div>
                             <div class="d-flex flex-column align-items-center text-center "><img class="square mt-4 cover" src="images/yellow-bg.png" width="300"><span class="font-weight-bold"></span></div>
@@ -56,11 +56,11 @@
                                     Edit
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><img src="images/yellow-bg.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/blue-bg.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/red-bg.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/green-bg.png"></a>
-                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/purple-bg.png"></a>
+                                    <a class="dropdown-item" onclick="setBgPic('images/yellow-bg.png')" href="javascript:void(0);"><img src="images/yellow-bg.png"></a>
+                                    <a class="dropdown-item" onclick="setBgPic('images/backgrounds/blue-bg.png')" href="javascript:void(0);"><img src="images/backgrounds/blue-bg.png"></a>
+                                    <a class="dropdown-item" onclick="setBgPic('images/backgrounds/red-bg.png')" href="javascript:void(0);"><img src="images/backgrounds/red-bg.png"></a>
+                                    <a class="dropdown-item" onclick="setBgPic('images/backgrounds/green-bg.png')" href="javascript:void(0);"><img src="images/backgrounds/green-bg.png"></a>
+                                    <a class="dropdown-item" onclick="setBgPic('images/backgrounds/purple-bg.png')" href="javascript:void(0);"><img src="images/backgrounds/purple-bg.png"></a>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                       <h1 class="headline">App Language</h1><br />
                       <p>See buttons, titles, and other texts on Goalden in your preferred language.</p>
                       <div id="google_translate_element"></div>
-                      <div class="form-check">
+                      <!-- <div class="form-check">
                           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value = "null">
                           <label class="form-check-label" for="flexRadioDefault2">
                               English
@@ -165,7 +165,7 @@
                               German
                           </label>
                       </div>
-                  </div>
+                  </div> -->
             <hr /><br />
             <div id="help">
                 <h1 class="headline">Help</h1>
@@ -222,6 +222,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="./js/settings.js"></script>
     <script src="./js/translate.js" ></script>
     <script src="./backend/settings.js" type="module"></script>
 </body>

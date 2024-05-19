@@ -23,6 +23,8 @@ const updateUser = async()=>{
         else {
             document.getElementById("user").textContent= '@' + data[0].username;
             $('#bio').val(data[0].bio);
+            $('#profile-img').attr('src', data[0].pro_pic);
+            $('.img-bg').css('background-image', 'url(../'+data[0].bg_pic+')');
         }
     }catch(err){
         console.error(err);
@@ -158,7 +160,12 @@ async function checkOwned(){
         console.error(err);
     }
     for (let goal in goals){
-        await checkGoalStatus(goal, goals[goal].start_date, goals[goal].status, goals[goal].id, "owned");
+        let date = goals[goal].start_date;
+        if (goals[goal].completed_date){
+            date = goals[goal].completed_date;
+            console.log(date);
+        }
+        await checkGoalStatus(goal, date, goals[goal].status, goals[goal].id, "owned");
     }
     
 }
@@ -201,7 +208,11 @@ async function checkJoined(){
     }
     console.log(joined);
     for (let goal in joined){
-        await checkGoalStatus(goals.length - joined.length + parseInt(goal), joined[goal][0].start_date, joinedIds[goal].status, joined[goal][0].id, "joined");
+        let date = joined[goal][0].start_date;
+        if (joined[goal][0].completed_date){
+            date = joined[goal][0].completed_date;
+        }
+        await checkGoalStatus(goals.length - joined.length + parseInt(goal), date, joinedIds[goal].status, joined[goal][0].id, "joined");
     }
     
 }
@@ -210,7 +221,7 @@ async function checkGoalStatus(index, start, status, id, type){
     if (id == 22) console.log('learn react', status);
     let numOfCp = 0;
     let startDate = new Date(start);
-    let firstCpDate = null;
+    let cpDate = null;
     //check total number of cps
     try{
         let {data, error} = await _supabase
@@ -220,7 +231,7 @@ async function checkGoalStatus(index, start, status, id, type){
         if (!error){
             numOfCp = data.length;
             for (let cp of data){
-                if (cp.checkpoint_order == 1) firstCpDate = new Date(cp.date);
+                if (cp.checkpoint_order == status+1) cpDate = new Date(cp.date);
             }
         }
         else throw error;
@@ -232,10 +243,10 @@ async function checkGoalStatus(index, start, status, id, type){
     if (startDate > currentDate && status >= 0){
         upcoming.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
-    else if (startDate < currentDate && status == numOfCp)
+    else if (status == numOfCp)
         completed.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
-    else if (startDate <= currentDate && firstCpDate >= currentDate){
-        console.log(firstCpDate)
+    else if (startDate <= currentDate && cpDate >= currentDate){
+        console.log(cpDate)
         ongoing.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
     else {
@@ -912,25 +923,26 @@ function getDatePhrase(type, date){
             return "Starts in " + String(date.getMonth() - currentDate.getMonth()) + " months";
     }
     else {
-        console.log(date, currentDate.getMonth(), date.getMonth());
+        let keyword = "Started";
+        if (type == "Completed") keyword = "Completed"
         if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 0))
-            return "Started Today";
+            return keyword + " Today";
         else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) == 1))
-            return "Started 1 day ago";
+            return keyword + " 1 day ago";
         else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) < 7))
-            return "Started " + String(currentDate.getDate() - (date.getDate()+1)) + " days ago";
+            return keyword + " " + String(currentDate.getDate() - (date.getDate()+1)) + " days ago";
         else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) < 14))
-            return "Started 1 week ago";
+            return keyword + " 1 week ago";
         else if ((currentDate.getMonth() - date.getMonth() == 0) && (currentDate.getDate() - (date.getDate()+1) > 7)) 
-            return "Started " + String(Math.floor((currentDate.getDate() - date.getDate())/7)) + " weeks ago";
+            return keyword + " " + String(Math.floor((currentDate.getDate() - date.getDate())/7)) + " weeks ago";
          else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - (date.getDate()+1) < 0)){
             if (Math.floor((currentDate.getDate() + (30 - (date.getDate()+1)))/7) == 1) return "Started 1 week ago";
-            else return "Started " + String(Math.floor((currentDate.getDate() + (30 - (date.getDate()+1)))/7)) + " weeks ago";
+            else return keyword + " " + String(Math.floor((currentDate.getDate() + (30 - (date.getDate()+1)))/7)) + " weeks ago";
          } 
         else if ((currentDate.getMonth() - date.getMonth() == 1) && (currentDate.getDate() - (date.getDate()+1) > 0))
-            return "Started 1 month ago";
+            return keyword + " 1 month ago";
         else if ((currentDate.getMonth() - date.getMonth() > 1))
-            return "Started " + String(currentDate.getMonth() - date.getMonth()) + " months ago";
+            return keyword + " " + String(currentDate.getMonth() - date.getMonth()) + " months ago";
     }
 
     
