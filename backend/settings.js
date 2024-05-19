@@ -13,6 +13,8 @@ async function getInfo(){
         else {
             $('#username').val(data[0].username);
             $('#bio').val(data[0].bio);
+            $('.rounded-circle').attr('src', data[0].pro_pic);
+            $('.square').attr('src', data[0].bg_pic);
         }
     }catch(err){
         console.error(err);
@@ -36,7 +38,9 @@ document.getElementById("updateSettings").addEventListener('click', async(e)=>{
     let newLang = google.translate.TranslateElement().g.Fc;
     let username = $('#username').val();
     let bio = $('#bio').val();
-    updateUser(newLang, username, bio);
+    let proPic = $('.rounded-circle').attr('src');
+    let bgPic = $('.square').attr('src');
+    updateUser(newLang, username, bio, proPic, bgPic);
     
     //await(updateLang());
     // let langs = document.querySelectorAll('.form-check-input');
@@ -47,7 +51,7 @@ document.getElementById("updateSettings").addEventListener('click', async(e)=>{
 
 });
 
-async function updateUser(newLang, username, bio){
+async function updateUser(newLang, username, bio, proPic, bgPic){
     console.log(newLang);
     //check username is not taken
     if (username != $('#username').val()){
@@ -68,12 +72,14 @@ async function updateUser(newLang, username, bio){
         .update({
             language: newLang,
             username: username,
-            bio: bio
+            bio: bio,
+            pro_pic: proPic,
+            bg_pic: bgPic
         })
         .eq('user_id', user.id);
         if (!error){
             console.log(newLang);
-            alert("Successfully updated settings!");
+            console.log("Successfully updated settings!");
             window.location.replace("./../profile.html"); 
         }
         else throw error;
@@ -83,4 +89,17 @@ async function updateUser(newLang, username, bio){
 }
 
 
-
+//reset password listener
+let reset = document.querySelector("#reset");
+reset.addEventListener("click", sendEmail);
+async function sendEmail(e){
+    e.preventDefault();
+    let email = document.querySelector("#inputemail").value;
+    console.log("working");
+    const { data, error } = await _supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://jessielin34.github.io/GoaldenGirls/reset-password.html'});
+    if (error){
+        alert(error);
+    }
+    else alert("Check email to reset password!")
+}

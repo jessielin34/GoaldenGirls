@@ -1,4 +1,5 @@
-
+// function to create a simple checkpoint when fetching in editGoal.js 
+// gets fully implemented in creategoal.js
 export function addCheckpoint (counter) {
     const addButton = document.getElementById('addCP');
     var newCheckpoint = document.createElement('div');

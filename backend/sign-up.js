@@ -30,9 +30,9 @@ async function signUp(e){
         }
         else {
             console.log(data.user);
-            addUserTable({data, username});
+            await addUserTable({data, username});
             alert("Verify your email!");
-            window.location.replace("./../index.html"); 
+            window.location.replace("./../login.html"); 
         }
         
     }
@@ -46,14 +46,17 @@ document.addEventListener("keydown", checkKey);
 function checkKey(event){
     if(event.key == "Enter") signUp(event);
 }
-
+//set user information and default fields in user table
 async function addUserTable(userData) {
     let {data, error} = await _supabase
     .from("user")
     .insert({
         user_id: userData.data.user.id,
         username: userData.username,
-        email: userData.data.user.email
+        email: userData.data.user.email,
+        bio: "Let's get Goalden!",
+        pro_pic: 'images/pro-img2.png',
+        bg_pic: 'images/yellow-bg.png'
     })
     if (error) alert(error);
 }

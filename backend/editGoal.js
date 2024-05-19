@@ -1,21 +1,26 @@
 import { _supabase } from "./client.js";
 import { addCheckpoint } from "./editGoalHelper.js";
-//import { user_data } from "./user.js";
+import { user } from "./user.js";
 
 const currentDate = new Date();
-let user_id = "";
+const user_id = user.id;
 //check user is signed in
 const updateUser = async()=>{
-    const { data: { user }, error } = await _supabase.auth.getUser();
-    user_id = user.id;
     //username
-    let {data, error_} = await _supabase
-    .from("user")
-    .select()
-    .eq('user_id', user_id);
-    console.log(data);
-    if (error_)  alert(error_);
-    else document.getElementById("user").textContent= '@' + data[0].username;
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq('user_id', user_id);
+        if (error) throw (error);
+        else {
+            document.getElementById("user").textContent= '@' + data[0].username;
+            $('#profile-img').attr('src', data[0].pro_pic);
+            $('.img-bg').css('background-image', 'url(../'+data[0].bg_pic+')');
+        }
+    }catch(err){
+        console.error(err);
+    }
 }; updateUser();
 
 //console.log(user_id);
@@ -24,6 +29,7 @@ const updateUser = async()=>{
 let orig_name = "";
 let orig_description = "";
 let orig_category = "";
+let orig_date = null;
 let goal_id = parseInt(localStorage.getItem("goal_id"));
 console.log(goal_id);
 const { data: goal, error_}  = await _supabase
@@ -37,6 +43,8 @@ if (!error_){
     document.querySelector("#goal-description").value = orig_description;
     orig_category = goal[0].category;
     document.querySelector("#category-select").value = orig_category;
+    orig_date = goal[0].start_date;
+    $('#start-date').val(orig_date);
 }
 else console.log(error_);
 
@@ -72,7 +80,11 @@ doneButton.addEventListener('click', async(e)=>{
     let checkList = []; // list of names of all updated checkpoints
     let dateList  = [];
     let checkpoints = document.querySelectorAll("input");
-    //let counter = 1;
+    let start_date = $('#start-date').val();
+    if (new Date(start_date) <= currentDate) {
+        alert("Goal must start at least tomorrow :)");
+        return;
+    }
     let textCounter = 1;
     let dateCounter = 1;
     for (let check of checkpoints){
@@ -83,24 +95,20 @@ doneButton.addEventListener('click', async(e)=>{
         }
         //check if cp has a date
         if (check.id == 'checkpoint-date' + String(dateCounter)){
-            if (check.value && checkList[dateCounter-1] != undefined) {
-                if (check.value < currentDate) {
-                    console.log(check.value);
-                    alert("Can't start in the past, must look into the present & the future!");
-                    return;
-                }
+            //make sure cp has text
+            if (check.value && checkList[dateCounter-1] != null) {
                 //make a separate function to check entire date arrray!
-                if (check.value < dateList[dateCounter-2]){
-                    alert("Checkpoint dates must be in chronological order");
+                if (!checkDates(start_date, dateList, check.value)){
+                    alert("Dates must be in chronological order");
                     return;
                 }
-                dateList.push(check.value); 
+                dateList.push(check.value);
+                dateCounter++; 
             }
             else {
-                alert("Make sure checkpoints have a description!")
+                alert("Each checkpoint must have a date and description!")
                 return;
             }
-            dateCounter++;
         }
     }
 
@@ -108,17 +116,7 @@ doneButton.addEventListener('click', async(e)=>{
         alert("Make sure each checkpoint has a date!")
         return;
     }
-    console.log(checkList, dateList);
-    //check if lists match
-    //const updateCps = checkArrays(cpNameList, checkList);
-    //console.log(updateCps);
-    //if (array)    
-    // if (updateCps.length == 0) {
-    //     alert("No changes made!");
-    //     return;
-    // }
-    //check from original to updated --> if diff change push into a new list with the 
-    console.log(checkList);
+   
     let goal = document.querySelector("#goal-title").value;
     let description = document.querySelector("#goal-description").value;
     let category = document.querySelector("#category-select").value;
@@ -133,6 +131,7 @@ doneButton.addEventListener('click', async(e)=>{
             goal_name: goal,
             description: description,
             category: category,
+            start_date: start_date
         })
         .eq('id', goal_id);
         if (error){
@@ -195,7 +194,7 @@ doneButton.addEventListener('click', async(e)=>{
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
         alert("Your goal has been modified!");
-        //window.location.replace("./../profile.html"); //hard-coded
+        window.location.replace("./../profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to edit");
@@ -203,15 +202,19 @@ doneButton.addEventListener('click', async(e)=>{
     }
 })
 
-function checkArrays(list_a, list_b){
-    let updateCps = [];
-    if (list_a == list_b) console.log("no changes");
+function checkDates(start_date, cpDates, newDate){
+    if (cpDates.length == 0) return true;
     else{
-        for (let i = 0; i < list_a.length ; ++i){
-            if (list_a[i] != list_b[i]){
-                updateCps.push(list_b[i]);
+        for (let date of cpDates){
+            if ((newDate <= date || newDate <= start_date)){
+                console.log(newDate, date);
+                return false;
+            }
+            if (date <= currentDate) {
+                console.log(newDate, date, cpDates);
+                return false;
             }
         }
     }
-    return updateCps;
+    return true;
 }

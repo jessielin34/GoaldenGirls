@@ -1,19 +1,27 @@
-import { _supabase } from "./client.js";
+import { _supabase } from "./client.js"
+import { user } from "./user.js"
+
 
 const currentDate = new Date();
-let user_id = "";
+const user_id = user.id;
 //check user is signed in
 const updateUser = async()=>{
-    const { data: { user }, error } = await _supabase.auth.getUser();
-    user_id = user.id;
     //username
-    let {data, error_} = await _supabase
-    .from("user")
-    .select()
-    .eq('user_id', user_id);
-    console.log(data);
-    if (error_)  alert(error_);
-    else document.getElementById("user").textContent= '@' + data[0].username;
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq('user_id', user_id);
+        if (error) throw (error);
+        else {
+            document.getElementById("user").textContent= '@' + data[0].username;
+            $('#bio').val(data[0].bio);
+            $('#profile-img').attr('src', data[0].pro_pic);
+            $('.img-bg').css('background-image', 'url(../'+data[0].bg_pic+')')
+        }
+    }catch(err){
+        console.error(err);
+    }
 }; updateUser();
 
 //
@@ -22,6 +30,10 @@ doneButton.addEventListener("click", async(e)=> {
     e.preventDefault();
     //get all checkpoints (text)
     let start_date = $('#start-date').val();
+    if (new Date(start_date) <= currentDate) {
+        alert("Goal must start at least tomorrow :)");
+        return;
+    }
     let checkList = [];
     let dateList = [];
     let checkpoints = document.querySelectorAll("input");
@@ -35,23 +47,20 @@ doneButton.addEventListener("click", async(e)=> {
         }
         //check if cp has a date
         if (check.id == 'checkpoint-date' + String(dateCounter)){
-            if (check.value && checkList[dateCounter-1] != undefined) {
+            //make sure cp has text
+            if (check.value && checkList[dateCounter-1] != null) {
                 //make a separate function to check entire date arrray!
-                if (check.value < currentDate) {
-                    alert("Can't start in the past, must look into the present & the future!");
+                if (!checkDates(start_date, dateList, check.value)){
+                    alert("Dates must be in chronological order");
                     return;
                 }
-                if (check.value < dateList[dateCounter-2]){
-                    alert("Checkpoint dates must be in chronological order");
-                    return;
-                }
-                dateList.push(check.value); 
+                dateList.push(check.value);
+                dateCounter++; 
             }
             else {
-                alert("Make sure checkpoints have a description!")
+                alert("Each checkpoint must have a date and description!")
                 return;
             }
-            dateCounter++;
         }
     }
 
@@ -68,7 +77,7 @@ doneButton.addEventListener("click", async(e)=> {
     let category = document.querySelector("#category-select").value;
     let goal_id = 0;
     console.log("woking..");
-    if(goal != "" && description != "" && checkpoints.length >= 3 && category != ""){
+    if(goal != "" && description != "" && start_date != undefined && checkpoints.length >= 3 && category != ""){
         const {data, error} = await _supabase
         .from("Goals")
         .insert({
@@ -87,6 +96,7 @@ doneButton.addEventListener("click", async(e)=> {
         goal_id = data[0].id;
         console.log(goal_id);
 
+        //insert to checkpoint table
         let order_counter =1;
         for (let cp_name of checkList){
             const {data2, error2} = await _supabase
@@ -104,11 +114,28 @@ doneButton.addEventListener("click", async(e)=> {
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
         alert("Your goal has been added!");
-        //window.location.replace("./../profile.html"); //hard-coded
+        window.location.replace("./../profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");
-        alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoints!");
+        alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 3 checkpoints!");
     }
     
 });
+
+function checkDates(start_date, cpDates, newDate){
+    if (cpDates.length == 0) return true;
+    else{
+        for (let date of cpDates){
+            if ((newDate <= date || newDate <= start_date)){
+                console.log(newDate, date);
+                return false;
+            }
+            if (date <= currentDate) {
+                console.log(newDate, date, cpDates);
+                return false;
+            }
+        }
+    }
+    return true;
+}
