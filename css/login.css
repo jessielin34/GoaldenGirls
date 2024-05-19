@@ -31,6 +31,42 @@ body, html {
     padding: 20px;
 }
 
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #f5c2b3;  /* Assuming you want to keep the same background */
+    z-index: 1000000000;
+    opacity: 1;
+    overflow: hidden;  
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center {
+    position: relative;
+}
+ 
+.one {
+    width: 60px;
+    aspect-ratio: 1;
+    background: linear-gradient(#dc1818 0 0) bottom/100% 0% no-repeat #ccc;
+    -webkit-mask: 
+      radial-gradient(circle at 60% 65%, #000 62%, #0000 65%) top left, 
+      radial-gradient(circle at 40% 65%, #000 62%, #0000 65%) top right, 
+      linear-gradient(to bottom left, #000 42%,#0000 43%) bottom left , 
+      linear-gradient(to bottom right,#000 42%,#0000 43%) bottom right;
+    -webkit-mask-size: 50% 50%;
+    -webkit-mask-repeat: no-repeat;
+    animation: l19 1.3s infinite linear; 
+}
+
+@keyframes l19 {
+    90%,100% {background-size:100% 100%}
+}
 
 .btn {
     font-family: 'Press Start 2P', system-ui;

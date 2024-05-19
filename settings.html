@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    <div id="loader">
+        <div class="center">
+            <div class="one"></div>
+        </div>
+    </div>
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -37,9 +42,12 @@
                                     Edit
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">add</a>
-                                    <a class="dropdown-item" href="#">profile pics</a>
-                                    <a class="dropdown-item" href="#">here</a>
+                                    <a class="dropdown-item" href="#"><img src="images/pro-img2.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/avatars/blue-boy.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-girl.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-boy.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-eye-girl.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/avatars/purple-eye-boy.png"></a>
                                 </div>
                             </div>
                             <div class="d-flex flex-column align-items-center text-center "><img class="square mt-4 cover" src="images/yellow-bg.png" width="300"><span class="font-weight-bold"></span></div>
@@ -48,9 +56,11 @@
                                     Edit
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">add</a>
-                                    <a class="dropdown-item" href="#">bg images</a>
-                                    <a class="dropdown-item" href="#">here</a>
+                                    <a class="dropdown-item" href="#"><img src="images/yellow-bg.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/blue-bg.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/red-bg.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/green-bg.png"></a>
+                                    <a class="dropdown-item" href="#"><img src="images/backgrounds/purple-bg.png"></a>
                                 </div>
                             </div>
                         </div>
@@ -65,6 +75,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-danger">DELETE ACCOUNT?</button>
                     </div>
             </div>
             <hr /><br />
@@ -185,6 +198,24 @@
             
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict"
+            $("#loader").delay(1000).fadeOut("slow");
+
+            var wow = new WOW({
+                boxClass: 'animate',
+                animateClass: 'animated',
+                offset: 90,
+                mobile: false
+            });
+            wow.init();
+
+        });
+    </script>
     
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -980,6 +980,98 @@ signout.addEventListener("click", async(e)=>{
     }
 });
 
+// Function to calculate user's level based on completed goals
+// const calculateLevel = (completedGoals) => {
+//     let level = 0;
+//     let goalsToNextLevel = 2;
+
+//     while (completedGoals >= goalsToNextLevel) {
+//         completedGoals -= goalsToNextLevel;
+//         level++;
+//         goalsToNextLevel += 2;
+//     }
+
+//     return {
+//         level,
+//         progress: completedGoals / goalsToNextLevel
+//     };
+// };
+
+// Function to update level box
+// const updateLevelBox = async () => {
+//     try {
+//         let { data, error } = await _supabase
+//             .from('Goals')
+//             .select('*')
+//             .eq('user_id', user_id)
+//             .eq('status', 'completed');
+//         if (error) throw error;
+
+//         const completedGoals = data.length;
+//         const { level, progress } = calculateLevel(completedGoals);
+
+//         const levelBox = document.getElementById('level-box');
+//         levelBox.innerHTML = `Level ${level} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+//             <path d="M3 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h1v4a4 4 0 0 0 3 3.874V13H5a2 2 0 1 0 4 0h-2v-1.126A4 4 0 0 0 9 8V4h1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3zm0 1h10v2H3V2zM5 9V4h6v5a3 3 0 0 1-6 0z"/>
+//         </svg>`;
+
+//         const progressBox = document.createElement('div');
+//         progressBox.className = 'progress-box';
+//         progressBox.innerHTML = `
+//             <div class="progress-bar-container">
+//                 <div class="progress-bar" style="width: ${progress * 100}%"></div>
+//             </div>
+//             <p>${Math.round(progress * 100)}% to next level</p>
+//         `;
+
+//         levelBox.appendChild(progressBox);
+
+//         levelBox.addEventListener('mouseenter', () => {
+//             progressBox.style.display = 'block';
+//         });
+
+//         levelBox.addEventListener('mouseleave', () => {
+//             progressBox.style.display = 'none';
+//         });
+
+//     } catch (err) {
+//         console.error(err);
+//     }
+// };
+
+// CSS for progress box
+// const style = document.createElement('style');
+// style.innerHTML = `
+//     .progress-box {
+//         display: none;
+//         position: absolute;
+//         top: 50px;
+//         left: 50%;
+//         transform: translateX(-50%);
+//         padding: 10px;
+//         background: white;
+//         border: 1px solid black;
+//         z-index: 1000;
+//         width: 200px;
+//         text-align: center;
+//     }
+//     .progress-bar-container {
+//         width: 100%;
+//         background: #e0e0e0;
+//         border-radius: 5px;
+//         overflow: hidden;
+//         margin-bottom: 5px;
+//     }
+//     .progress-bar {
+//         height: 10px;
+//         background: green;
+//     }
+// `;
+// document.head.appendChild(style);
+
+// Call the function to update level box
+// updateLevelBox();
+
 /*<ol class="carousel-indicators caro-style">
 <li data-target="#ongoingCarousel" data-slide-to="0" class="active"></li>
 <li data-target="#ongoingCarousel" data-slide-to="1"></li> <!--add more bar indicators if need be-->

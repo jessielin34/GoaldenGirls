@@ -47,6 +47,42 @@ body {
     overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
 }
 
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #f5c2b3;  /* Assuming you want to keep the same background */
+    z-index: 1000000000;
+    opacity: 1;
+    overflow: hidden;  
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center {
+    position: relative;
+}
+ 
+.one {
+  width: 300px;
+  height: 30px;
+  -webkit-mask:
+    radial-gradient(circle closest-side,#000 94%,#0000) 0 0/25% 100%,
+    linear-gradient(#000 0 0) center/calc(100% - 12px) calc(100% - 12px) no-repeat;
+  background:
+   linear-gradient(#fee948 0 0) 0/0% no-repeat
+   #ddd; 
+  animation: l7 2s infinite linear;
+}
+
+@keyframes l7 {
+    100% {background-size:100%}
+}  
+
+
 .img-bg {
     display: flex;
     background-image: url(../images/yellow-bg.png);
@@ -72,7 +108,7 @@ body {
 
 .username {
     align-self: center;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
     text-shadow: 1px 2px 2px rgb(0,0,0);
     font-size: large; 

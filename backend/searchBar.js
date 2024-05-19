@@ -30,7 +30,7 @@ function filterUsers(value) {
     );
   }
 
-function renderDropdown(filteredUsers) {
+/*function renderDropdown(filteredUsers) {
     dropdownMenu.innerHTML = ""; // Clear previous dropdown items
   
     if (filteredUsers.length === 0) {
@@ -59,9 +59,36 @@ function renderDropdown(filteredUsers) {
   
     // Show dropdown menu
     dropdownMenu.classList.add("show");
-  }
+  }*/
+  function renderDropdown(filteredUsers) {
+    dropdownMenu.innerHTML = ""; // Clear previous dropdown items
   
-
+    if (filteredUsers.length === 0) {
+      const dropdownItem = document.createElement("a");
+      dropdownItem.classList.add("dropdown-item", "text-muted");
+      dropdownItem.textContent = "No users found";
+      dropdownMenu.appendChild(dropdownItem);
+    } else {
+      filteredUsers.forEach((user) => {
+        const dropdownItem = document.createElement("a");
+        dropdownItem.classList.add("dropdown-item");
+        dropdownItem.href = `searchprofile.html?id=${user.user_id}`; // Link to searchprofile.html
+        dropdownItem.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center">
+            <span>${user.username}</span>
+            <button class="btn btn-sm btn-primary">${user.following ? "Unfollow" : "Follow"}</button>
+          </div>
+        `;
+        dropdownMenu.appendChild(dropdownItem);
+      });
+    }
+  
+      // Show dropdown menu
+      dropdownMenu.classList.add("show");
+    }
+  
+  
+  
 searchInput.addEventListener("input", async (e) => {
   const value = e.target.value.trim().toLowerCase();
   
