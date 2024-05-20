@@ -32,7 +32,7 @@ async function signUp(e){
             console.log(data.user);
             await addUserTable({data, username});
             alert("Verify your email!");
-            window.location.replace("./../login.html"); 
+            window.location.replace("./login.html"); 
         }
         
     }

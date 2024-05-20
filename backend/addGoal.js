@@ -113,8 +113,8 @@ doneButton.addEventListener("click", async(e)=> {
         // get id of goal by checking auth.uid() && 
         // https://www.youtube.com/watch?v=roAJ61sTGIc
         // https://supabase.com/docs/guides/auth/managing-user-data
-        alert("Your goal has been added!");
-        window.location.replace("./../profile.html"); //hard-coded
+        //alert("Your goal has been added!");
+        window.location.replace("./profile.html"); //hard-coded
     }
     else{
         console.log("Unable to add to database");

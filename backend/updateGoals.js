@@ -307,7 +307,7 @@ async function addDeleteButtonListener(){
                     .eq('goal_id', my_goal)
                     if (!error){
                         alert("Successfully deleted goal!");
-                        window.location.replace("./../profile.html"); 
+                        window.location.replace("./profile.html"); 
                     }
                     else throw error;
                 }catch(err){
@@ -333,7 +333,7 @@ async function addUnjoinListener(){
                 if (!error){
                     await getNumberOfPpl(joined_goal);
                     alert("Successfully unjoined goal!");
-                    window.location.replace("./../profile.html"); 
+                    window.location.replace("./profile.html"); 
                 }
             }catch(err){
                 console.error(err);
@@ -616,7 +616,7 @@ signout.addEventListener("click", async(e)=>{
     try{
         let { data, error } = await _supabase.auth.signOut();
         if (!error){
-            window.location.replace("./../index.html"); 
+            window.location.replace("./index.html"); 
         }
         else throw error;
     }catch(err){

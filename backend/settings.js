@@ -80,7 +80,7 @@ async function updateUser(newLang, username, bio, proPic, bgPic){
         if (!error){
             console.log(newLang);
             console.log("Successfully updated settings!");
-            window.location.replace("./../profile.html"); 
+            window.location.replace("./profile.html"); 
         }
         else throw error;
     }catch(err){

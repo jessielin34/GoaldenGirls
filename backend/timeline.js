@@ -216,7 +216,7 @@ async function getJoinStatus(goal_id){
 function updateBack(){
     $('#back').on('click', function(e){
         e.preventDefault();
-        window.location.replace("./../joingoal.html");
+        window.location.replace("./joingoal.html");
     })
 }
 
@@ -268,7 +268,7 @@ async function updateNumOfPpl(num, id){
         if (error) throw error;
         else {
             // alert("Successfully joined goal!");
-            window.location.replace("./../timeline.html"); 
+            window.location.replace("./timeline.html"); 
         }
     }catch(err){
         console.error(err);
@@ -377,7 +377,7 @@ async function updateStatus(table, id, status, num_cp){
             throw error;
         }
         else{
-            window.location.replace("./../timeline.html"); 
+            window.location.replace("./timeline.html"); 
         }
     }catch(err){
         console.error(err);

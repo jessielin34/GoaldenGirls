@@ -388,7 +388,7 @@ async function updateNumOfPpl(num, id){
         if (error) throw error;
         else {
             alert("Successfully joined goal!");
-            window.location.replace("./../joingoal.html"); 
+            window.location.replace("./joingoal.html"); 
         }
     }catch(err){
         console.error(err);
@@ -403,7 +403,7 @@ signout.addEventListener("click", async(e)=>{
     try{
         let { data, error } = await _supabase.auth.signOut();
         if (!error){
-            window.location.replace("./../index.html"); 
+            window.location.replace("./index.html"); 
         }
         else throw error;
     }catch(err){
