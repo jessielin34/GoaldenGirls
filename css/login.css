@@ -110,6 +110,12 @@ body, html {
     margin: 4px 2px;
 }
 
+.subtitle {
+    font-family: 'Press Start 2P', system-ui;
+    padding: 15px 15px;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
 
 .input-group-text {
     background-color: slategray;

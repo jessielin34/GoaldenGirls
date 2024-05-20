@@ -84,8 +84,13 @@ async function setCheckpoints(id, status){
         .select("*")
         .eq("goal_id", id);
         if (data){
-            console.log(data.length);
-            for (let i in data){
+            console.log(data);
+            let sortedData = [];
+            for (let goal of data){
+                sortedData.push(goal);
+            }
+            sortGoals(sortedData);
+            for (let i in sortedData){
                 let addClass = (i%2 == 0) ? "even": "odd";
                 if (i == 0) addClass = '';
                 console.log(addClass);
@@ -93,16 +98,16 @@ async function setCheckpoints(id, status){
                     $('<li/>')
                     .html(`
                     <div class="left ${addClass}">
-                    <div class="icon animate fadeInRight" data-wow-delay="1.2s">
+                    <div class="icon animate fadeInRight" data-wow-delay="0.6s">
                         <img src="images/colorwheel-unscreen.gif" alt="" class="checkpoint-image"/>
                         <input type="checkbox" class="mark-complete" id="cp${parseInt(i)+1}" style="display: none;">
                         <label for="cp${parseInt(i)+1}" style="display: none;">Mark as Completed</label>
                     </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="checkpoint-date">${new Date(data[i].date).getMonth()+1}/${new Date(data[i].date).getDate()+1}/${new Date(data[i].date).getFullYear()}</h4>
+                        <h4 class="checkpoint-date">${new Date(sortedData[i].date).getMonth()+1}/${new Date(sortedData[i].date).getDate()+1}/${new Date(sortedData[i].date).getFullYear()}</h4>
                         <p class="checkpoint-text">
-                            ${data[i].name}
+                            ${sortedData[i].name}
                         </p>
                     </div>
                     
@@ -124,6 +129,11 @@ async function setCheckpoints(id, status){
     }catch(err){
         console.error(err);
     }
+}
+
+function sortGoals(goals){
+    goals.sort((a,b) => a.checkpoint_order - b.checkpoint_order);
+    console.log(goals);
 }
 
 async function setJoinedUsers(id){
@@ -149,7 +159,7 @@ async function setJoinedUsers(id){
         .html(
             `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" style="margin-right: -10px;" class="bi bi-person-fill" viewBox="0 0 16 16">
             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-          </svg><br>${joinedUsers.length} Users Joined`
+          </svg><br>${joinedUsers.length}${joinedUsers.length == 1 ? ' User': ' Users'} Joined`
         )
     );
     for (let user of joinedUsers){
@@ -257,7 +267,7 @@ async function updateNumOfPpl(num, id){
         .eq('id', id)
         if (error) throw error;
         else {
-            alert("Successfully joined goal!");
+            // alert("Successfully joined goal!");
             window.location.replace("./../timeline.html"); 
         }
     }catch(err){

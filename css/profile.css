@@ -472,14 +472,16 @@ visibility: hidden !important;
     width: 100%;
     background-color: #ec5b5b;
     border-radius: 5px;
+    border: solid black;
     overflow: hidden;
     height: 20px; 
 }
 
 .progress-bar-fill {
-    height: 100%;
-    background-color: #f4506c;
-    width: 0;
+    height: 20px;
+    width: 50%;
+    background-color: #f4506c;; 
+   
 }
 
 .progress-label {

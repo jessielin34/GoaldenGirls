@@ -26,116 +26,6 @@ const updateUser = async()=>{
     }
 }; updateUser();
 
-//array with categories
-let categories = [];
-
-
-const checkDB = async()=> {
-    let goal_ids = [];
-    let { data: goals, error_} = await _supabase
-    .from("Join")
-    .select("*")
-    .eq("user_id", user_id);
-    for (let i =0; i <goals.length; i++){
-        goal_ids.push(goals[i].goal_id);
-    }
-    console.log(goals[0]);
-    let goal = "";
-    const {data, error} = await _supabase
-    .from("Goals")
-    .select("*")
-    .neq('user_id', user_id);
-    if (data){
-        //https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-        //https://youtu.be/4bqKagS5X88?si=VcavSSC0LfeBryZ3
-        for (let i in data){
-            let repeat = false;
-            for (let j in goal_ids){
-                if (data[i].id == goal_ids[j]){
-                    repeat = true;
-                }    
-            }
-            if (!repeat){
-                let category = data[i].category;
-                if (!categories.includes(category)){ //add category sections
-                    categories.push(category);
-                    $('.list-group').append(
-                        $('<li/>')
-                        .attr("id", category)
-                        .addClass("list-group-item d-flex justify-content-between align-items-start bg-transparent")
-                    );
-                    $('#'+category).append(
-                        $('<div/>')
-                        .addClass("ms-2 me-auto")
-                        .attr("id", category +"div")
-                    )
-                    $(`#${category}div`).append(
-                        $('<div/>')
-                        .addClass('container fw-bold')
-                        .text(category)
-                    )
-                }
-                //add goals
-                $(`#${category}div`).append(
-                    $('<a/>')
-                    .html(`<a style="color: black !important; ">
-                <div class="card card-style" style="width: 18rem; height: 12rem; display: inline-block; ">
-                    <div class="card-body">
-                        <h5 class="card-title">${data[i].goal_name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">${data[i].description}</h6>
-                        <button type="button" class="btn btn-warning join" value="${data[i].id}">Join</button>
-                    </div>
-                </div>
-                </a>`)
-                )
-            }
-            
-            };
-            console.log(categories);
-            
-            //add categories
-            categories.sort();
-            for (let cat of categories){
-                
-                
-
-            }
-
-            // const template = document.createElement("a");
-            // //creat div with category name as textContent
-            // template.innerHTML = goal.trim();
-            // let sibling = document.getElementById("goal1");
-            // let parent = sibling.parentNode;
-            // parent.insertBefore(template, sibling.nextSibling); 
-        
-            //add join Event Listener
-            const joined = document.querySelectorAll(".join");
-            for (let i =0; i<joined.length; i++){
-                let join_goal = parseInt(joined[i].value);
-                joined[i].addEventListener('click', async()=>{
-                    let {data, error} = await _supabase
-                    .from("Join")
-                    .insert({
-                        user_id: user_id,
-                        goal_id: join_goal,
-                    });
-                    if (error){
-                        console.log(error);
-                        alert("Unable to join goal :(")
-                    }
-                    else{
-                        alert("Successfully joined!");
-                        window.location.replace("./../joingoal.html"); 
-                    } 
-                });
-            }
-        }
-    else{
-        console.log(error);
-    };
-
-};
-
 let unJoinedGoals = [];//list of unjoind goal objects
 
 async function displayGoals(){
@@ -297,20 +187,17 @@ function displayCards(type, size){
     )
     //add all cards to category
     for(let goal of unJoinedGoals){
-        let currentDate = new Date();
-        
         let timeline = getTimeline(goal.cp_num, goal.id);
         if (goal.category == type){
-            let datePhrase = '';
-            if (goal.date.getDate() - currentDate.getDate() == 0 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
-                datePhrase = "Starting today!"
-            }
-            else if (goal.date.getDate() - currentDate.getDate() == 1 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
-                datePhrase = "Starting in 1 day"
-            }
-            else {
-                datePhrase = `Starting in ${goal.date.getDate() - currentDate.getDate()} days`;
-            }
+            // if (goal.date.getDate() - currentDate.getDate() == 0 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
+            //     datePhrase = "Starting today!"
+            // }
+            // else if (goal.date.getDate() - currentDate.getDate() == 1 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
+            //     datePhrase = "Starting in 1 day"
+            // }
+            // else {
+            //     datePhrase = `Starting in ${goal.date.getDate() - currentDate.getDate()} days`;
+            // }
             if (counter ==0){//first card
                 $('#carousel-inner-'+type).append(
                     $('<div/>')
@@ -430,7 +317,7 @@ function getTimeline(size, id){
 }
 
 function getDatePhrase(date){
-    if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate() - currentDate.getDate() == 0))
+    if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 0))
         return "Starts Today";
     if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 1))
         return "Starts in 1 day";
