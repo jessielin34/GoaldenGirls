@@ -24,4 +24,4 @@ To install and run the system, you must clone the repository onto your local mac
 
 # How we deployed it
 We used Github pages to help us deploy this website.
-See the deployed site at: https://jessielin34.github.io/GoaldenGirls/
+See the deployed site at: https://goalden.netlify.app/
