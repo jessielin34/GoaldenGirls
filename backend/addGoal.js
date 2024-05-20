@@ -17,7 +17,7 @@ const updateUser = async()=>{
             document.getElementById("user").textContent= '@' + data[0].username;
             $('#bio').val(data[0].bio);
             $('#profile-img').attr('src', data[0].pro_pic);
-            $('.img-bg').css('background-image', 'url(../'+data[0].bg_pic+')')
+            $('.img-bg').css('background-image', 'url(./'+data[0].bg_pic+')')
         }
     }catch(err){
         console.error(err);

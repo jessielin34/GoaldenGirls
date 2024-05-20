@@ -35,12 +35,11 @@ async function getInfo(){
 //USER UPDATE EVENT LISTENER
 document.getElementById("updateSettings").addEventListener('click', async(e)=>{
     e.preventDefault();
-    let newLang = google.translate.TranslateElement().g.Fc;
     let username = $('#username').val();
     let bio = $('#bio').val();
     let proPic = $('.rounded-circle').attr('src');
     let bgPic = $('.square').attr('src');
-    updateUser(newLang, username, bio, proPic, bgPic);
+    updateUser(username, bio, proPic, bgPic);
     
     //await(updateLang());
     // let langs = document.querySelectorAll('.form-check-input');
@@ -51,8 +50,7 @@ document.getElementById("updateSettings").addEventListener('click', async(e)=>{
 
 });
 
-async function updateUser(newLang, username, bio, proPic, bgPic){
-    console.log(newLang);
+async function updateUser(username, bio, proPic, bgPic){
     //check username is not taken
     if (username != $('#username').val()){
         try {
@@ -70,7 +68,6 @@ async function updateUser(newLang, username, bio, proPic, bgPic){
         let {data, error} = await _supabase
         .from('user')
         .update({
-            language: newLang,
             username: username,
             bio: bio,
             pro_pic: proPic,
@@ -78,9 +75,8 @@ async function updateUser(newLang, username, bio, proPic, bgPic){
         })
         .eq('user_id', user.id);
         if (!error){
-            console.log(newLang);
             console.log("Successfully updated settings!");
-            //window.location.replace("./profile.html"); 
+            window.location.replace("./profile.html"); 
         }
         else throw error;
     }catch(err){
