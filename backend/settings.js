@@ -24,11 +24,11 @@ async function getInfo(){
 
 
  //make new translate element 
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    console.log(google.translate.TranslateElement().g.Fc);
+// function googleTranslateElementInit() {
+//     new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+//     console.log(google.translate.TranslateElement().g.Fc);
 
-}googleTranslateElementInit();
+// }googleTranslateElementInit();
 //
 
 
@@ -80,7 +80,7 @@ async function updateUser(newLang, username, bio, proPic, bgPic){
         if (!error){
             console.log(newLang);
             console.log("Successfully updated settings!");
-            window.location.replace("./profile.html"); 
+            //window.location.replace("./profile.html"); 
         }
         else throw error;
     }catch(err){
