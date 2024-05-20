@@ -23,5 +23,5 @@ Supabase Client: @supabase/supabase-js (For interacting with Supabase from the b
 To install and run the system, you must clone the repository onto your local machine and then locate index.html, right click the file and click on open with live server to run the code. Make sure the extension for the live server is installed on your code editor. 
 
 # How we deployed it
-We used Github pages to help us deploy this website.
+We used Netlify to help us deploy this website.
 See the deployed site at: https://goalden.netlify.app/
