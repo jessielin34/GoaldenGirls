@@ -53,10 +53,10 @@ async function displayGoals(){
     await checkOwned();
     await checkJoined();
     console.log(goals.length);
-    sortGoals(upcoming);
-    sortGoals(ongoing);
-    sortGoals(completed);
-    sortGoals(failed);
+    sortGoals(upcoming, 'Upcoming');
+    sortGoals(ongoing, 'Ongoing');
+    sortGoals(completed, 'Completed');
+    sortGoals(failed, 'Failed');
     $('.spinner-border').hide();
     await setUpcoming();
     await setOngoing();
@@ -176,8 +176,14 @@ async function checkGoalStatus(index, start, status, id, type){
     }
 }
 
-function sortGoals(goals){
-    goals.sort((a,b) => b.date.getTime() - a.date.getTime());
+function sortGoals(goals, type){
+    if (type == 'Completed' || type == 'Failed'){
+        goals.sort((a,b) => b.date.getTime() - a.date.getTime());
+    }
+    else {
+        goals.sort((a,b) => a.date.getTime() - b.date.getTime())
+    }
+    
     console.log(goals);
 }
 
