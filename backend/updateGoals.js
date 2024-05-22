@@ -1,17 +1,10 @@
-// const supabaseKey = 
-// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1waGViaXJ6eWRlb2dreWprdGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA2MDY2OTksImV4cCI6MjAyNjE4MjY5OX0.qDac2fiFpZVq-TOfqIDfj9osvHOWpCBb6VIVgypSiMM';
-
-// const supabaseUrl = 'https://mphebirzydeogkyjktjr.supabase.co';
-
-// const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-// console.log(_supabase);
-
 import {_supabase} from './client.js';
 import { user } from './user.js';
 import { categoryPaths } from './categories.js';
 
 const currentDate = new Date();
 let user_id = user.id;
+//update user info based on user_id
 const updateUser = async()=>{
     //username
     try {
@@ -32,16 +25,14 @@ const updateUser = async()=>{
 }; updateUser();
 
 
-//updateGoals();
-
-//ONGOING, UPCOMING, COMPLETED
+//ONGOING, UPCOMING, COMPLETED, FAILED
 // 1 list of objects containing all the goal info
 // based on start_date push info to 
 // all three categories -> {index & start_date} 
 // that sorts the objects based on date 
 // https://www.geeksforgeeks.org/sort-an-object-array-by-date-in-javascript/
 
-
+//global variables for the four different carousel sections
 var upcoming = [];
 var ongoing = [];
 var completed  = [];
@@ -49,6 +40,7 @@ var failed = [];
 
 var goals = null;
 
+//main function to display all goal cards
 async function displayGoals(){
     await checkOwned();
     await checkJoined();
@@ -61,12 +53,13 @@ async function displayGoals(){
     await setUpcoming();
     await setOngoing();
     await setCompleted();
+    setLevel(completed.length);
     await setFailed();
     await addDeleteButtonListener();
     await addUnjoinListener();
-    setLevel(completed.length);
 
 } displayGoals();
+//checks user made goals and add them to 
 async function checkOwned(){
     try{
         let {data, error} = await _supabase
@@ -80,17 +73,18 @@ async function checkOwned(){
     }catch(err){
         console.error(err);
     }
+    //for each goal check which category they fall under
     for (let goal in goals){
         let date = goals[goal].start_date;
         if (goals[goal].completed_date){
             date = goals[goal].completed_date;
-            console.log(date);
+            // console.log(date);
         }
         await checkGoalStatus(goal, date, goals[goal].status, goals[goal].id, "owned");
     }
     
 }
-
+//check all the goals the user has joined
 async function checkJoined(){
     let joinedIds = [];
     let joined = [];
@@ -127,7 +121,7 @@ async function checkJoined(){
             console.error(err);
         }
     }
-    console.log(joined);
+    //check what category each of the joined goals falls under
     for (let goal in joined){
         let date = joined[goal][0].start_date;
         if (joined[goal][0].completed_date){
@@ -137,9 +131,8 @@ async function checkJoined(){
     }
     
 }
-// consider deleting id param
+// checks which goal falls under which carousel category and pushes it to appropriate list
 async function checkGoalStatus(index, start, status, id, type){
-    if (id == 22) console.log('learn react', status);
     let numOfCp = 0;
     let startDate = new Date(start);
     let cpDate = null;
@@ -159,8 +152,7 @@ async function checkGoalStatus(index, start, status, id, type){
     }catch(err){
         console.error(err);
     }
-    if (numOfCp == 0) console.log(id);
-    //push to appropriate goal status
+    //push to appropriate goal status based on date and user progress status
     if (startDate > currentDate && status >= 0){
         upcoming.push({index: parseInt(index), date: startDate, status: status, type: type, cp: numOfCp});
     }
@@ -176,6 +168,7 @@ async function checkGoalStatus(index, start, status, id, type){
     }
 }
 
+//sort a list of goals in chronological order and based on its carousel category
 function sortGoals(goals, type){
     if (type == 'Completed' || type == 'Failed'){
         goals.sort((a,b) => b.date.getTime() - a.date.getTime());
@@ -187,6 +180,7 @@ function sortGoals(goals, type){
     console.log(goals);
 }
 
+//functions to display the carousels depending on their type 
 async function setUpcoming(){
     if (upcoming.length == 0){
         console.log("No Upcoming Goals")
@@ -197,28 +191,23 @@ async function setUpcoming(){
     }
     
 }
-
 async function setOngoing(){
     if (ongoing.length == 0){
         console.log("No Ongoing Goals")
     } 
     else {
-        //setIndicators("ongoing", ongoing.length);
         await setCarousel("Ongoing", ongoing, ongoing.length);
     }
     //button to delete should be gone 
 }
-
 async function setCompleted(){
     if (completed.length == 0){
         console.log("No Completed Goals")
     } 
     else {
-        //setIndicators("completed", completed.length);
         await setCarousel("Completed", completed, completed.length);
     }
 }
-
 async function setFailed(){
     if (failed.length == 0){
         console.log("No Failed Goals")
@@ -228,6 +217,7 @@ async function setFailed(){
     }
 }
 
+//sets the carousel indicators 
 function setIndicators(type, size){
     $('#'+type+'Carousel').append(
         $('<ol/>')
@@ -257,7 +247,7 @@ function setIndicators(type, size){
     console.log($('#'+'ol'+type));
 
 }
-
+//get username based on user_id
 async function getUsername(id){
     try{
         let {data, error} = await _supabase
@@ -272,6 +262,7 @@ async function getUsername(id){
         console.error(err);
     }
 }
+//adds delete button to all buttons with class .delete_my
 async function addDeleteButtonListener(){
     const mine = document.querySelectorAll(".delete_my");
         for (let i =0; i<mine.length; i++){
@@ -323,7 +314,7 @@ async function addDeleteButtonListener(){
             })
         }
 }
-
+//adds unjoin button to all buttons with .unjoin_my class
 async function addUnjoinListener(){
     const joined = document.querySelectorAll(".unjoin_my");
     for (let i =0; i<joined.length; i++){
@@ -349,7 +340,7 @@ async function addUnjoinListener(){
     }
 }
 
-
+//gets the number of people based on goal id
 async function getNumberOfPpl(id){
     try{
         let {data, error} = await _supabase
@@ -364,7 +355,7 @@ async function getNumberOfPpl(id){
         console.error(err);
     }
 }
-
+//updates the number of people based on previous totoal and goal id
 async function updateNumOfPpl(num, id){
     try{
         let {data, error} = await _supabase
@@ -382,8 +373,9 @@ async function updateNumOfPpl(num, id){
     }
 }
 
-
+//displays the carousel for the list based on its carousel category and number of objects
 async function setCarousel(type, array, size){
+    //adds header of category
     $('.container').append(
         $('<h2/>')
         .addClass('headline')
@@ -407,7 +399,7 @@ async function setCarousel(type, array, size){
         let owner = '';
         let color = '';
         let buttons ='';
-        if (obj.type == "joined"){
+        if (obj.type == "joined"){ //if goal has been joined update certain variables
             color = 'rgb(255, 242, 219)';
             owner = await getUsername(goals[obj.index].user_id);
             buttons = `
@@ -419,7 +411,7 @@ async function setCarousel(type, array, size){
             </a>
             </div>`;
         }
-        else {
+        else {//else if owned change them to these
             color = 'rgb(241, 241, 244)';
             buttons = `
             <div class="header-part">
@@ -438,6 +430,7 @@ async function setCarousel(type, array, size){
             
             </div>`;
         }
+        //clear buttons if the goal is not upcoming
         if (type == 'Upcoming'){
 
         }
@@ -450,6 +443,7 @@ async function setCarousel(type, array, size){
         else {
             buttons =``;
         }
+        //store timeline html code based on checkpoints and goal_id
         let timeline =`<a onclick="setTimelineId(${goals[obj.index].id});" href="javascript:void(0);"">
         <div class="mini-timeline">
         `;
@@ -463,7 +457,7 @@ async function setCarousel(type, array, size){
         }
         timeline += `</div>
         </a>`
-        if (counter ==0){//first card
+        if (counter ==0){//first card make the section active
             $('#carousel-inner-'+type).append(
                 $('<div/>')
                 .attr('id', type+String(counter))
@@ -473,7 +467,7 @@ async function setCarousel(type, array, size){
                 $('#'+type+String(counter)).addClass('carousel-static');
             }
         }
-        if (counter%3 == 0 && counter != 0){
+        if (counter%3 == 0 && counter != 0){//else if its the first card of next sections dont make it active
             console.log(counter)
             $('#carousel-inner-'+type).append(
                 $('<div/>')
@@ -484,8 +478,11 @@ async function setCarousel(type, array, size){
                 $('#'+type+String(counter)).addClass('carousel-static');
             }
         }
+        //add goals to corresponfing section
         let abbr = goals[obj.index].goal_name;
+        //shorten goal name if itt's too long
         if (goals[obj.index].goal_name.length > 17) abbr = goals[obj.index].goal_name.substr(0,17) + '...';
+        //add goal card with all previously established variables
         $('#'+type+String(counter - counter%3)).append(
             $('<div/>')
             .addClass('card card-style mb-3')
@@ -553,7 +550,7 @@ async function setCarousel(type, array, size){
         }
         counter++;
     }
-    //add the buttons for carousel
+    //add space between carousel categories
     $('#'+type+'Carousel').after(
         $('<br>')
         
@@ -568,7 +565,8 @@ async function setCarousel(type, array, size){
     )
     
 }
-
+//function to get the appropriate phrase relative to the start date or completed date of the goal
+//also checks what goal type it is and sets the phrase accordingly 
 function getDatePhrase(type, date){
     if (type == "Upcoming"){
         if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 1))
@@ -641,89 +639,5 @@ const setLevel = (completedGoals) => {
     $('.progress-bar-fill').css('width', String(percent)+'%');
     $('.progress-container small').css('font-size', '15px');
     $('.progress-container small').text('Complete ' + String(goalsToNextLevel)+ ' more '+(goalsToNextLevel ==1? ' goal!': ' goals!'));
-    // while (completedGoals >= goalsToNextLevel) {
-    //     completedGoals -= goalsToNextLevel;
-    //     level++;
-    //     goalsToNextLevel += 2;
-    // }
 
-    // return {
-    //     level,
-    //     progress: completedGoals / goalsToNextLevel
-    // };
 };
-
-// Function to update level box
-// const updateLevelBox = async () => {
-//     try {
-//         let { data, error } = await _supabase
-//             .from('Goals')
-//             .select('*')
-//             .eq('user_id', user_id)
-//             .eq('status', 'completed');
-//         if (error) throw error;
-
-//         const completedGoals = data.length;
-//         const { level, progress } = calculateLevel(completedGoals);
-
-//         const levelBox = document.getElementById('level-box');
-//         levelBox.innerHTML = `Level ${level} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
-//             <path d="M3 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h1v4a4 4 0 0 0 3 3.874V13H5a2 2 0 1 0 4 0h-2v-1.126A4 4 0 0 0 9 8V4h1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3zm0 1h10v2H3V2zM5 9V4h6v5a3 3 0 0 1-6 0z"/>
-//         </svg>`;
-
-//         const progressBox = document.createElement('div');
-//         progressBox.className = 'progress-box';
-//         progressBox.innerHTML = `
-//             <div class="progress-bar-container">
-//                 <div class="progress-bar" style="width: ${progress * 100}%"></div>
-//             </div>
-//             <p>${Math.round(progress * 100)}% to next level</p>
-//         `;
-
-//         levelBox.appendChild(progressBox);
-
-//         levelBox.addEventListener('mouseenter', () => {
-//             progressBox.style.display = 'block';
-//         });
-
-//         levelBox.addEventListener('mouseleave', () => {
-//             progressBox.style.display = 'none';
-//         });
-
-//     } catch (err) {
-//         console.error(err);
-//     }
-// };
-
-// CSS for progress box
-// const style = document.createElement('style');
-// style.innerHTML = `
-//     .progress-box {
-//         display: none;
-//         position: absolute;
-//         top: 50px;
-//         left: 50%;
-//         transform: translateX(-50%);
-//         padding: 10px;
-//         background: white;
-//         border: 1px solid black;
-//         z-index: 1000;
-//         width: 200px;
-//         text-align: center;
-//     }
-//     .progress-bar-container {
-//         width: 100%;
-//         background: #e0e0e0;
-//         border-radius: 5px;
-//         overflow: hidden;
-//         margin-bottom: 5px;
-//     }
-//     .progress-bar {
-//         height: 10px;
-//         background: green;
-//     }
-// `;
-// document.head.appendChild(style);
-
-// Call the function to update level box
-// updateLevelBox();

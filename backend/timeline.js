@@ -12,10 +12,12 @@ import { categoryPaths } from './categories.js';
 
 
 const currentDate = new Date();
+//main function to display the timeline page
 const setTimeline = async()=> {
+    //retrieve goal_id from localStorage
     let goal_id = parseInt(localStorage.getItem("goal_id"));
     let cp_status = 0;
-    console.log(goal_id);
+    //get all goal information from supabase and display it in the html page
     try{
         let { data: goal, error_}  = await _supabase
         .from("Goals")
@@ -33,18 +35,6 @@ const setTimeline = async()=> {
             console.log(pro_pic)
             $('#owner-img').attr('src', pro_pic);
             $('.owner-name').text('@'+username);
-            //check if goal has started
-            console.log(goal[0].start_date);
-            
-            // $('.top-bar').eq(1).append(
-            //     $('<a/>')
-            //     .attr('id', 'joingoal')
-            //     .html(
-            //     `<button class="btn btn-info join_my unjoin-button border" value="${goal_id}"> 
-            //         JOIN 
-            //     </button>
-            //     `)
-            // );
             await setJoinedUsers(goal_id);
             if (goal[0].user_id == user.id){
                 cp_status = goal[0].status;
@@ -52,9 +42,10 @@ const setTimeline = async()=> {
             }
             else {
                 cp_status = await getJoinStatus(goal_id);
-                if (cp_status != undefined) editButton('Join', goal_id);//if user has joinedd goal add editButtton functionality
+                if (cp_status != undefined) editButton('Join', goal_id);//if user has joined goal add editButtton functionality
                 
             }
+            //if goal hasn't started and user joined the goal display date start section
             if( new Date(goal[0].start_date) > currentDate && cp_status != undefined){
                 $('.progress-bar').text('Goal Starts: ' + goal[0].start_date);
                 $('.top-bar').eq(1).append(
@@ -71,7 +62,7 @@ const setTimeline = async()=> {
     }catch(err){
         console.error(err);
     }
-
+    //display checkpoints based on goal_id and status of completion
     await setCheckpoints(goal_id, cp_status);
 }; setTimeline();
 
@@ -89,11 +80,13 @@ async function setCheckpoints(id, status){
             for (let goal of data){
                 sortedData.push(goal);
             }
-            sortGoals(sortedData);
+            //sort checkpoints to be in chronological order
+            sortCheckpoints(sortedData);
             for (let i in sortedData){
+                //add class to checkpoint if its on the left or right side
                 let addClass = (i%2 == 0) ? "even": "odd";
                 if (i == 0) addClass = '';
-                console.log(addClass);
+                //append the checkpoint object to the timeline
                 $('.row').append(
                     $('<li/>')
                     .html(`
@@ -131,11 +124,13 @@ async function setCheckpoints(id, status){
     }
 }
 
-function sortGoals(goals){
+//sort the checkpoints based on their checkpoint order
+function sortCheckpoints(goals){
     goals.sort((a,b) => a.checkpoint_order - b.checkpoint_order);
     console.log(goals);
 }
 
+//get users who joined the goal and display it on the Joined users section
 async function setJoinedUsers(id){
     let joinedUsers = [];
     try{
@@ -153,6 +148,7 @@ async function setJoinedUsers(id){
         console.error(err);
     }
     console.log(joinedUsers);
+    //update the number of users who joined
     $('#num-joined').append(
         $('<small/>')
         .addClass('text-muted')
@@ -162,6 +158,7 @@ async function setJoinedUsers(id){
           </svg><br>${joinedUsers.length}${joinedUsers.length == 1 ? ' User': ' Users'} Joined`
         )
     );
+    //add each user to the section
     for (let user of joinedUsers){
         $('#joined-users').append(
             $('<li/>')
@@ -172,7 +169,7 @@ async function setJoinedUsers(id){
         )
     }
 }
-
+//function to get username based on user_id
 async function getUsername(id){
     try{
         let {data, error} = await _supabase
@@ -190,7 +187,7 @@ async function getUsername(id){
         console.error(err);
     }
 }
-
+//retrieves the progress status of the joined user
 async function getJoinStatus(goal_id){
     try{
         let {data, error} = await _supabase
@@ -212,14 +209,14 @@ async function getJoinStatus(goal_id){
         console.error(err);
     }
 }
-
+//back button goes back to the join goal page instead of thee profile page
 function updateBack(){
     $('#back').on('click', function(e){
         e.preventDefault();
         window.location.replace("./joingoal.html");
     })
 }
-
+//listener for the join button
 async function addJoinListener(user_id, goal_id){
     $('#joingoal').on('click', async function(){
         try{
@@ -241,7 +238,7 @@ async function addJoinListener(user_id, goal_id){
     })
     
 }
-
+//gets the total number of people who are part of the goal
 async function getNumberOfPpl(id){
     try{
         let {data, error} = await _supabase
@@ -256,7 +253,7 @@ async function getNumberOfPpl(id){
         console.error(err);
     }
 }
-
+//updates the total number of people of the goal
 async function updateNumOfPpl(num, id){
     try{
         let {data, error} = await _supabase
@@ -274,7 +271,7 @@ async function updateNumOfPpl(num, id){
         console.error(err);
     }
 }
-
+//checks the status of the edit progress button and updates the status of the goal if necessary
 function editButton(table, id){
     document.querySelector('.progress-bar button').addEventListener('click', function() {
         // Toggle checkboxes visibility
@@ -285,10 +282,9 @@ function editButton(table, id){
         // Toggle button text between "Edit Progress" and "Done"
         if (this.textContent === "Edit Progress") {
             this.textContent = "Done";
-            // Additional actions to enable edit mode can be added here
         } else {
             this.textContent = "Edit Progress";
-            //check # of checked cbs
+            //check # of checked checkboxes and make it the current status
             let checkboxes = document.querySelectorAll('.mark-complete');
             let status = 0;
             for (let checkbox of checkboxes){
@@ -296,12 +292,11 @@ function editButton(table, id){
             }
             console.log(table,id);
             updateStatus(table, id, status, checkboxes.length)
-            // Additional actions to disable edit mode can be added here
         }
     });
 }
 
-//
+//functionality when cheeckboxes are checked for each checkpoint (changes display between "Completed" and "Mark as Complete")
 function markCompleted(){
     document.querySelectorAll('.mark-complete').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
@@ -329,7 +324,7 @@ function markCompleted(){
     });
 }
 
-
+//based on the status (int) it checks off the equivalent number of checkboxes
 function setCompleted(int){
     for (let i=1; i <= int; i++){
         $('#cp'+String(i)).prop("checked", true); //check the checkbox
@@ -346,10 +341,11 @@ function setCompleted(int){
         checkboxLabel.style.backgroundColor = "lightgreen"
     }
 }
-
+//updates the status of the goal
 async function updateStatus(table, id, status, num_cp){
     let col_id = "id";
     if (table == "Join") col_id = 'goal_id';
+    //if the user completed the goal add completed date
     if (status == num_cp){
         try{
             let {data, error} = await _supabase
@@ -361,12 +357,13 @@ async function updateStatus(table, id, status, num_cp){
                 throw error;
             }
             else{
-                alert('completed marked!');
+                alert('Congratulations, you completed the goal!');
             }
         }catch(err){
             console.error(err);
         }
     }
+    //update the status of the user for the corresponding goal
     try{
         let {data, error} = await _supabase
         .from(table)

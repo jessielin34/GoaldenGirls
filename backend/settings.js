@@ -23,7 +23,7 @@ async function getInfo(){
 }getInfo();
 
 
- //make new translate element 
+ //make new translate element DOESNT WORK ON HOSTING SITE
 // function googleTranslateElementInit() {
 //     new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 //     console.log(google.translate.TranslateElement().g.Fc);
@@ -35,19 +35,14 @@ async function getInfo(){
 //USER UPDATE EVENT LISTENER
 document.getElementById("updateSettings").addEventListener('click', async(e)=>{
     e.preventDefault();
+    //get all input field values
     let username = $('#username').val();
     let bio = $('#bio').val();
     let proPic = $('.rounded-circle').attr('src');
     let bgPic = $('.square').attr('src');
+    //send all input fields to be PUT
     updateUser(username, bio, proPic, bgPic);
     
-    //await(updateLang());
-    // let langs = document.querySelectorAll('.form-check-input');
-    // langs.forEach((e)=>{
-    //     if (e.checked == true) newLang = e.value;       
-    // });
-    
-
 });
 
 async function updateUser(username, bio, proPic, bgPic){
@@ -64,6 +59,7 @@ async function updateUser(username, bio, proPic, bgPic){
             throw err;
         }
     }
+    //call supabase API and update the information
     try {
         let {data, error} = await _supabase
         .from('user')
@@ -93,7 +89,7 @@ async function sendEmail(e){
     let email = document.querySelector("#inputemail").value;
     console.log("working");
     const { data, error } = await _supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: 'https://jessielin34.github.io/GoaldenGirls/reset-password.html'});
+    redirectTo: 'https://goalden.netlify.app/reset-password.html'});
     if (error){
         alert(error);
     }

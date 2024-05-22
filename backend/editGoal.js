@@ -112,11 +112,7 @@ doneButton.addEventListener('click', async(e)=>{
         }
     }
 
-    if (checkList.length != dateList.length){
-        alert("Make sure each checkpoint has a date!")
-        return;
-    }
-   
+ 
     let goal = document.querySelector("#goal-title").value;
     let description = document.querySelector("#goal-description").value;
     let category = document.querySelector("#category-select").value;
@@ -154,7 +150,7 @@ doneButton.addEventListener('click', async(e)=>{
             .eq('id', cpIdList[cp]);
         }
         if (error){
-            alert("unable to modify checkpoints");
+            alert("Unable to modify checkpoints");
             return;
         }
 
@@ -197,8 +193,8 @@ doneButton.addEventListener('click', async(e)=>{
         window.location.replace("./profile.html"); //hard-coded
     }
     else{
-        console.log("Unable to add to edit");
-        alert("Unable to add goal ;( \nMake sure to fill out all fields and at least 2 checkpoints!");
+        console.log("Unable to edit goal");
+        alert("Unable to edit goal ;( \nMake sure to fill out all fields and at least 3 checkpoints!");
     }
 })
 

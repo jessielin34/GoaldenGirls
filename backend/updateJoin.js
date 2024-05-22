@@ -1,13 +1,9 @@
 import { _supabase } from "./client.js";
 import { user } from "./user.js";
-//check user is signed in
-
-// var script = document.createElement('script');
-// script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
-// document.getElementsByTagName('head')[0].appendChild(script);
 
 const currentDate = new Date();
 let user_id = user.id;
+//update user information
 const updateUser = async()=>{
     //username
     try {
@@ -28,19 +24,16 @@ const updateUser = async()=>{
 
 let unJoinedGoals = [];//list of unjoind goal objects
 
+//main function to display unjoined goals
 async function displayGoals(){
     await getGoals();
     sortGoals(unJoinedGoals);
     await displayCarousel();
     await addJoinListener();
     $('.spinner-border').hide();
-    // await addJoinListener();
-    // $('.spinner-border').hide();
 }displayGoals();
     
-
-//displayGoals();
-
+//retrieve all goals which are not joined or created by the user
 async function getGoals(){
     let goal_ids = []; 
     try{
@@ -57,14 +50,14 @@ async function getGoals(){
     }catch(err){
         console.error(err);
     }
+    //get all goals not made by user
     try{
         let {data, error} = await _supabase
         .from("Goals")
         .select("*")
         .neq('user_id', user_id);
         if (!error){
-            //https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-            //https://youtu.be/4bqKagS5X88?si=VcavSSC0LfeBryZ3
+            //check if goal has been joined by the user
             for (let i in data){
                 let repeat = false;
                 for (let j in goal_ids){
@@ -73,9 +66,8 @@ async function getGoals(){
                     }  
                 }
                 if (new Date(data[i].start_date) < new Date()) repeat = true;  
-                //console.log(new Date(data[i].start_date).getDate());
+                //if it has not been push an object with all the necessary goal information to unJoinedGoals
                 if (!repeat){
-                    //constructor
                     let username = await getUsername(data[i].user_id);
                     console.log(username);
                     unJoinedGoals.push({
@@ -95,7 +87,7 @@ async function getGoals(){
     }
    
 }
-
+//get username based on user id
 async function getUsername(id){
     try{
         let {data, error} = await _supabase
@@ -108,21 +100,20 @@ async function getUsername(id){
         console.error(err);
     }
 }
-
+//sort goals based on increasing order
 function sortGoals(goals){
     goals.sort((a,b) => a.date - b.date);
-    console.log(goals);
 }
+//display all relevant carousel goals
 async function displayCarousel(){
     let categories = getCategories();
     for (let category of categories){
-        //indicators
         setIndicators(category.category, category.size);
         displayCards(category.category, category.size);
     }
     console.log(categories);
 }
-
+//checks the goals of all categories and returns a list with all the categories
 function getCategories(){
     let categories = [];
     for (let goal of unJoinedGoals){
@@ -148,15 +139,16 @@ function getCategories(){
     }
     return categories;
 }
+//sets indicators for each category carousel
 function setIndicators(type, size){
     $('#'+type+'Carousel').append(
         $('<ol/>')
         .attr('id', 'ol'+type)
         .addClass('carousel-indicators caro-style')
     )
+    //set is the section of the current carousel
     let set = 1;
     if (size/3 > 1) set = Math.ceil(size/3);
-    //<li data-target="#upcomingCarousel" data-slide-to="0" class="active"></li>
     for (let i =0; i < set; i++){
         if (i == 0){
             $('#'+'ol'+type).append(
@@ -189,16 +181,7 @@ function displayCards(type, size){
     for(let goal of unJoinedGoals){
         let timeline = getTimeline(goal.cp_num, goal.id);
         if (goal.category == type){
-            // if (goal.date.getDate() - currentDate.getDate() == 0 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
-            //     datePhrase = "Starting today!"
-            // }
-            // else if (goal.date.getDate() - currentDate.getDate() == 1 && goal.date.getMonth() - currentDate.getMonth == 0 && goal.date.getFullYear() - currentDate.getFullYear() == 0){
-            //     datePhrase = "Starting in 1 day"
-            // }
-            // else {
-            //     datePhrase = `Starting in ${goal.date.getDate() - currentDate.getDate()} days`;
-            // }
-            if (counter ==0){//first card
+            if (counter ==0){//first card make the section active
                 $('#carousel-inner-'+type).append(
                     $('<div/>')
                     .attr('id', type+String(counter))
@@ -208,7 +191,7 @@ function displayCards(type, size){
                     $('#'+type+String(counter)).addClass('carousel-static');
                 }
             }
-            if (counter%3 == 0 && counter != 0){
+            if (counter%3 == 0 && counter != 0){ //else if its the first card of next sections dont make it active
                 console.log(counter)
                 $('#carousel-inner-'+type).append(
                     $('<div/>')
@@ -219,9 +202,9 @@ function displayCards(type, size){
                     $('#'+type+String(counter)).addClass('carousel-static');
                 }
             }
-            //add card
-            console.log(goal.name);
+            //shorten goal name if itt's too long
             if (goal.name.length > 17) goal.name = goal.name.substr(0,17) + '...';
+            //add goals to corresponding section
                 $('#'+type+String(counter - counter%3)).append(
                     $('<div/>')
                     .addClass('card card-style mb-3')
@@ -262,7 +245,7 @@ function displayCards(type, size){
                    ${timeline}
                </div>`)
                 )
-            
+            //add coursel next and prev buttons
             if (counter == size-1 && size > 3){
                 $('#'+type+'Carousel').append(
                     $('<a/>')
@@ -292,6 +275,7 @@ function displayCards(type, size){
             counter++;
         } 
     }
+    //add spacing between carousels
     $('#'+type+'Carousel').after(
         $('<br>')
         
@@ -305,7 +289,7 @@ function displayCards(type, size){
         
     )
 }
-
+//return timeline html code based on size and goal id
 function getTimeline(size, id){
     let timeline =`<a onclick="setTimelineId(${id});" href="javascript:void(0);">
         <div class="mini-timeline">`;
@@ -315,7 +299,7 @@ function getTimeline(size, id){
     timeline += `</div></a>`;
     return timeline;
 }
-
+//based on the goal date return the appropriate phrase relative to the current date
 function getDatePhrase(date){
     if ((date.getMonth() - currentDate.getMonth() == 0) && (date.getDate()+1 - currentDate.getDate() == 0))
         return "Starts Today";
@@ -334,7 +318,7 @@ function getDatePhrase(date){
     
 }
 
-
+//add join button to all cards
 async function addJoinListener(){
     let joined = document.querySelectorAll(".join_my");
     for (let i =0; i<joined.length; i++){
@@ -361,7 +345,7 @@ async function addJoinListener(){
         });
     }
 }
-
+//get total number of people based on the goal_id
 async function getNumberOfPpl(id){
     try{
         let {data, error} = await _supabase
@@ -376,7 +360,7 @@ async function getNumberOfPpl(id){
         console.error(err);
     }
 }
-
+//update the total number of people based on the id and previous total
 async function updateNumOfPpl(num, id){
     try{
         let {data, error} = await _supabase
@@ -394,20 +378,3 @@ async function updateNumOfPpl(num, id){
         console.error(err);
     }
 }
-
-let signout = document.getElementById('sign_out');
-console.log(signout);
-signout.addEventListener("click", async(e)=>{ 
-    e.preventDefault();
-    console.log(signout);
-    try{
-        let { data, error } = await _supabase.auth.signOut();
-        if (!error){
-            window.location.replace("./index.html"); 
-        }
-        else throw error;
-    }catch(err){
-        console.error(err);
-    }
-    
-});

@@ -1,12 +1,11 @@
 import { _supabase } from "./client.js"
 import { user } from "./user.js"
 
-
+//set global variables
 const currentDate = new Date();
 const user_id = user.id;
-//check user is signed in
+//fetch and update user information
 const updateUser = async()=>{
-    //username
     try {
         let {data, error} = await _supabase
         .from("user")
@@ -24,12 +23,12 @@ const updateUser = async()=>{
     }
 }; updateUser();
 
-//
+//add event listener to acquire all information from the edit form
 let doneButton = document.querySelector("#done");
 doneButton.addEventListener("click", async(e)=> {
     e.preventDefault();
-    //get all checkpoints (text)
     let start_date = $('#start-date').val();
+    //check date is later than current date
     if (new Date(start_date) <= currentDate) {
         alert("Goal must start at least tomorrow :)");
         return;
@@ -49,7 +48,7 @@ doneButton.addEventListener("click", async(e)=> {
         if (check.id == 'checkpoint-date' + String(dateCounter)){
             //make sure cp has text
             if (check.value && checkList[dateCounter-1] != null) {
-                //make a separate function to check entire date arrray!
+                //call checkDates to make sure all checkpoints and start_date align
                 if (!checkDates(start_date, dateList, check.value)){
                     alert("Dates must be in chronological order");
                     return;
@@ -62,11 +61,6 @@ doneButton.addEventListener("click", async(e)=> {
                 return;
             }
         }
-    }
-
-    if (checkList.length != dateList.length){
-        alert("Make sure each checkpoint has a date!")
-        return;
     }
     
     console.log(checkList);
@@ -127,10 +121,12 @@ function checkDates(start_date, cpDates, newDate){
     if (cpDates.length == 0) return true;
     else{
         for (let date of cpDates){
+            //check if the date is less than or equal to dates already in array & start date
             if ((newDate <= date || newDate <= start_date)){
                 console.log(newDate, date);
                 return false;
             }
+            //check date is not equal or less than current date
             if (date <= currentDate) {
                 console.log(newDate, date, cpDates);
                 return false;

@@ -1,5 +1,5 @@
 import { _supabase } from "./client.js";
-
+//reset the password of the user based on the inputted passwords
 let reset = document.querySelector("#reset");
 reset.addEventListener("click", resetPassword);
 async function resetPassword(){
@@ -14,5 +14,5 @@ async function resetPassword(){
         }
         else alert("Password successfully updated!");
     }
-    else alert("Enter all fields!");
+    else alert("Enter all fields.\nMake sure passwords are matching!");
 }

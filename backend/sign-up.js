@@ -5,21 +5,41 @@ signup.addEventListener("click", signUp);
 async function signUp(e){
     e.preventDefault();
     let username = document.querySelector("#inputusername").value;
+    let email = document.querySelector("#inputemail").value;
     //check username is not taken
     try {
         let {data, error} = await _supabase
         .from("user")
         .select()
         .eq("username", username);
-        if (data.length != 0) throw("username already exists in database");
+        if (data.length != 0) throw("Username already exists in database");
     } catch (err){
         alert("Username is taken!")
-        throw err;
+        console.error(err);
     }
-    let email = document.querySelector("#inputemail").value;
+    //check email is not taken
+    try {
+        let {data, error} = await _supabase
+        .from("user")
+        .select()
+        .eq("email", email);
+        if (data.length != 0) throw("Email already exists in database");
+    } catch (err){
+        alert("This email has already been registered! Please use a different email or try logging in.")
+        console.error(err);
+    }
+    //check passwords match
     let password = document.querySelector("#inputpassword").value;
     let password2 = document.querySelector("#reenterpassword").value;
-    if (email != "" && password != "" && password2 != ""){
+    if (password != password2){
+        alert("Passwords are not matching!");
+        return;
+    }
+    if (password.length < 6){
+        alert("Passwords must be 6 characters or longer");
+        return;
+    }
+    if (username != "" && email != "" && password != "" && password2 != ""){
         const { data, error } = await _supabase.auth.signUp({
             email: email,
             password: password,

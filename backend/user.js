@@ -1,5 +1,6 @@
 import { _supabase } from "./client.js";
 
+//get information of logged in user and export it
 try {
     var { data: { user }, error } = await _supabase.auth.getUser();
     console.log(user);
@@ -7,7 +8,6 @@ try {
 catch(error){
     console.log(error);
 }
-//console.log(user);
 
 export {user};
 
